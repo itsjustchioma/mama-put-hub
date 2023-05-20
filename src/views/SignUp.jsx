@@ -4,7 +4,6 @@ import Logo from "../components/Logo";
 // import { useState } from "react";
 
 export default function SignUp() {
-
   return (
     <div className="font-acumin main-container bg-background-color">
       <div className="wrapper-container grid grid-cols-1    overflow-hidden  md:grid-cols-2">
@@ -83,7 +82,7 @@ export default function SignUp() {
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
                 </div>
-                <button className="rounded-md bg-medium-blue py-3 px-5 text-white text-sm flex items-center my-4  w-32">
+                <button className="rounded-md bg-laurel-green py-3 px-5 text-white text-sm flex items-center my-4  w-32">
                   Sign Up!
                   <svg
                     className="w-4 h-4 ml-2"
@@ -104,7 +103,7 @@ export default function SignUp() {
 
               <Link
                 to="/Login"
-                className="border-2 text-sm py-3  rounded-lg border-laurel-green text-center"
+                className="border-2 text-sm py-3 my-4  rounded-lg border-laurel-green text-center"
               >
                 <button className="text-laurel-green">
                   Already have an account? Log in.
