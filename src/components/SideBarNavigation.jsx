@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import burger from '/assets/burger.avif'
+import burger from "/assets/burger.png";
 
 import HorizontalLine from "./HorizontalLine";
-
 
 export default function SideBarNavigation() {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,11 +36,19 @@ export default function SideBarNavigation() {
   return (
     <div className="">
       <button onClick={toggleVisibility}>
-        {isVisible ? "" :  <img src= {burger} className="    sm:block absolute top-10 left-16  w-16  hidden "/>}
+        {isVisible ? (
+          ""
+        ) : (
+          <img
+            src={burger}
+            className="    sm:block absolute top-10 left-16  w-14  hidden "
+          />
+        )}
       </button>
 
       <span className="absolute text-white text-4xl top-5 left-5 cursor-pointer">
-      <ion-icon name="arrow-forward-outline"></ion-icon>      </span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>{" "}
+      </span>
 
       <div
         ref={sidebarRef}
@@ -69,11 +76,9 @@ export default function SideBarNavigation() {
               <li key={i} className="">
                 <a className="flex flex-col text-center pt-6">
                   <div className="p-2.5 mb-7 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-orange-300">
-                    <span className="text-[15px] ml-4 ">
-                      {menu.name}
-                    </span>
+                    <span className="text-[15px] ml-4 ">{menu.name}</span>
                   </div>
-                  <HorizontalLine/>
+                  <HorizontalLine />
                 </a>
               </li>
             ))}
