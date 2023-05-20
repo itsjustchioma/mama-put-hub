@@ -12,7 +12,9 @@ export const theme = {
       "laurel-green": "#9fb693",
       "lemon-meringue": "#f8e8c4",
       "pastel-pink": "#f0af9e",
-      copper: "#e48364",
+      "copper-orange": "#e48364",
+      "grey-text": "#AFABA8",
+      "background-color": "#F9F5F2",
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],

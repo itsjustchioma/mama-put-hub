@@ -10,8 +10,8 @@ function App() {
 
   return (
     <>
-      <h1 className="text-red-500 font-sans">Hello World</h1>
-      <p className="font-sans">Cook like a pro, MamaPut's got the flow!</p>
+      <h1 className="text-laurel-green font-sans">Hello World</h1>
+      <p className="font-sans">Cook like a pro, Mamaput's got the flow!</p>
     </>
   );
 }
