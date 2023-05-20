@@ -46,8 +46,10 @@ export default function Login() {
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
                 </div>
-                <button className="rounded-md bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32">
-                  Sign In
+                <button className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md">
+                  <span className="relative z-10">
+                    <span className="wave-on-hover">Log In</span>
+                  </span>
                   <svg
                     className="w-4 h-4 ml-2"
                     viewBox="0 0 20 20"
@@ -76,8 +78,6 @@ export default function Login() {
                   Don't have an account? Sign Up.
                 </p>
               </Link>
-
-
             </form>
           </div>
         </div>
