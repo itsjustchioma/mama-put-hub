@@ -1,6 +1,8 @@
 import "./App.css";
 import { Client } from "appwrite";
 import Onboarding from "./views/Onboarding";
+import Navigation from "./components/Navigation";
+import SideBarNavigation from "./components/SideBarNavigation";
 
 function App() {
   const client = new Client();
@@ -11,9 +13,12 @@ function App() {
 
   return (
     <>
-      <h1 className="text-laurel-green font-sans">Hello World</h1>
-      <p className="font-sans">Cook like a pro, Mamaput's got the flow!</p>
+  
+
 <Onboarding/>
+{/* <Navigation/> */}
+
+<SideBarNavigation/>
     </>
   );
 }
