@@ -34,7 +34,7 @@ export default function SideBarNavigation() {
   ];
 
   return (
-    <div className="">
+    <div className=" z-[999]">
       <button onClick={toggleVisibility}>
         {isVisible ? (
           ""
@@ -52,7 +52,7 @@ export default function SideBarNavigation() {
 
       <div
         ref={sidebarRef}
-        className={`sidebar fixed top-0 bottom-0 left-0 w-56 duration-500 transition-transform transform  bg-slate-300 ${
+        className={`sidebar z-[999] fixed top-0 bottom-0 left-0 w-56 duration-500 transition-transform transform  bg-slate-300 ${
           isVisible ? "translate-x-0" : "-translate-x-full"
         } `}
       >
