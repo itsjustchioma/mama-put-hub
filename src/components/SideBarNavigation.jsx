@@ -41,7 +41,7 @@ export default function SideBarNavigation() {
         ) : (
           <img
             src={burger}
-            className="    sm:block absolute top-10 left-16  w-14  hidden "
+            className="   z-[999]  sm:block absolute top-10 left-16  w-14  hidden "
           />
         )}
       </button>
