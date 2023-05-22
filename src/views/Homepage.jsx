@@ -13,9 +13,7 @@ const Homepage = (props) => {
         <Tags />
 
         <SideBarNavigation />
-        <ImageCarouselFrame
-          title={"What do you want to eat today?"}
-        />
+        <ImageCarouselFrame title={"What do you want to eat today?"} />
         <ImageCarouselFrame title={"Popular Recipes?"} />
         <Navigation />
       </div>
