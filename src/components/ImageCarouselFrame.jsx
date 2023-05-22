@@ -10,13 +10,14 @@ export default function ImageCarouselFrame(props) {
   return (
 
     <div className=" ">
-      <motion.div className="carousel overflow-scroll w-10/12 m-auto h-96">
-      <h1 className="text-2xl  font-semibold">{props.title}</h1>
+            <h1 className="text-2xl  font-semibold">{props.title}</h1>
 
-        <motion.div className="inner-carousel flex justify-start">
+      <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-96">
+
+        <motion.div className="inner-carousel flex justify-start  ">
           {CarouselImageGallery.map((item, index) => (
             <motion.div className="item w-64 h-64" key={index}>
-              <div className="w-64 h-64 object-center p-4 relative top-0">
+              <div className="w-64 h-64 object-center p-4 mx-4 relative cursor-pointer top-0">
               <button className="absolute right-5">
                   <img src={deleteicon} className="w-5" alt="" />
                 </button>

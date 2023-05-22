@@ -7,6 +7,7 @@ export const content = [
 ];
 export const theme = {
   extend: {
+    
     colors: {
       "pastel-blue": "#add6cf",
       "laurel-green": "#9fb693",
@@ -19,6 +20,7 @@ export const theme = {
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
     },
+    
   },
 };
 export const plugins = [];

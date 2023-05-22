@@ -46,9 +46,7 @@ export default function SideBarNavigation() {
         )}
       </button>
 
-      <span className="absolute text-white text-4xl top-5 left-5 cursor-pointer">
-        <ion-icon name="arrow-forward-outline"></ion-icon>{" "}
-      </span>
+    
 
       <div
         ref={sidebarRef}

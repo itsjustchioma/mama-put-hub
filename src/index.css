@@ -11,9 +11,23 @@
   50% {
     transform: translateX(120%);
   }
+
 }
 
 .wave-on-hover:hover {
   display: inline-block;
   animation: wave 1s infinite;
+}
+
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
