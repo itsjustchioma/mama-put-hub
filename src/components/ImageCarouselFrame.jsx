@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import CarouselImageGallery from "./CarouselImageGallery";
 import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
-import deleteicon from "/assets/pot logo.png";
-
-
+import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
+import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 
 export default function ImageCarouselFrame(props) {
-  return (
+//   const [isBookmarkVisible, setIsBookmarkVisible] = useState(false);
 
+//   const handleBookmarkClick = () => {
+//     setIsBookmarkVisible(!isBookmarkVisible);
+//   };
+
+  return (
     <div className=" ">
-            <h1 className="text-2xl  font-semibold">{props.title}</h1>
+      <h1 className="text-2xl mx-8 font-semibold">{props.title}</h1>
 
       <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-96">
-
         <motion.div className="inner-carousel flex justify-start  ">
           {CarouselImageGallery.map((item, index) => (
             <motion.div className="item w-64 h-64" key={index}>
               <div className="w-64 h-64 object-center p-4 mx-4 relative cursor-pointer top-0">
-              <button className="absolute right-5">
-                  <img src={deleteicon} className="w-5" alt="" />
+                <button className="absolute right-5">
+                  <img
+                    src={emptyBookmarkIcon}
+                    className="w-5 my-2"
+                    alt="bookmark"
+                  />
                 </button>
                 <img
                   src={item.imageURL}
@@ -28,7 +35,10 @@ export default function ImageCarouselFrame(props) {
                 />
                 <div className=" mt-2">
                   <h3>{item.name}</h3>
-                  <p className="flex items-center"><img src={starRating} className="w-4 f" alt="" />: {item.rating}</p>
+                  <p className="flex items-center">
+                    <img src={starRating} className="w-4 f" alt="rating" />:{" "}
+                    {item.rating}
+                  </p>
                 </div>
               </div>
             </motion.div>

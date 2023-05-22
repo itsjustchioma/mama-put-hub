@@ -8,6 +8,7 @@ import apron from "/assets/apron.png";
 import plate from "/assets/plate.png";
 import knife from "/assets/knife.png";
 import chefHat from "/assets/chef hat 1.png";
+import { Link } from "react-router-dom";
 
 export default function Onboarding() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -147,12 +148,14 @@ const Step3 = ({ onPrevious }) => {
         Users can upload their recipes, add images, and provide step-by-step
         instructions
       </p>
-      <button
-        onClick={onPrevious}
-        className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
-      >
-        Let's get started
-      </button>
+      <Link to={"/home"}>
+        <button
+          // onClick={onPrevious}
+          className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
+        >
+          Let's get started
+        </button>
+      </Link>
     </div>
   );
 };

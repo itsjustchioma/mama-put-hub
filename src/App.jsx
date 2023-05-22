@@ -1,7 +1,6 @@
-import "./App.css";
 import { Client } from "appwrite";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 import SignUp from "./views/SignUp";
 import Login from "./views/Login";
 import Photos from "./views/Photos";
