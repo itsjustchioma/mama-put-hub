@@ -19,7 +19,7 @@ const handleClick = () =>{
 // }
 
   return (
-    <header className="flex justify-end items-center px-4 py-2 ">
+    <header className="flex justify-end items-center  py-2 ">
       <h1 onClick={handleClick} > {hideSearch ? "" : <img src={search} className="w-6   mr-4" alt="" /> }</h1>
       {searchVisible && (
             <>
