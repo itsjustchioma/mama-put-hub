@@ -11,6 +11,8 @@ import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
+import Header from "./components/Header";
+import ViewDish from "./views/ViewDish";
 function App() {
   return (
     <Router>
@@ -25,12 +27,11 @@ function App() {
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
+        <Route path="/ViewDish" element={<ViewDish/>} />
+
       </Routes>
       <Navigation />
-<<<<<<< Updated upstream
-=======
       <SideBarNavigation />
->>>>>>> Stashed changes
     </Router>
 
     // {/* <Onboarding /> */}

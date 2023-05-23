@@ -3,12 +3,7 @@ export const Menus = [
     name: "Search",
     icon: "/public/assets/search.png",
     dis: "translate-x-0",
-<<<<<<< Updated upstream
-    path: "/Home"
-
-=======
-    path: "/home",
->>>>>>> Stashed changes
+    path: "/Home",
   },
   {
     name: "Your Library",
