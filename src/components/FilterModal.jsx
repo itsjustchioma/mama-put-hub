@@ -23,7 +23,10 @@ export default function FilterModal({closeModal, props}) {
        <h1 className='text-lg font-semibold'>Filter</h1>
         <FilterTags/>
       </div>
+      <div className='mb-20 absolute left-0 right-0 bottom-3'>
       <Button title='Showing 87 results'/>
+
+      </div>
 
     </div>
   );

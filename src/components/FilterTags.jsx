@@ -112,7 +112,7 @@ export default function FilterTags() {
   </div>
   </div>
 
-  <div className='suggestedDietsTags mt-3'>
+  <div className='suggestedDietsTags mt-3  mb-20'>
     <h1 className='text-[14px] font-medium '>Suggested Diets</h1>
   <div className="flex  flex-wrap whitespace-nowrap no-scrollbar">
     {SuggestedDietsTags.map((tag, index) => (
