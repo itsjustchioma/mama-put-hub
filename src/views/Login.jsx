@@ -1,6 +1,34 @@
-import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Client, Account } from "appwrite";
+// import Homepage from "./Homepage";
+
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    const client = new Client();
+    const account = new Account(client);
+
+    client
+      .setEndpoint("https://cloud.appwrite.io/v1")
+      .setProject("64676cf547e8830694b8");
+
+    try {
+      const response = await account.createEmailSession(email, password);
+      console.log("Login success:", response);
+      navigate("/home"); // Replace '/homepage' with your desired route
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle error and provide appropriate feedback to the user
+    }
+  };
+
   return (
     <div className="container bg-background-color">
       <div className="wrapper-container grid grid-cols-1  md:grid-cols-2  overflow-hidden">
@@ -26,6 +54,8 @@ export default function Login() {
                 type="email"
                 required
                 placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="mt-1 block w-full h-12 my-4 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1"
               />
@@ -36,6 +66,8 @@ export default function Login() {
               <input
                 type="password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 my-4 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
               focus:outline-none focus:border-laurel-green focus:ring-1 
           "
@@ -46,7 +78,10 @@ export default function Login() {
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
                 </div>
-                <button className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md">
+                <button
+                  className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
+                  onClick={handleLogin}
+                >
                   <span className="relative z-10">
                     <span className="wave-on-hover">Log In</span>
                   </span>

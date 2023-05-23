@@ -1,9 +1,28 @@
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
+import { Client, Account } from "appwrite";
 
 // import { useState } from "react";
 
 export default function SignUp() {
+  // const client = new Client();
+  // const account = new Account(client);
+
+  // client
+  //   .setEndpoint("https://cloud.appwrite.io/v1")
+  //   .setProject("64676cf547e8830694b8");
+
+  //   const promise = account.createEmailSession("email@example.com", "password");
+
+  //   promise.then(
+  //     function (response) {
+  //       console.log(response); // Success
+  //     },
+  //     function (error) {
+  //       console.log(error); // Failure
+  //     }
+  //   );
+
   return (
     <div className="font-acumin main-container bg-background-color">
       <div className="wrapper-container grid grid-cols-1    overflow-hidden  md:grid-cols-2">

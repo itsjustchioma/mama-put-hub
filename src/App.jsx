@@ -1,4 +1,3 @@
-import { Client } from "appwrite";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SignUp from "./views/SignUp";
@@ -10,14 +9,9 @@ import Homepage from "./views/Homepage";
 import Onboarding from "./views/Onboarding";
 import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
-import YourLibrary from "./views/YourLibrary"
+import YourLibrary from "./views/YourLibrary";
+import SideBarNavigation from "./components/Navigation/SideBarNavigation";
 function App() {
-  const client = new Client();
-
-  client
-    .setEndpoint("https://cloud.appwrite.io/v1")
-    .setProject("64676cf547e8830694b8");
-
   return (
     <Router>
       <Routes>
@@ -31,9 +25,12 @@ function App() {
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
-
       </Routes>
       <Navigation />
+<<<<<<< Updated upstream
+=======
+      <SideBarNavigation />
+>>>>>>> Stashed changes
     </Router>
 
     // {/* <Onboarding /> */}
