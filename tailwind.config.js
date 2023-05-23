@@ -7,7 +7,6 @@ export const content = [
 ];
 export const theme = {
   extend: {
-    
     colors: {
       "pastel-blue": "#add6cf",
       "laurel-green": "#9fb693",
@@ -16,12 +15,18 @@ export const theme = {
       "copper-orange": "#e48364",
       "grey-text": "#AFABA8",
       "background-color": "#F9F5F2",
+      "small-grey": "#ECEDE8",
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
     },
-    
+    boxShadow: {
+      "equal-shadow": "0 0 6px 0 rgba(0, 0, 0, 0.2)",
+    },
+    borderRadius: {
+      "round-shadow": "50px",
+      "half-round": "40px",
+    },
   },
 };
 export const plugins = [];
-

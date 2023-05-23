@@ -11,7 +11,10 @@ import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
-import Header from "./components/Header";
+import Achievement from "./views/Achievement";
+import MyProfile from "./views/MyProfile"
+import UserPreferencePage from "./views/UserPreferencePage";
+
 function App() {
   return (
     <Router>
@@ -26,14 +29,15 @@ function App() {
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
+        <Route path="/Achievement" element={<Achievement />} /> 
+        <Route path="/MyProfile" element={<MyProfile />} /> 
+        <Route path="/UserPreferencePage" element={<UserPreferencePage />} /> 
+        
       </Routes>
       <Navigation />
       <SideBarNavigation />
     </Router>
 
-    // {/* <Onboarding /> */}
-    // {/* <Navigation /> */}
-    // {/* <SideBarNavigation /> */}
   );
 }
 
