@@ -7,8 +7,8 @@ export default function FilterModal({closeModal, props}) {
 
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-white overflow-scroll z-[99]">
-      <div className="modal-content p-5">
+    <div className="fixed top-0 left-0 w-full h-full bg-white  z-[99]">
+      <div className="modal-content p-5 overflow-scroll  h-[90vh]">
        <div className='flex justify-between'> 
        <button onClick={()=> {
             closeModal(false)
@@ -22,8 +22,9 @@ export default function FilterModal({closeModal, props}) {
        </div>
        <h1 className='text-lg font-semibold'>Filter</h1>
         <FilterTags/>
-        <Button title='Showing 87 results'/>
       </div>
+      <Button title='Showing 87 results'/>
+
     </div>
   );
 }

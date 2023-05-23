@@ -3,6 +3,8 @@ export const Menus = [
     name: "Search",
     icon: "/public/assets/search.png",
     dis: "translate-x-0",
+    path: "/Home"
+
   },
   {
     name: "Your Library",

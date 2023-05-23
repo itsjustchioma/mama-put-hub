@@ -33,7 +33,7 @@ function App() {
         <Route path="/YourLibrary" element={<YourLibrary />} />
 
       </Routes>
-      {/* <Navigation /> */}
+      <Navigation />
     </Router>
 
     // {/* <Onboarding /> */}
