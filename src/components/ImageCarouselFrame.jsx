@@ -7,10 +7,9 @@ import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 
 export default function ImageCarouselFrame(props) {
   // const [isBookmarkVisible, setIsBookmarkVisible] = useState(false);
-
-  // const handleBookmarkClick = () => {
-  //   setIsBookmarkVisible(!isBookmarkVisible);
-  // };
+  // const handleBookMarkClick =() =>{
+  //     setIsBookmarkVisible(!isBookmarkVisible)
+  // }
 
   return (
     <div className=" ">
