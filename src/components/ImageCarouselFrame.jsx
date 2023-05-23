@@ -37,6 +37,7 @@ export default function ImageCarouselFrame(props) {
                   <p className="flex items-center text-[14px]">
                     <img src={starRating} className="w-4 f" alt="rating" />:{" "}
                     {item.rating}
+                    
                   </p>
                 </div>
               </div>
