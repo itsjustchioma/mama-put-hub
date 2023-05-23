@@ -11,6 +11,7 @@ import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
+import Header from "./components/Header";
 function App() {
   return (
     <Router>
@@ -27,10 +28,7 @@ function App() {
         <Route path="/YourLibrary" element={<YourLibrary />} />
       </Routes>
       <Navigation />
-<<<<<<< Updated upstream
-=======
       <SideBarNavigation />
->>>>>>> Stashed changes
     </Router>
 
     // {/* <Onboarding /> */}

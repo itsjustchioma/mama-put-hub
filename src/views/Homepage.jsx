@@ -12,8 +12,6 @@ const Homepage = (props) => {
       <Header />
       <div className="w-10/12 mx-auto">
         <Tags />
-
-        <SideBarNavigation />
         <ImageCarouselFrame title={"What do you want to eat today?"} />
         <ImageCarouselFrame title={"Popular Recipes?"} />
         <Navigation />

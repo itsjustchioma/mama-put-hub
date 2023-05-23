@@ -32,7 +32,7 @@ const SideBarNavigation = () => {
         ) : (
           <img
             src={burger}
-            className="z-[999] sm:block absolute top-10 left-16 w-14 hidden"
+            className="z-[999] sm:block absolute top-10 left-10 w-14 hidden"
             alt="Burger Menu"
           />
         )}
@@ -48,22 +48,25 @@ const SideBarNavigation = () => {
         <div className="p-2.5 mt-2">
           <div>
             <form action="">
-              <div className="search flex items-center rounded-md p-2.5 bg-orange-400">
+              {/* <div className="search flex items-center rounded-md p-2.5 bg-orange-400">
                 <ion-icon name="search-outline"></ion-icon>
                 <input
                   type="text"
                   className="ml-2 bg-transparent cursor-pointer placeholder-white"
                   placeholder="Search"
                 />
-              </div>
+              </div> */}
             </form>
           </div>
 
           <ul>
             {Menus.map((menu, i) => (
               <li key={i} className="">
-                <a className="flex flex-col text-center pt-6">
-                  <div className="p-2.5 mb-7 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-orange-300">
+                <a
+                  href={menu.path}
+                  className="flex flex-col text-center pt-6 hover:bg-copper-orange"
+                >
+                  <div className="p-2.5 mb-7 flex items-center rounded-md px-4 duration-300 cursor-pointer">
                     <img src={menu.icon} alt={menu.altText} className="w-4" />
                     <span className="text-[15px] ml-4">{menu.name}</span>
                   </div>
