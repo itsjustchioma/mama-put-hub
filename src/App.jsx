@@ -11,15 +11,11 @@ import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
-<<<<<<< HEAD
 import Achievement from "./views/Achievement";
 import MyProfile from "./views/MyProfile"
 import UserPreferencePage from "./views/UserPreferencePage";
 
-=======
-import Header from "./components/Header";
 import ViewDish from "./views/ViewDish";
->>>>>>> 8cdcafc534d2e8f2ee0dcc734d1eda7802628785
 function App() {
   return (
     <Router>
@@ -34,15 +30,12 @@ function App() {
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
-<<<<<<< HEAD
         <Route path="/Achievement" element={<Achievement />} /> 
         <Route path="/MyProfile" element={<MyProfile />} /> 
         <Route path="/UserPreferencePage" element={<UserPreferencePage />} /> 
         
-=======
         <Route path="/ViewDish" element={<ViewDish/>} />
 
->>>>>>> 8cdcafc534d2e8f2ee0dcc734d1eda7802628785
       </Routes>
       <Navigation />
       <SideBarNavigation />
