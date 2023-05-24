@@ -18,7 +18,20 @@ const CarouselImageGallery = [
     { imageURL: dish7, name: "Pizza", rating: 4.8, path:"/ViewDish" },
     { imageURL: dish8, name: "Salad", rating: 4.4, path:"/ViewDish" },
   ];
+
+
+
+const CarouselISavedRecipe = [
+  { imageURL: dish1, name: "Pan Cake", rating: 4.5, path:"/NewRecipe" },
+  { imageURL: '', name: "Lamb Chops", rating: 4.2,path:"/NewRecipe" },
+  { imageURL: dish3, name: "Potato Spaghetti", rating: 4.7,path:"/NewRecipe" },
+  { imageURL: dish4, name: "Home Burger", rating: 4.9,path:"/NewRecipe" },
+  { imageURL: dish5, name: "Pan Cake", rating: 4.6,path:"/NewRecipe" },
+  { imageURL: dish6, name: "Roasted Diced Beef, Broccoli Served with wine", rating: 4.3 , path:"/NewRecipe"},
+  { imageURL: dish7, name: "Pizza", rating: 4.8, path:"/ViewDish" },
+  { imageURL: dish8, name: "Salad", rating: 4.4, path:"/ViewDish" },
+];
   
   
   
-export default CarouselImageGallery;
+export default {CarouselImageGallery, CarouselISavedRecipe};

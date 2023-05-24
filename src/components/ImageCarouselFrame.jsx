@@ -35,7 +35,7 @@ export default function ImageCarouselFrame(props) {
 
       <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80">
         <motion.div className="inner-carousel flex justify-start  ">
-          {CarouselImageGallery.map((item, index) => (
+          {CarouselImageGallery.CarouselImageGallery.map((item, index) => (
             <motion.div className="item w-64 h-64" key={index} >
             <Link to={"/ViewDish"}>
               <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">

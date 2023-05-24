@@ -14,6 +14,7 @@ import SideBarNavigation from "./components/Navigation/SideBarNavigation";
 import Achievement from "./views/Achievement";
 import MyProfile from "./views/MyProfile"
 import UserPreferencePage from "./views/UserPreferencePage";
+import NewRecipe from "./views/NewRecipe";
 
 import ViewDish from "./views/ViewDish";
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route path="/YourLibrary" element={<YourLibrary />} />
         <Route path="/Achievement" element={<Achievement />} /> 
         <Route path="/MyProfile" element={<MyProfile />} /> 
+        <Route path="/NewRecipe" element={<NewRecipe />} /> 
+
         <Route path="/UserPreferencePage" element={<UserPreferencePage />} /> 
         
         <Route path="/ViewDish" element={<ViewDish/>} />
