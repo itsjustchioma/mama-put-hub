@@ -119,10 +119,12 @@ function NewRecipe() {
     setFormData((prevData) => ({
       ...prevData,
       steps: updatedSteps,
+      totalTime: totalTime,
     }));
     console.log("Form submitted:", formData);
     setStep((prevStep) => prevStep + 1);
   };
+  
 
   const handleIncrement = () => {
     setFormData((prevData) => ({
@@ -270,7 +272,7 @@ function NewRecipe() {
               </label>
               <br />
               <br />
-              <br />
+              
               <div className="flex flex-col">
                 <div onClick={handlePrevious} className="mb-4">
                   <Button title="Previous Step" />
@@ -293,13 +295,14 @@ function NewRecipe() {
                 handlePrevious={handlePrevious}
               />              
 
-              <div onClick={handlePrevious} className="mb-4">
+              <div onClick={handlePrevious} className="mb-2">
                 <Button title="Previous Step" />
 
               </div>
-              <button type="submit" className="bg-pastel-blue hover:bg-laurel-green text-white font-bold py-2 px-4 rounded">
-  Submit
-</button>
+              <div onClick={handleNext}>
+                  <Button title="Next Step" />
+                </div>
+          
              
 
             </form>
@@ -348,6 +351,15 @@ function NewRecipe() {
       <div onClick={handlePrevious}>
         <Button title="Previous"/>
       </div>
+      <br />
+      <br />
+
+      <form onSubmit={handleSubmit}>
+      <button type="submit" className="bg-pastel-blue hover:bg-laurel-green text-white font-bold py-2 px-4 rounded">
+  Submit
+</button>
+
+</form>
     </div>
   </div>
 )}
