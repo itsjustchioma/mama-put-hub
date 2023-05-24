@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function AchievementTag() {
   return (
-    <div className="p-10 sm:p-12 rounded-round-shadow bg-pastel-blue relative flex items-center">
+    <div className="p-10 sm:p-12 rounded-round-shadow bg-pastel-blue relative flex items-center justify-between">
       <div className="">
         <h4 className="text-md sm:text-lg font-semibold text-black">
           Achievements

@@ -2,8 +2,8 @@ import { React } from "react";
 
 function AchievementAvatar() {
   return (
-    <div className="mx-4 my-4 md:mx-24 md:my-6">
-      <div className="p-10 sm:p-6 rounded-round-shadow border bg-background-color relative flex items-center">
+    <div className=" my-4  md:my-6">
+      <div className="p-10 sm:p-6 rounded-round-shadow border bg-background-color relative flex items-center justify-between   ">
         <div className="">
           <h4 className="text-md sm:text-lg font-semibold text-black">
             Achievements.
