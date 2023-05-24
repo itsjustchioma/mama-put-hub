@@ -6,6 +6,8 @@ import dish5 from "/assets/pexels-karthik-reddy-397913.jpg";
 import dish6 from "/assets/pexels-nerfee-mirandilla-3186654.jpg";
 import dish7 from "/assets/pexels-rajesh-tp-1633525.jpg";
 import dish8 from "/assets/pexels-valeria-boltneva-842571.jpg";
+import iicon from "/assets/i icon.png";
+
 
 
 const CarouselImageGallery = [
@@ -22,8 +24,8 @@ const CarouselImageGallery = [
 
 
 const CarouselISavedRecipe = [
-  { imageURL: dish1, name: "Pan Cake", rating: 4.5, path:"/NewRecipe" },
-  { imageURL: '', name: "Lamb Chops", rating: 4.2,path:"/NewRecipe" },
+  { imageURL: iicon, name: "Create New Recipe", rating: '', path:"/NewRecipe" },
+  { imageURL: dish2, name: "Lamb Chops", rating: 4.2,path:"/NewRecipe" },
   { imageURL: dish3, name: "Potato Spaghetti", rating: 4.7,path:"/NewRecipe" },
   { imageURL: dish4, name: "Home Burger", rating: 4.9,path:"/NewRecipe" },
   { imageURL: dish5, name: "Pan Cake", rating: 4.6,path:"/NewRecipe" },
