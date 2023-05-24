@@ -16,14 +16,12 @@ export default function FilterTags() {
         { name: "Under 15 mins" },
         { name: "Under 30 mins" },
         { name: "Under 60 mins" },
-       
       ];
 
       const LevelTags = [
         { name: "Easy" },
         { name: "Medium" },
         { name: "Like a PRO" },
-       
       ];
 
       const DishTypeTags = [
@@ -34,10 +32,6 @@ export default function FilterTags() {
         { name: "Desert" },
         { name: "Appetizers" },
         { name: "Brunch" },
-
-        
-        
-        
       ];
 
       const SuggestedDietsTags = [
@@ -49,9 +43,7 @@ export default function FilterTags() {
         { name: "DASH Diet (Dietary Approaches to Stop Hypertension)" },
         { name: "Glucose Free" },
 
-        
-        
-        
+          
       ];
     
       

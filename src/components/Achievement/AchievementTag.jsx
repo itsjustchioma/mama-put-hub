@@ -1,5 +1,4 @@
 import React from "react";
-import Achievement from "../views/Achievement";
 import { Link } from "react-router-dom";
 
 function AchievementTag() {

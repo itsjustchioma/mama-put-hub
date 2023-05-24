@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ProfileMenu } from "./ProfileMenu";
-import HorizontalLine from "./HorizontalLine";
+import HorizontalLine from "../HorizontalLine";
 
 function ProfileOptions() {
   return (
