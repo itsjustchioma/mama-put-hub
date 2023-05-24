@@ -13,9 +13,9 @@ export default function YourLibrary() {
 
   return (
     <div className="overflow-scroll h-[90vh]">
-      <div className="m-4">
+      <div className="m-4 w-5/6  mx-auto  md:h-100vh ">
         <Header />
-        <h1 className="text-xl">Saved Recipe</h1>
+        <h1 className="text-xl">Saved Recipes</h1>
         <ImageCarouselFrame />
         <h1 className="text-xl">My Recipes</h1>
 

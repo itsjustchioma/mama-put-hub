@@ -163,7 +163,7 @@ function NewRecipe() {
 
 
   return (
-    <div className="m-4 h-[90vh] overflow-scroll">
+    <div className="m-4 h-[90vh] overflow-scroll w-5/6  mx-auto  no-scrollbar">
       <div className="flex justify-between mb-4">
         <button>
           <img src={leftarrow} className="w-4" alt="" />
