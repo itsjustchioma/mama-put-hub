@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import dummyImage from "/assets/user.png";
 import Button from "../components/Button";
 import leftarrow from "/assets/left arrow.png";
+import BackArrow from "../components/BackClick/BackArrow";
+import { Link, useNavigate } from "react-router-dom";
+import { tags } from "../components/Tags";
 
 const LevelTags = [
   { name: "Easy" },
@@ -92,6 +95,7 @@ function NewRecipe() {
     description: "",
     level: "",
     count: 0,
+    type: "",
     steps: [],
   });
 
@@ -163,13 +167,20 @@ function NewRecipe() {
     return totalTime;
   };
 
+  const handleBackClick = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
+  const navigate = useNavigate();
+
+
 
   return (
     <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
       <div className="flex justify-between mb-4">
-        <button>
-          <img src={leftarrow} className="w-4" alt="" />
-        </button>
+        
+          <BackArrow onClick={handleBackClick} />
+      
         <button className="text-sm">clear all</button>
       </div>
       <div className="h-[90vh] overflow-scroll">
@@ -280,7 +291,26 @@ function NewRecipe() {
               </label>
               <br />
               <br />
-              
+              <label className="font-medium">
+
+Category: <br />
+<select
+  name="type"
+  value={formData.type}
+  onChange={handleChange}
+  className="my-2 p-2 rounded border border-gray-300"
+  style={{ minWidth: "200px" }}
+>
+  <option value="">Select Category</option>
+  {tags.map((tag, index) => (
+    <option key={index} value={tag.name}>
+      {tag.name}
+    </option>
+  ))}
+</select>
+</label>
+<br />
+<br />
               <div className="flex flex-col">
                 <div onClick={handlePrevious} className="mb-4">
                   <Button title="Previous Step" />

@@ -51,6 +51,7 @@ const ViewDish = () => {
                     <img src={starRating} className="w-4" alt="" />{" "}
                     {dish.rating}
                   </span>
+                  <p>{dish.type}</p>
                   <p className="uppercase"> {dish.level}</p>
                   <p> {dish.time} min</p>
                   <p>Servings: {dish.servings}</p>

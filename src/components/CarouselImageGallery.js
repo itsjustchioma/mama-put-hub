@@ -15,6 +15,7 @@ const CarouselImageGallery = [
     rating: 4.5,
     path: "/ViewDish",
     level: "medium",
+    type: "dessert", 
     time: "50",
     servings: "4",
     ingredients: [
@@ -52,6 +53,7 @@ const CarouselImageGallery = [
     level: "like a pro",
     time: 60,
     servings: "4",
+    type: "non-vegitarian", 
     ingredients: [
       { name: "lamb chops", quantity: "500g" },
       { name: "olive oil", quantity: "2 tbsp" },
@@ -86,6 +88,7 @@ const CarouselImageGallery = [
     level: "easy",
     time: 30,
     servings: "4",
+    type: "main", 
     ingredients: [
       { name: "potatoes", quantity: "500g" },
       { name: "spaghetti", quantity: "250g" },
@@ -119,6 +122,7 @@ const CarouselImageGallery = [
     level: "medium",
     time: 45,
     servings: "4",
+    type: "sandwich", 
     ingredients: [
       { name: "ground beef", quantity: "500g" },
       { name: "buns", quantity: "4" },
@@ -151,6 +155,7 @@ const CarouselImageGallery = [
     level: "easy",
     time: 40,
     servings: "4",
+    type: "dessert", 
     ingredients: [
       { name: "flour", quantity: "200g" },
       { name: "milk", quantity: "250ml" },
@@ -186,6 +191,7 @@ const CarouselImageGallery = [
     level: "like a pro",
     time: 75,
     servings: "4",
+    type: "main", 
     ingredients: [
       { name: "beef", quantity: "500g" },
       { name: "broccoli", quantity: "1 head" },
@@ -222,7 +228,9 @@ const CarouselImageGallery = [
     path: "/ViewDish",
     level: "medium",
     time: 55,
+    type: "italian", 
     servings: "4",
+
     ingredients: [
       { name: "dough", quantity: "300g" },
       { name: "tomato sauce", quantity: "200ml" },
@@ -260,6 +268,7 @@ const CarouselImageGallery = [
     level: "easy",
     time: 20,
     servings: "4",
+    type: "salad", 
     ingredients: [
       { name: "lettuce", quantity: "1 head" },
       { name: "tomato", quantity: "2" },

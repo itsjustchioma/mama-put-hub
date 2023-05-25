@@ -1,18 +1,24 @@
 import React from "react";
 
+
+ export const tags = [
+  { name: "Breakfast" },
+  { name: "Brunch" },
+  { name: "Lunch" },
+  { name: "Diary" },
+  { name: "Dinner" },
+  { name: "Snacks" },
+  { name: "Appetizers" },
+  { name: "Salads" },
+  { name: "Soups" },
+  { name: "Pasta and Noodles" },
+  { name: "Desserts" },
+
+
+];
+
 export default function Tags() {
-  const tags = [
-    { name: "Popular" },
-    { name: "Lactose Free" },
-    { name: "Sugar Free" },
-    { name: "Diary" },
-    { name: "Salads" },
-    { name: "Italian Cuisine" },
-    { name: "Mexican Dish" },
-    { name: "Salads" },
-
-
-  ];
+ 
   return (
     <div className="flex  w-full overflow-scroll mx-auto whitespace-nowrap no-scrollbar md:mx-auto md:w-[70%]">
       {tags.map((tag, index) => (
