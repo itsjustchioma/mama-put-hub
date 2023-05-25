@@ -13,10 +13,13 @@ import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
 import Achievement from "./views/Achievement";
-import MyProfile from "./views/MyProfile";
 import UserPreferencePage from "./views/UserPreferencePage";
 import NewRecipe from "./views/NewRecipe";
 import ViewDish from "./views/ViewDish";
+
+const closeModal = () => {
+  // Implementation for closing the modal
+};
 
 function App() {
   return (
@@ -32,8 +35,11 @@ function App() {
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
-        <Route path="/Achievement" element={<Achievement />} />
-        <Route path="/MyProfile" element={<MyProfile />} />
+        {/* <Route path="/Achievement" element={<Achievement />} /> */}
+        <Route
+          path="/Achievement"
+          element={<Achievement closeModal={closeModal} />}
+        />
         <Route path="/NewRecipe" element={<NewRecipe />} />
         <Route path="/UserPreferencePage" element={<UserPreferencePage />} />
         <Route path="/ViewDish/:id" element={<ViewDish />} />
