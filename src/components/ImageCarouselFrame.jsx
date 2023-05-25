@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
 import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ImageCarouselFrame(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
-  const history = useHistory(); // Add useHistory hook
+  const navigate = useNavigate();
+
 
   const handleBookMarkClick = (index) => {
     const updatedStatus = [...bookmarkStatus];
@@ -17,9 +18,10 @@ export default function ImageCarouselFrame(props) {
     setBookmarkStatus(updatedStatus);
   };
 
-  const handleImageClick = (index) => {
-    history.push(`/ViewDish/${index}`); // Redirect to the ViewDish component with the index as a parameter
-  };
+const handleImageClick = (index) => {
+  navigate(`/ViewDish/${index}`);
+};
+
 
   return (
     <div className=" ">
