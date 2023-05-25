@@ -13,7 +13,7 @@ const ViewDish = () => {
   const dish = CarouselImageGallery.CarouselImageGallery[Number(id)];
 
   return (
-    <div className="h-[90vh] overflow-scroll  md:h-[100vh] md:w-5/6  mx-auto">
+    <div className="h-[90vh] overflow-scroll no-scrollbar md:h-[100vh] md:w-5/6  mx-auto">
       <div className="p-4">
         <div className="flex justify-between">
           <button
@@ -44,18 +44,17 @@ const ViewDish = () => {
                     {" "}
                     <img src={starRating} className="w-4" alt="" />{" "}
                     {dish.rating}
-                    &nbsp;
-                    &nbsp; <br />
-                  <span className="text-sm text-cyan-400"> 
-                  <Link>
-                    25 reviews
-                    </Link>
-                  </span>
+                 
+               
                   </span>
                   <p className="uppercase"> {dish.level}</p>
                   <p> {dish.time} min</p>
                   <p>Servings: {dish.servings}</p>
-
+                  <span className="text-sm text-cyan-400"> 
+                  <Link>
+                    25 reviews
+                    </Link>
+                    </span>
                 </div>
                 
                 <div className="mt-4">
