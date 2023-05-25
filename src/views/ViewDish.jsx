@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, useParams } from "react";
 import leftarrow from "/assets/left arrow.png";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
+import { useLocation } from "react-router-dom";
 
-export default function ViewDish(props) {
-  const { imageUrl, rating, name } = props;
+export default function ViewDish() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const { id } = useParams();
+      const image = await fetch(`/api/images/${id}`);
+      const imageData = await image.json();
+      setSelectedImage(imageData);
+    };
+
+    fetchImage();
+  }, []);
+
+  if (!selectedImage) {
+    // Handle the case when `selectedImage` is null or undefined
+    return <div>No image selected.</div>;
+  }
+
+  const { imageUrl, rating, name } = selectedImage;
 
   return (
     <div>
