@@ -11,14 +11,12 @@
   50% {
     transform: translateX(120%);
   }
-
 }
 
 .wave-on-hover:hover {
   display: inline-block;
   animation: wave 1s infinite;
 }
-
 
 @layer utilities {
   /* Chrome, Safari and Opera */
@@ -29,5 +27,11 @@
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+}
+
+@media (max-width: 767px) {
+  .justify-evenly {
+    justify-content: center;
   }
 }

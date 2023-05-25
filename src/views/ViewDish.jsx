@@ -22,9 +22,9 @@ const ViewDish = () => {
     <div className="h-[90vh] overflow-scroll no-scrollbar md:h-[100vh] md:w-5/6  mx-auto">
       <div className="p-4">
         <div className="flex justify-between pb-4">
-        <BackArrow onClick={handleBackClick} />
+          <BackArrow onClick={handleBackClick} />
 
-<img src={fullBookmarkIcon} className="w-4" alt="" />
+          <img src={fullBookmarkIcon} className="w-4" alt="" />
         </div>
         {dish ? (
           <div>
@@ -37,26 +37,25 @@ const ViewDish = () => {
             </div>
             <div className="overflow-scroll   meda  overscroll-contain  -mt-3">
               <div className=" bg-copper-orange inset-0 p-4 rounded-t-3xl  overflow-y-auto overscroll-contain">
-                <h1 className="text-2xl text-center font-medium">{dish.name}</h1>
+                <h1 className="text-xl md:text-3xl text-center font-bold">
+                  {dish.name}
+                </h1>
 
-                <div className="flex justify-center justify-evenly mt-4 flex-wrap">
-                  <span className="flex items-center  ">
-                    {" "}
-                    <img src={starRating} className="w-4" alt="" />{" "}
-                    {dish.rating}
-                 
-               
+                <div className="flex flex-col items-center mt-4 md:text-xl">
+                  <div className="flex items-center">
+                    <img src={starRating} className="w-4" alt="" />
+                    <p className="ml-1">{dish.rating}</p>
+                  </div>
+                  <div className="flex items-center mt-2">
+                    <p className="uppercase mr-4">{dish.level}</p>
+                    <p>{dish.time} min</p>
+                  </div>
+                  <p className="mt-2">Servings: {dish.servings}</p>
+                  <span className="text-sm text-cyan-400 mt-2">
+                    <Link>25 reviews</Link>
                   </span>
-                  <p className="uppercase"> {dish.level}</p>
-                  <p> {dish.time} min</p>
-                  <p>Servings: {dish.servings}</p>
-                  <span className="text-sm text-cyan-400"> 
-                  <Link>
-                    25 reviews
-                    </Link>
-                    </span>
                 </div>
-                
+
                 <div className="mt-4">
                   <h1 className="text-2xl font-medium">Ingredients</h1>
                   <ul>
@@ -67,10 +66,8 @@ const ViewDish = () => {
                       </li>
                     ))}
                   </ul>
-                  
                 </div>
-                <Button title="Show directions"/>
-
+                <Button title="Show directions" />
               </div>
             </div>
           </div>
