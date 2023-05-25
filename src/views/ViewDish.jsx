@@ -1,47 +1,28 @@
-import React, { useState, useEffect, useParams } from "react";
-import leftarrow from "/assets/left arrow.png";
-import fullBookmarkIcon from "/public/assets/fullbookmark.png";
-import { useLocation } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
+import CarouselImageGallery from "../components/CarouselImageGallery";
 
-export default function ViewDish() {
-  const [selectedImage, setSelectedImage] = useState(null);
+function ViewDish() {
+  const { id } = useParams();
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      const { id } = useParams();
-      const image = await fetch(`/api/images/${id}`);
-      const imageData = await image.json();
-      setSelectedImage(imageData);
-    };
+  // Find the selected dish based on the id
+  const selectedDish = CarouselImageGallery.CarouselImageGallery.find(
+    (dish, index) => index.toString() === id
+  );
 
-    fetchImage();
-  }, []);
-
-  if (!selectedImage) {
-    // Handle the case when `selectedImage` is null or undefined
-    return <div>No image selected.</div>;
+  if (!selectedDish) {
+    return <div>No dish found.</div>;
   }
 
-  const { imageUrl, rating, name } = selectedImage;
+  const { imageURL, name, rating } = selectedDish;
 
   return (
     <div>
-      <div className="flex justify-between">
-        <button>
-          <img src={leftarrow} className="w-4" alt="" />
-        </button>
-
-        <button className="text-sm">
-          <img src={fullBookmarkIcon} className="w-4" alt="" />
-        </button>
-      </div>
-
-      {/* Render the image, rating, and name */}
-      <img src={imageUrl} alt="Dish" />
+      <img src={imageURL} alt="Dish" />
+      <h2>{name}</h2>
       <p>Rating: {rating}</p>
-      <h3>{name}</h3>
-
-      {/* Other content */}
     </div>
   );
 }
+
+export default ViewDish;
