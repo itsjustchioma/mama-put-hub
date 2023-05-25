@@ -41,7 +41,8 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
     <div>
       {foods.map((food, index) => (
         <div key={index}>
-          <label>
+                       <label className="font-medium">
+
             Food Name: <br />
             <input
               type="text"
@@ -52,7 +53,8 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
             />
           </label>{" "}
           <br />
-          <label>
+          <label className="font-medium">
+
             Time: <br />
             <input
               type="text"
@@ -206,7 +208,7 @@ function NewRecipe() {
                   />
                 </label>
               </div>
-              <label>
+              <label className="font-medium">
                 Name your recipe: <br />
                 <input
                   type="text"
@@ -218,7 +220,9 @@ function NewRecipe() {
                 />
               </label>
               <div>
-                <label>
+                <br />
+              <label className="font-medium">
+
                   Servings: <br />
                   <button type="button" onClick={handleDecrement}>
                     -
@@ -229,6 +233,7 @@ function NewRecipe() {
                   </button>
                 </label>
               </div>
+              <br />
               <div onClick={handleNext}>
                 <Button title="Next Step" />
               </div>
@@ -242,8 +247,10 @@ function NewRecipe() {
             <h1 className="text-lg">Recipe Publication</h1>
 
             <form onSubmit={handleSubmit}>
-              <label>
-                Description:
+            <label className="font-medium">
+
+                Description: 
+                <br />
                 <input
                   type="text"
                   name="description"
@@ -253,7 +260,8 @@ function NewRecipe() {
                 />
               </label>
               <br />
-              <label>
+              <label className="font-medium">
+
                 Level: <br />
                 <select
                   name="level"
@@ -282,12 +290,15 @@ function NewRecipe() {
                 </div>
               </div>
             </form>
+            <div className="text-center text-sm mt-4">Step 2</div>
+
           </div>
         )}
 
         {step === 3 && (
           <div>
-            <h2>Step 3: Add Steps</h2>
+                         <h1 className="text-lg">Recipe Publication</h1>
+
             <form onSubmit={handleSubmit}>
               <FoodForm
                 formData={formData}
@@ -306,12 +317,15 @@ function NewRecipe() {
              
 
             </form>
+            <div className="text-center text-sm mt-4">Step 3</div>
+
           </div>
         )}
 
 {step === 4 && (
   <div>
-    <h2 className="text-xl font-bold mb-4">Step 4: Summary</h2>
+                  <h1 className="text-lg">Recipe Publication</h1>
+
     <br />
     <p className="mb-2">Name: {formData.name}</p>
     <br />
@@ -324,19 +338,24 @@ function NewRecipe() {
 
     <p className="mb-2">Level: {formData.level}</p>
 
+<br />
 
     <p className="mb-2">Steps:</p>
+    <br />
     <ul>
       {formData.steps.map((step, index) => (
         
         <li key={index}>{step.name}: {step.time } minutes</li>
        
       ))}
+
     </ul>
+    
     <p className="mb-2">
               Estimated Time: {calculateTotalTime()} minutes
             </p>
 
+<br />
 
     <div className="mb-4">
       {formData.picture && (

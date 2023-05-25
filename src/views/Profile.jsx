@@ -6,7 +6,7 @@ import ProfileOptions from "../components/Profile/ProfileOptions";
 
 function Profile() {
   return (
-    <div className="bg-background-color w-5\6 md:h-[100vh] m-auto">
+    <div className="bg-background-color h-[90vh] w-5\6 md:h-[100vh] m-auto">
       <Header />
       <div className="w-10/12 mx-auto">
         <h1 className="text-xl  font-semibold">Profile</h1>
