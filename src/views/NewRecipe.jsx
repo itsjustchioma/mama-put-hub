@@ -165,7 +165,7 @@ function NewRecipe() {
 
 
   return (
-    <div className="m-4 h-[90vh] overflow-scroll w-5/6  mx-auto  no-scrollbar">
+    <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
       <div className="flex justify-between mb-4">
         <button>
           <img src={leftarrow} className="w-4" alt="" />
@@ -177,8 +177,8 @@ function NewRecipe() {
           <div>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <h1 className="text-lg">Recipe Publication</h1>
-                <p> Add a recipe cover</p>
+                <h1 className="text-lg font-medium">Recipe Publication</h1>
+                <p className="font-medium"> Add a recipe cover</p>
                 <div className="bg-pastel-blue h-[30vh] mx-auto rounded-lg my-auto">
                   {formData.picture ? (
                     <img
@@ -204,7 +204,7 @@ function NewRecipe() {
                     id="picture"
                     accept="image/*"
                     onChange={handlePictureChange}
-                    className="border border-gray-300 rounded-md p-2 w-80"
+                    className="border border-gray-300 rounded-md p-2 w-72"
                   />
                 </label>
               </div>
@@ -213,7 +213,7 @@ function NewRecipe() {
                 <input
                   type="text"
                   placeholder="for example? smashed potato and chicken"
-                  className="border border-gray-300 rounded-md p-2 ml-2 w-80"
+                  className="border border-gray-300 rounded-md p-2 ml-2 w-72"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
@@ -244,7 +244,7 @@ function NewRecipe() {
 
         {step === 2 && (
           <div>
-            <h1 className="text-lg">Recipe Publication</h1>
+            <h1 className="text-lg font-medium">Recipe Publication</h1>
 
             <form onSubmit={handleSubmit}>
             <label className="font-medium">
@@ -256,7 +256,7 @@ function NewRecipe() {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-2  w-80"
+                  className="border border-gray-300 rounded-md p-2  w-72"
                 />
               </label>
               <br />
@@ -297,7 +297,7 @@ function NewRecipe() {
 
         {step === 3 && (
           <div>
-                         <h1 className="text-lg">Recipe Publication</h1>
+                         <h1 className="text-lg font-medium">Recipe Publication</h1>
 
             <form onSubmit={handleSubmit}>
               <FoodForm
@@ -324,35 +324,35 @@ function NewRecipe() {
 
 {step === 4 && (
   <div>
-                  <h1 className="text-lg">Recipe Publication</h1>
+                  <h1 className="text-lg font-medium">Recipe Publication</h1>
 
     <br />
-    <p className="mb-2">Name: {formData.name}</p>
+    <p className="mb-2 "><b>Name:</b> {formData.name}</p>
     <br />
 
-    <p className="mb-2">Servings: {formData.count}</p>
+    <p className="mb-2 "><b>Servings:</b> {formData.count}</p>
     <br />
 
-    <p className="mb-2">Description: {formData.description}</p>
+    <p className="mb-2 "><b>Description:</b> {formData.description}</p>
     <br />
 
-    <p className="mb-2">Level: {formData.level}</p>
+    <p className="mb-2 "><b>Level:</b> {formData.level}</p>
 
 <br />
 
-    <p className="mb-2">Steps:</p>
+    <p className="mb-2 "><b>Steps:</b></p>
     <br />
     <ul>
       {formData.steps.map((step, index) => (
         
-        <li key={index}>{step.name}: {step.time } minutes</li>
+        <li key={index}>{step.name}: {step.time } <b>minutes</b></li>
        
       ))}
 
     </ul>
     
     <p className="mb-2">
-              Estimated Time: {calculateTotalTime()} minutes
+             <b> Estimated Time:</b> {calculateTotalTime()} <b>minutes</b>
             </p>
 
 <br />
