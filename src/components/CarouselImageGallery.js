@@ -31,7 +31,10 @@ const CarouselISavedRecipe = [
     rating: "",
     path: "/NewRecipe",
   },
-  { imageURL: dish2, name: "Lamb Chops", rating: 4.2, path: "/NewRecipe" },
+  { imageURL: dish2, 
+    name: "Lamb Chops", 
+    rating: 4.2, 
+    path: "/NewRecipe" },
   {
     imageURL: dish3,
     name: "Potato Spaghetti",
