@@ -13,7 +13,6 @@ function Profile() {
         <ProfileTag />
         <AchievementTag />
         <ProfileOptions />
-      
       </div>
     </div>
   );

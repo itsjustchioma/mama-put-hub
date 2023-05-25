@@ -26,55 +26,53 @@ export default function YourLibrary() {
                 {index === 0 ? ( // Render the link only for the first item
                   <Link to="/NewRecipe">
                     <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
-                    <div className="h-full bg-slate-400">
-                      <img
-                        src={item.imageURL}
-                        className="rounded-md bg-slate-200  w-10 h-10 flex items-center mx-auto absolute top-[40%] left-[40%] "
-                        alt=""
-                        
-                      />
+                      <div className="h-full bg-slate-400">
+                        <img
+                          src={item.imageURL}
+                          className="rounded-md bg-slate-200 w-10 h-10 flex items-center mx-auto absolute top-[40%] left-[40%] "
+                          alt=""
+                        />
                       </div>
 
                       <div className=" mt-2 ">
                         <h5 className="text-[14px]">{item.name}</h5>
-                        
                       </div>
                     </div>
                   </Link>
                 ) : (
                   <Link to="/ViewDish">
-                  <div>
-                    {/* Render other items without the link */}
-                    <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
-                      <button className="absolute right-5 ">
-                        <img
-                          src={emptyBookmarkIcon}
-                          className="w-5 my-2"
-                          alt="bookmark"
-                        />
-                      </button>
-                      <img
-                        src={item.imageURL}
-                        className="rounded-md bg-slate-200 h-full w-full  "
-                        alt=""
-                        onClick={() => {
-                          handleImageClick(item);
-                        }}
-                      />
-
-                      <div className=" mt-2 ">
-                        <h5 className="text-[14px]">{item.name}</h5>
-                        <p className="flex items-center text-[14px]">
+                    <div>
+                      {/* Render other items without the link */}
+                      <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
+                        <button className="absolute right-5 ">
                           <img
-                            src={starRating}
-                            className="w-4 f"
-                            alt="rating"
+                            src={emptyBookmarkIcon}
+                            className="w-5 my-2"
+                            alt="bookmark"
                           />
-                          : {item.rating}
-                        </p>
+                        </button>
+                        <img
+                          src={item.imageURL}
+                          className="rounded-md bg-slate-200 h-full w-full  "
+                          alt=""
+                          onClick={() => {
+                            handleImageClick(item);
+                          }}
+                        />
+
+                        <div className=" mt-2 ">
+                          <h5 className="text-[14px]">{item.name}</h5>
+                          <p className="flex items-center text-[14px]">
+                            <img
+                              src={starRating}
+                              className="w-4 f"
+                              alt="rating"
+                            />
+                            : {item.rating}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </Link>
                 )}
               </motion.div>
