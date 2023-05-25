@@ -53,7 +53,7 @@ export default function YourLibrary() {
                         </button>
                         <img
                           src={item.imageURL}
-                          className="rounded-md bg-slate-200 h-full w-full  "
+                          className="rounded-md h-full w-full  "
                           alt=""
                           onClick={() => {
                             handleImageClick(item);
