@@ -34,7 +34,7 @@ export default function ImageCarouselFrame(props) {
         <motion.div className="inner-carousel flex justify-start  ">
           {CarouselImageGallery.CarouselImageGallery.map((item, index) => (
             <motion.div className="item w-64 h-64" key={index}>
-              {/* <Link to={"/ViewDish"}> */}
+       
                 <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
                   <button className="absolute right-5">
                     <img
@@ -56,7 +56,7 @@ export default function ImageCarouselFrame(props) {
                       handleImageClick(item);
                     }}
                   />
-
+       <Link to={"/ViewDish"}>
                   <div className=" mt-2 ">
                     <h5 className="text-[14px]">{item.name}</h5>
                     <p className="flex items-center text-[14px]">
@@ -64,8 +64,9 @@ export default function ImageCarouselFrame(props) {
                        {item.rating}
                     </p>
                   </div>
+                  </Link>
+
                 </div>
-              {/* </Link> */}
             </motion.div>
           ))}
         </motion.div>

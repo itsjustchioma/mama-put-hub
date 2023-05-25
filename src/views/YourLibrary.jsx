@@ -29,7 +29,7 @@ export default function YourLibrary() {
                       <div className="h-full bg-slate-400">
                         <img
                           src={item.imageURL}
-                          className="rounded-md bg-slate-200 w-10 h-10 flex items-center mx-auto absolute top-[40%] left-[40%] "
+                          className="rounded-md  w-10 h-10 flex items-center mx-auto absolute top-[40%] left-[40%] "
                           alt=""
                         />
                       </div>
