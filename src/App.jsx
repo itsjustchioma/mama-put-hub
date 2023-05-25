@@ -16,6 +16,7 @@ import Achievement from "./views/Achievement";
 import UserPreferencePage from "./views/UserPreferencePage";
 import NewRecipe from "./views/NewRecipe";
 import ViewDish from "./views/ViewDish";
+import RecipeDirection from "./views/RecipeDirection";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -43,6 +44,8 @@ function App() {
         <Route path="/NewRecipe" element={<NewRecipe />} />
         <Route path="/UserPreferencePage" element={<UserPreferencePage />} />
         <Route path="/ViewDish/:id" element={<ViewDish />} />
+        <Route path="/RecipeDirection/:id" element={<RecipeDirection />} />
+
       </Routes>
       <Navigation />
       <SideBarNavigation />
