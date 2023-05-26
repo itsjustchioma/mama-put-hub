@@ -12,7 +12,7 @@ function Achievement() {
   };
 
   return (
-    <div className="bg-pastel-blue h-[90vh]">
+    <div className="bg-pastel-blue h-[90vh] overflow-scroll  no-scrollbar">
       <div className="w-5/6 mx-auto">
         <div className="flex">
           <BackArrow onClick={handleBackClick} />
