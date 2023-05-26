@@ -59,6 +59,7 @@ const handleImageClick = (index) => {
                       <img src={starRating} className="w-4 f" alt="rating" />
                       {item.rating}
                     </p>
+                    <p className="text-[14px]">{item.type}</p>
                   </div>
                 </Link>
               </div>
