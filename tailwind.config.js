@@ -27,6 +27,8 @@ export const theme = {
       "round-shadow": "50px",
       "half-round": "40px",
     },
+
+    
   },
 };
 export const plugins = [];

@@ -46,23 +46,24 @@ const ViewDish = () => {
               <div className=" bg-copper-orange inset-0 p-4   overflow-y-auto overscroll-contain">
                 <h1 className="text-2xl text-center font-medium">{dish.name}</h1>
 
-                <div className="flex flex-col justify-center justify-evenly mt-4 flex-wrap items-center">
-                  <span className="flex items-center  ">
-                    <img src={starRating} className="w-4" alt="" />{" "}
+                <div className="flex  justify-center justify-evenly mt-4 flex-wrap items-center">
+                  <span className="flex items-center  text-sm pr-3">
+                    <img src={starRating} className="w-10" alt="" />{" "}
                     {dish.rating}
                   </span>
-                  <p>{dish.type}</p>
-                  <p className="uppercase"> {dish.level}</p>
-                  <p> {dish.time} min</p>
-                  <p>Servings: {dish.servings}</p>
-                  <span className="text-sm text-cyan-400">
+                 
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.type}</p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.level}</p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.time} min</p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3">Servings: {dish.servings}</p>
+                  <span className="text-sm text-cyan-400  border-l-2 border-black pl-3 pr-3">
                     <Link>25 reviews</Link>
                   </span>
                 </div>
 
                 <div className="mt-4">
-                  <h1 className="text-2xl font-medium">Ingredients</h1>
-                  <ul>
+                  <h1 className="text-xl font-medium">Ingredients</h1>
+                  <ul className="text-sm">
                     {dish.ingredients.map((ingredient, index) => (
                       <li key={index} className="flex justify-between">
                         <span>{ingredient.name}</span>
