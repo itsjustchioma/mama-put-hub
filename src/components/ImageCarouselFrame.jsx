@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CarouselImageGallery from "./CarouselImageGallery";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
 import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
@@ -27,10 +27,10 @@ const handleImageClick = (index) => {
     <div className=" ">
       <h1 className="text-xl  font-semibold">{props.title}</h1>
 
-      <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80">
-        <motion.div className="inner-carousel flex justify-start  ">
+      <div className="carousel overflow-x-scroll no-scrollbar m-auto h-96">
+        <div className="inner-carousel flex justify-start  ">
           {CarouselImageGallery.CarouselImageGallery.map((item, index) => (
-            <motion.div className="item w-64 h-64" key={index}>
+            <div className="item w-64 h-64" key={index}>
               <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
                 <button className="absolute right-5">
                   <img
@@ -63,10 +63,10 @@ const handleImageClick = (index) => {
                   </div>
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 }
