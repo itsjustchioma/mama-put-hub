@@ -23,7 +23,7 @@ const Homepage = (props) => {
           </div>
         </div>
         <ImageCarouselFrame title={"What do you want to eat today?"} />
-        <ImageCarouselFrame title={"Popular Recipes?"} />
+        <ImageCarouselFrame title={"Popular Recipes"} />
         <Navigation />
       </div>
     </div>

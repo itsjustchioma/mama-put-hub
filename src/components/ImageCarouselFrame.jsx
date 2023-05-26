@@ -23,6 +23,8 @@ const handleImageClick = (index) => {
 };
 
 
+
+
   return (
     <div className=" ">
       <h1 className="text-xl  font-semibold">{props.title}</h1>

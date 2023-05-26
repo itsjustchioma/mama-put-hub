@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
+import CommentSection from "../components/CommentSection";
 
 const ViewDish = () => {
   const { id } = useParams(); // Retrieve the id (index) from the URL parameter
@@ -57,7 +58,7 @@ const ViewDish = () => {
                   <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.time} min</p>
                   <p className="text-sm border-l-2 border-black pl-3 pr-3">Servings: {dish.servings}</p>
                   <span className="text-sm text-cyan-400  border-l-2 border-black pl-3 pr-3">
-                    <Link>25 reviews</Link>
+                    <Link to={'/CommentSection'}>25 reviews</Link>
                   </span>
                 </div>
 
