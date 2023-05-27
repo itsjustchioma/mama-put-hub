@@ -19,6 +19,9 @@ import ViewDish from "./views/ViewDish";
 import RecipeDirection from "./views/RecipeDirection";
 import MyProfile from "./views/MyProfile";
 import CommentSection from "./components/CommentSection";
+import SavedRecipe from "./views/SavedRecipe";
+import AllDone from "./views/AllDone";
+import Logout from "./views/Logout";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -49,7 +52,9 @@ function App() {
         <Route path="/ViewDish/:id" element={<ViewDish />} />
         <Route path="/RecipeDirection/:id" element={<RecipeDirection />} />
         <Route path="/CommentSection" element={<CommentSection />} />
-
+        <Route path="/SavedRecipe" element={<SavedRecipe />} />
+        <Route path="/AllDone" element={<AllDone />} />
+        <Route path="/Logout" element={<Logout />} />
       </Routes>
       <Navigation />
       <SideBarNavigation />

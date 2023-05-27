@@ -44,8 +44,7 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
     <div>
       {foods.map((food, index) => (
         <div key={index}>
-                       <label className="font-medium">
-
+          <label className="font-medium">
             Food Name: <br />
             <input
               type="text"
@@ -57,7 +56,6 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
           </label>{" "}
           <br />
           <label className="font-medium">
-
             Time: <br />
             <input
               type="text"
@@ -75,13 +73,11 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
         </div>
       ))}
       <br />
-      
+
       <div onClick={handleAddFood}>
-      <Button  title="Add More Steps" />
-
+        <Button title="Add More Steps" />
       </div>
-    <br />
-
+      <br />
     </div>
   );
 }
@@ -130,7 +126,6 @@ function NewRecipe() {
     console.log("Form submitted:", formData);
     setStep((prevStep) => prevStep + 1);
   };
-  
 
   const handleIncrement = () => {
     setFormData((prevData) => ({
@@ -156,7 +151,6 @@ function NewRecipe() {
     }));
   };
 
-
   const calculateTotalTime = () => {
     let totalTime = 0;
     formData.steps.forEach((step) => {
@@ -173,22 +167,19 @@ function NewRecipe() {
 
   const navigate = useNavigate();
 
-
-
   return (
     <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
       <div className="flex justify-between mb-4">
-        
-          <BackArrow onClick={handleBackClick} />
-      
-        <button className="text-sm">clear all</button>
+        <BackArrow onClick={handleBackClick} />
+
+        <button className="text-sm">Clear All</button>
       </div>
       <div className="h-[90vh] overflow-scroll">
         {step === 1 && (
           <div>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <h1 className="text-lg font-medium">Recipe Publication</h1>
+                <h1 className="text-lg font-bold">Recipe Publication</h1>
                 <p className="font-medium"> Add a recipe cover</p>
                 <div className="bg-pastel-blue h-[30vh] mx-auto rounded-lg my-auto">
                   {formData.picture ? (
@@ -208,23 +199,24 @@ function NewRecipe() {
                   )}
                 </div>
                 <br />
-                <br />
                 <label htmlFor="picture" className="block font-medium">
+                  {" "}
+                  Add an image <br />
                   <input
                     type="file"
                     id="picture"
                     accept="image/*"
                     onChange={handlePictureChange}
-                    className="border border-gray-300 rounded-md p-2 w-72"
+                    className="border border-gray-300 rounded-md p-2 w-72 font-normal"
                   />
                 </label>
               </div>
               <label className="font-medium">
-                Name your recipe: <br />
+                Name of recipe <br />
                 <input
                   type="text"
                   placeholder="for example? smashed potato and chicken"
-                  className="border border-gray-300 rounded-md p-2 ml-2 w-72"
+                  className="border font-normal border-gray-300 rounded-md p-2 ml-2 w-72"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
@@ -232,8 +224,7 @@ function NewRecipe() {
               </label>
               <div>
                 <br />
-              <label className="font-medium">
-
+                <label className="font-medium">
                   Servings: <br />
                   <button type="button" onClick={handleDecrement}>
                     -
@@ -255,30 +246,28 @@ function NewRecipe() {
 
         {step === 2 && (
           <div>
-            <h1 className="text-lg font-medium">Recipe Publication</h1>
+            <h1 className="text-lg font-bold">Recipe Publication</h1>
 
             <form onSubmit={handleSubmit}>
-            <label className="font-medium">
-
-                Description: 
+              <label className="font-medium">
+                Description:
                 <br />
                 <input
                   type="text"
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-2  w-72"
+                  className="border border-gray-300 rounded-md p-2 font-normal  w-72"
                 />
               </label>
-              <br />
+              <br /> <br />
               <label className="font-medium">
-
                 Level: <br />
                 <select
                   name="level"
                   value={formData.level}
                   onChange={handleChange}
-                  className="my-2 p-2 rounded border border-gray-300"
+                  className="my-2 p-2 rounded border border-gray-300 font-normal"
                   style={{ minWidth: "200px" }}
                 >
                   <option value="">Select level</option>
@@ -292,25 +281,24 @@ function NewRecipe() {
               <br />
               <br />
               <label className="font-medium">
-
-Category: <br />
-<select
-  name="type"
-  value={formData.type}
-  onChange={handleChange}
-  className="my-2 p-2 rounded border border-gray-300"
-  style={{ minWidth: "200px" }}
->
-  <option value="">Select Category</option>
-  {tags.map((tag, index) => (
-    <option key={index} value={tag.name}>
-      {tag.name}
-    </option>
-  ))}
-</select>
-</label>
-<br />
-<br />
+                Category: <br />
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  className="my-2 p-2 rounded border border-gray-300 font-normal"
+                  style={{ minWidth: "200px" }}
+                >
+                  <option value="">Select Category</option>
+                  {tags.map((tag, index) => (
+                    <option key={index} value={tag.name}>
+                      {tag.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <br />
+              <br />
               <div className="flex flex-col">
                 <div onClick={handlePrevious} className="mb-4">
                   <Button title="Previous Step" />
@@ -321,98 +309,102 @@ Category: <br />
               </div>
             </form>
             <div className="text-center text-sm mt-4">Step 2</div>
-
           </div>
         )}
 
         {step === 3 && (
           <div>
-                         <h1 className="text-lg font-medium">Recipe Publication</h1>
-
+            <h1 className="text-lg font-bold">Recipe Publication</h1>
+            <br />
             <form onSubmit={handleSubmit}>
               <FoodForm
                 formData={formData}
                 setFormData={setFormData}
                 handlePrevious={handlePrevious}
-              />              
+              />
 
               <div onClick={handlePrevious} className="mb-2">
                 <Button title="Previous Step" />
-
               </div>
               <div onClick={handleNext}>
-                  <Button title="Next Step" />
-                </div>
-          
-             
-
+                <Button title="Next Step" />
+              </div>
             </form>
             <div className="text-center text-sm mt-4">Step 3</div>
-
           </div>
         )}
 
-{step === 4 && (
-  <div>
-                  <h1 className="text-lg font-medium">Recipe Publication</h1>
+        {step === 4 && (
+          <div>
+            <h1 className="text-lg font-bold">Recipe Publication</h1>
 
-    <br />
-    <p className="mb-2 "><b>Name:</b> {formData.name}</p>
-    <br />
+            <br />
+            <p className="mb-2 ">
+              <b>Name:</b> {formData.name}
+            </p>
+            <br />
 
-    <p className="mb-2 "><b>Servings:</b> {formData.count}</p>
-    <br />
+            <p className="mb-2 ">
+              <b>Servings:</b> {formData.count}
+            </p>
+            <br />
 
-    <p className="mb-2 "><b>Description:</b> {formData.description}</p>
-    <br />
+            <p className="mb-2 ">
+              <b>Description:</b> {formData.description}
+            </p>
+            <br />
 
-    <p className="mb-2 "><b>Level:</b> {formData.level}</p>
-
-<br />
-
-    <p className="mb-2 "><b>Steps:</b></p>
-    <br />
-    <ul>
-      {formData.steps.map((step, index) => (
-        
-        <li key={index}>{step.name}: {step.time } <b>minutes</b></li>
-       
-      ))}
-
-    </ul>
-    
-    <p className="mb-2">
-             <b> Estimated Time:</b> {calculateTotalTime()} <b>minutes</b>
+            <p className="mb-2 ">
+              <b>Level:</b> {formData.level}
             </p>
 
-<br />
+            <br />
 
-    <div className="mb-4">
-      {formData.picture && (
-        <img
-          src={URL.createObjectURL(formData.picture)}
-          alt="Selected"
-          className="max-w-xs rounded"
-        />
-      )}
-    </div>
-    <div className="mb-4">
-      <div onClick={handlePrevious}>
-        <Button title="Previous"/>
-      </div>
-      <br />
-      <br />
+            <p className="mb-2 ">
+              <b>Steps:</b>
+            </p>
+            <br />
+            <ul>
+              {formData.steps.map((step, index) => (
+                <li key={index}>
+                  {step.name}: {step.time} <b>minutes</b>
+                </li>
+              ))}
+            </ul>
 
-      <form onSubmit={handleSubmit}>
-      <button type="submit" className="bg-pastel-blue hover:bg-laurel-green text-white font-bold py-2 px-4 rounded">
-  Submit
-</button>
+            <p className="mb-2">
+              <b> Estimated Time:</b> {calculateTotalTime()} <b>minutes</b>
+            </p>
 
-</form>
-    </div>
-  </div>
-)}
+            <br />
 
+            <div className="mb-4">
+              {formData.picture && (
+                <img
+                  src={URL.createObjectURL(formData.picture)}
+                  alt="Selected"
+                  className="max-w-xs rounded"
+                />
+              )}
+            </div>
+            <div className="mb-4">
+              <div onClick={handlePrevious}>
+                <Button title="Previous" />
+              </div>
+              <br />
+              <br />
+
+              <form onSubmit={handleSubmit}>
+                <button
+                  type="submit"
+                  className="bg-pastel-blue hover:bg-laurel-green text-white font-medium py-2 px-4 rounded"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

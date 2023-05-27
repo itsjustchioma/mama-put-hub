@@ -13,7 +13,6 @@
   }
 }
 
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -28,7 +27,6 @@
 .animate-fadeIn {
   animation: fadeIn 2s; /* Specify the duration (e.g., 1s) */
 }
-
 
 .wave-on-hover:hover {
   display: inline-block;
@@ -51,4 +49,34 @@
   .justify-evenly {
     justify-content: center;
   }
+}
+
+/* "C" Shape */
+.c-shape {
+  position: absolute;
+  left: -16px;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background-color: inherit;
+  border-radius: 0 50% 50% 0;
+}
+
+.c-shape::before,
+.c-shape::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 100%;
+  background-color: #ffffff; /* Set the background color to match the page background */
+}
+
+.c-shape::before {
+  left: -16px;
+  border-radius: 50% 0 0 50%;
+}
+
+.c-shape::after {
+  right: -16px;
+  border-radius: 0 50% 50% 0;
 }

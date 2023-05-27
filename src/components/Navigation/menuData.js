@@ -4,6 +4,7 @@ export const Menus = [
     icon: "/public/assets/search.png",
     dis: "translate-x-0",
     path: "/Home",
+    colorName: "pastel-blue",
   },
   {
     name: "Your Library",
@@ -11,6 +12,7 @@ export const Menus = [
     dis: "translate-x-16",
     altText: "Search Icon",
     path: "/yourlibrary",
+    colorName: "laurel-green",
   },
   {
     name: "Scanner",
@@ -18,6 +20,7 @@ export const Menus = [
     dis: "translate-x-32",
     altText: "Scanner Icon",
     path: "/scanner",
+    colorName: "lemon-meringue",
   },
   {
     name: "Shopping",
@@ -25,6 +28,7 @@ export const Menus = [
     dis: "translate-x-48",
     altText: "Shopping Cart Icon",
     path: "/shopping",
+    colorName: "pastel-pink",
   },
   {
     name: "Profile",
@@ -32,5 +36,6 @@ export const Menus = [
     dis: "translate-x-64",
     altText: "User Icon",
     path: "/profile",
+    colorName: "copper-orange",
   },
 ];

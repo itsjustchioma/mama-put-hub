@@ -20,10 +20,9 @@ const ViewDish = () => {
 
   console.log(dish);
 
-
   const handleDirection = (index) => {
     navigate(`/RecipeDirection/${index}`, {
-      state: { recipeArray: CarouselImageGallery.CarouselImageGallery }
+      state: { recipeArray: CarouselImageGallery.CarouselImageGallery },
     });
   };
 
@@ -32,7 +31,7 @@ const ViewDish = () => {
       <div className="p-4">
         <div className="flex justify-between pb-4">
           <BackArrow onClick={handleBackClick} />
-          <img src={fullBookmarkIcon} className="w-4" alt="" />
+          <img src={fullBookmarkIcon} className="w-6 h-6" alt="" />
         </div>
         {dish ? (
           <div>
@@ -45,18 +44,31 @@ const ViewDish = () => {
             </div>
             <div className="overflow-scroll   meda  overscroll-contain  -mt-3">
               <div className=" bg-copper-orange inset-0 p-4   overflow-y-auto overscroll-contain">
-                <h1 className="text-2xl text-center font-medium">{dish.name}</h1>
+                <h1 className="text-2xl text-center font-medium">
+                  {dish.name}
+                </h1>
 
                 <div className="flex  justify-center justify-evenly mt-4 flex-wrap items-center">
                   <span className="flex items-center  text-sm pr-3">
                     <img src={starRating} className="w-10" alt="" />{" "}
                     {dish.rating}
                   </span>
-                 
-                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.type}</p>
-                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.level}</p>
-                  <p className="text-sm border-l-2 border-black pl-3 pr-3"> {dish.time} min</p>
-                  <p className="text-sm border-l-2 border-black pl-3 pr-3">Servings: {dish.servings}</p>
+
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3">
+                    {" "}
+                    {dish.type}
+                  </p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3">
+                    {" "}
+                    {dish.level}
+                  </p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3">
+                    {" "}
+                    {dish.time} min
+                  </p>
+                  <p className="text-sm border-l-2 border-black pl-3 pr-3">
+                    Servings: {dish.servings}
+                  </p>
                   <span className="text-sm text-cyan-400  border-l-2 border-black pl-3 pr-3">
                     <Link to={'/CommentSection'}>25 reviews</Link>
                   </span>

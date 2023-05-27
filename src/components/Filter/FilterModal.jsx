@@ -13,9 +13,9 @@ export default function FilterModal({ closeModal }) {
       <div className="modal-content p-5 overflow-scroll  h-[90vh]">
         <div className="flex justify-between">
           <BackArrow onClick={handleBackClick} />
-          <button className="text-sm">clear all</button>
+          <button className="text-sm">Clear All</button>
         </div>
-        <h1 className="text-lg font-semibold">Filter</h1>
+        <h1 className="text-lg font-semibold mt-4">Filter</h1>
         <FilterTags />
       </div>
       <div className="mb-20 absolute left-0 right-0 bottom-3">

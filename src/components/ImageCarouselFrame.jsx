@@ -11,23 +11,19 @@ export default function ImageCarouselFrame(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const navigate = useNavigate();
 
-
   const handleBookMarkClick = (index) => {
     const updatedStatus = [...bookmarkStatus];
     updatedStatus[index] = !updatedStatus[index];
     setBookmarkStatus(updatedStatus);
   };
 
-const handleImageClick = (index) => {
-  navigate(`/ViewDish/${index}`);
-};
-
-
-
+  const handleImageClick = (index) => {
+    navigate(`/ViewDish/${index}`);
+  };
 
   return (
     <div className=" ">
-      <h1 className="text-xl  font-semibold">{props.title}</h1>
+      <h1 className="text-xl font-semibold">{props.title}</h1>
 
       <div className="carousel overflow-x-scroll no-scrollbar m-auto h-96">
         <div className="inner-carousel flex justify-start  ">
@@ -56,7 +52,7 @@ const handleImageClick = (index) => {
                   {" "}
                   {/* Pass the index as a parameter */}
                   <div className=" mt-2 ">
-                    <h5 className="text-[14px]">{item.name}</h5>
+                    <h5 className="text-[14px] font-semibold">{item.name}</h5>
                     <p className="flex items-center text-[14px]">
                       <img src={starRating} className="w-4 f" alt="rating" />
                       {item.rating}

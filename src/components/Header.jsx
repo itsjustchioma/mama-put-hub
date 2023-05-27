@@ -25,24 +25,28 @@ export default function Header({ showNotification }) {
   return (
     <header className="flex justify-end items-center  py-2 ">
       <h1 onClick={handleClick}>
-        {showSearchButton && (
-          <img src={search} className="w-6   mr-4" alt="" />
-        )}
+        {showSearchButton && <img src={search} className="w-6   mr-4" alt="" />}
       </h1>
       {searchVisible && (
         <>
-        <form action="" className="flex flex-wrap">
-          <div className="flex bg-lemon-meringue rounded-3xl w-[200px] p-[0.5rem]">
-            <img src={search} className="w-8   mr-4" alt="" />
-
-            <input type="text" className="bg-transparent outline-none" />
-          </div>
-          <button type="submit" className="m-2 text-sm bg-pastel-blue p-2  rounded-2xl  text-white" onClick={handleCancel}>
-            submit
-          </button>
-          <button className="m-2 text-sm bg-pastel-blue p-2  rounded-2xl  text-white" onClick={handleCancel}>
-            cancel
-          </button>
+          <form action="" className="flex flex-wrap">
+            <div className="flex bg-lemon-meringue rounded-3xl w-[200px] p-[0.5rem] h-10 mt-2 ml-4">
+              <img src={search} className="w-6 h-6 mr-4" alt="search" />
+              <input type="text" className="bg-transparent outline-none" />
+            </div>
+            <button
+              type="submit"
+              className="m-2 text-sm bg-pastel-blue p-2  rounded-2xl  text-white"
+              onClick={handleCancel}
+            >
+              Submit
+            </button>
+            <button
+              className="m-2 text-sm bg-pastel-blue p-2  rounded-2xl  text-white"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
           </form>
         </>
       )}

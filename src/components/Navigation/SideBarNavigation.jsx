@@ -64,7 +64,7 @@ const SideBarNavigation = () => {
               <li key={i} className="">
                 <a
                   href={menu.path}
-                  className="flex flex-col text-center pt-6 hover:bg-copper-orange"
+                  className={`flex flex-col text-center pt-6 hover:bg-${menu.colorName}`}
                 >
                   <div className="p-2.5 mb-7 flex items-center rounded-md px-4 duration-300 cursor-pointer">
                     <img src={menu.icon} alt={menu.altText} className="w-4" />
@@ -77,7 +77,7 @@ const SideBarNavigation = () => {
           </ul>
         </div>
         <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer">
-          <i className="bi bi-box-arrow-in-right"></i>
+          <img src="/public/assets/back-arrow.png" alt="" className="w-4" />
           <span className="text-[15px] ml-4">Logout</span>
         </div>
       </div>
