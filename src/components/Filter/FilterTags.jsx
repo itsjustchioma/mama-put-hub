@@ -112,7 +112,7 @@ export default function FilterTags() {
         <div className="flex wrap flex-wrap whitespace-nowrap no-scrollbar">
           {IngredientTags.map((tag, index) => (
             <label
-              className={`m-2 text-center p-1 rounded-xl border border-black text-xs ${
+              className={`m-2 text-center p-1 rounded-xl border border-black text-xs cursor-pointer ${
                 selectedIngredients.includes(tag.name) ? 'bg-blue-500 text-white' : ''
               }`}
               key={index}
@@ -138,7 +138,7 @@ export default function FilterTags() {
         <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
           {CookTimeTags.map((tag, index) => (
             <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] ${
+              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
                 selectedCookTimes.includes(tag.name) ? 'bg-blue-500 text-white' : ''
               }`}
               key={index}
@@ -164,7 +164,7 @@ export default function FilterTags() {
         <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
           {LevelTags.map((tag, index) => (
             <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] ${
+              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
                 selectedLevels.includes(tag.name) ? 'bg-blue-500 text-white' : ''
               }`}
               key={index}
@@ -190,7 +190,7 @@ export default function FilterTags() {
         <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
           {DishTypeTags.map((tag, index) => (
             <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] ${
+              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
                 selectedDishTypes.includes(tag.name) ? 'bg-blue-500 text-white' : ''
               }`}
               key={index}
@@ -215,7 +215,7 @@ export default function FilterTags() {
         <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
           {SuggestedDietsTags.map((tag, index) => (
             <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] ${
+              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
                 selectedDiets.includes(tag.name) ? 'bg-blue-500 text-white' : ''
               }`}
               key={index}

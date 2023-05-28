@@ -172,7 +172,7 @@ function NewRecipe() {
       <div className="flex justify-between mb-4">
         <BackArrow onClick={handleBackClick} />
 
-        <button className="text-sm">Clear All</button>
+        <button className="text-sm"></button>
       </div>
       <div className="h-[90vh] overflow-scroll">
         {step === 1 && (
