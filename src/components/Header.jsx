@@ -45,6 +45,32 @@ export default function Header({ showNotification }) {
     };
   }, []);
 
+  // Dummy array of notifications
+  const notifications = [
+    {
+      id: 1,
+      message: "YOu got a 5 star rating!",
+      date: "2023-05-28",
+      time: "09:00 AM",
+      read: false,
+    },
+    {
+      id: 2,
+      message: "John commented on your recipe",
+      date: "2023-05-27",
+      time: "02:30 PM",
+      read: true,
+    },
+    {
+      id: 3,
+      message: "Upcoming event: Conference on AI",
+      date: "2023-05-30",
+      time: "10:00 AM",
+      read: false,
+    },
+  ];
+  
+
   return (
     <header className="flex justify-end items-center py-2">
       <h1 onClick={handleClick}>
@@ -88,10 +114,16 @@ export default function Header({ showNotification }) {
             onClick={handleBellClick}
           />
           {showNotifications && (
-            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer">
-              {/* Notification messages go here */}
-              <p className="text-base">Notification 1</p>
-              <p className="text-base">Notification 2</p>
+            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer mr-4 z-20 text-[12px] overflow-scroll h-64">
+              {notifications.map((notification) => (
+                <p key={notification.id} className=" hover:bg-pastel-pink p-4">
+                  {notification.message} <br />
+                  {notification.time} <br />
+                  {notification.date}
+
+
+                </p>
+              ))}
             </div>
           )}
         </span>

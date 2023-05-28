@@ -5,6 +5,7 @@ import leftarrow from "/assets/left arrow.png";
 import BackArrow from "../components/BackClick/BackArrow";
 import { Link, useNavigate } from "react-router-dom";
 import { tags } from "../components/Tags";
+import IngredientForm from "../components/IngredientForm";
 
 const LevelTags = [
   { name: "Easy" },
@@ -65,6 +66,7 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
               className="my-2 p-2 rounded border border-gray-300"
             />
           </label>
+          
           {index > 0 && (
             <button type="button" onClick={() => handleRemoveFood(index)}>
               Remove
@@ -81,6 +83,9 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
     </div>
   );
 }
+
+
+
 
 function NewRecipe() {
   const [step, setStep] = useState(1);
@@ -299,13 +304,17 @@ function NewRecipe() {
               </label>
               <br />
               <br />
+              <IngredientForm formData={formData} setFormData={setFormData} handlePrevious={handlePrevious} />
+
+
               <div className="flex flex-col">
+              <div onClick={handleNext}>
+                  <Button title="Next Step" />
+                </div> <br />
                 <div onClick={handlePrevious} className="mb-4">
                   <Button title="Previous Step" />
                 </div>
-                <div onClick={handleNext}>
-                  <Button title="Next Step" />
-                </div>
+             
               </div>
             </form>
             <div className="text-center text-sm mt-4">Step 2</div>
@@ -322,13 +331,15 @@ function NewRecipe() {
                 setFormData={setFormData}
                 handlePrevious={handlePrevious}
               />
+  <div onClick={handleNext}>
+                <Button title="Next Step" />
+              </div>
 
+              <br />
               <div onClick={handlePrevious} className="mb-2">
                 <Button title="Previous Step" />
               </div>
-              <div onClick={handleNext}>
-                <Button title="Next Step" />
-              </div>
+            
             </form>
             <div className="text-center text-sm mt-4">Step 3</div>
           </div>

@@ -15,21 +15,22 @@ export default function YourLibrary() {
 
   const clickedItems = [];
 
-  const [selectedItem, setSelelctedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleImageClick = (item) => {
-    setSelelctedItem(item);
+  const handleImageClick = (item, index) => {
+    setSelectedItem(item);
     clickedItems.push(item);
 
-    navigate("/ViewDish", {
+    navigate(`/ViewDish/${index}`, {
       state: {
         selectedImage: item,
         array: CarouselISavedRecipe.CarouselISavedRecipe,
       },
     });
   };
+
   return (
     <div className="overflow-scroll h-[90vh]">
       <div className="m-4 w-5/6  mx-auto  md:h-100vh ">
@@ -75,10 +76,10 @@ export default function YourLibrary() {
                         className="rounded-md h-full w-full  "
                         alt=""
                         onClick={() => {
-                          handleImageClick(item);
+                          handleImageClick(item, index);
                         }}
                       />
-                      <Link to="/ViewDish">
+                      <Link to={`/ViewDish/${index}`}>
                         <div className=" mt-2 ">
                           <h5 className="text-[14px] font-semibold">
                             {item.name}

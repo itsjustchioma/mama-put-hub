@@ -85,6 +85,7 @@ const ViewDish = () => {
                     ))}
                   </ul>
                 </div>
+                <br />
                 <div onClick={() => handleDirection(id)}>
                   <Button title="Show directions" />
                 </div>

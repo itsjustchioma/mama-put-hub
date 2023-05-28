@@ -106,6 +106,9 @@ export default function RecipeDirection() {
             </div>
             <div className="mt-28">
               <h1 className="text-2xl font-medium">Steps</h1>
+              <div>
+                
+              </div>
               <p>{directions.steps[currentStep].step}</p>
               <div className="flex justify-between  mt-4">
                 {timer ? (
