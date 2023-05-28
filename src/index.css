@@ -25,7 +25,7 @@
 }
 
 .animate-fadeIn {
-  animation: fadeIn 2s; /* Specify the duration (e.g., 1s) */
+  animation: fadeIn 1s; /* Specify the duration (e.g., 1s) */
 }
 
 .wave-on-hover:hover {

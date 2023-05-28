@@ -35,7 +35,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="justify-center items-center flex mt-40 p-4  md:w-1/2 mx-auto ">
+    <div className="justify-center items-center flex mt-40 p-4  md:w-1/2 mx-auto h-[40vh]">
       {renderStep()}
     </div>
   );
@@ -43,7 +43,7 @@ export default function Onboarding() {
 
 const Step1 = ({ onNext }) => {
   return (
-    <div>
+    <div className="">
       <img
         src={broccoli}
         className="w-14  translate-x-8  md:-translate-x-40"
@@ -64,7 +64,7 @@ const Step1 = ({ onNext }) => {
       <h2>Step 1</h2>
       <h1 className="text-5xl md:text-6xl">Create Your Personal Cookbook</h1>
       <p className="mt-10  md:text-lg">
-        Keep track of your favorite recipes with Cookit. Save and store recipes
+        Keep track of your favorite recipes with MamaPutHub. Save and store recipes
         in your recipe cookbook
       </p>
       <button
