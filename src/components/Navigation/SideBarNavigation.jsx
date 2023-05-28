@@ -64,7 +64,7 @@ const SideBarNavigation = () => {
               <li key={i} className="">
                 <a
                   href={menu.path}
-                  className={`flex flex-col text-center pt-6 hover:bg-${menu.colorName}`}
+                  className={`flex flex-col text-center pt-6 hover:bg-laurel-green`}
                 >
                   <div className="p-2.5 mb-7 flex items-center rounded-md px-4 duration-300 cursor-pointer">
                     <img src={menu.icon} alt={menu.altText} className="w-4" />
