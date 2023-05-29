@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UserInfo } from "./UserInfo";
 
 function ProfileTag() {
   return (
     <div className="p-6 sm:p-12 rounded-md relative flex items-center">
       <img
-        src="/public/assets/guava.png"
+        src={UserInfo.profilePicture}
         alt="userimage"
         className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
       />
       <div className="ml-6">
         <h4 className="text-md sm:text-lg font-semibold text-black">
-          Leroy Jenkins
+          {UserInfo.name}
         </h4>
         <p className="text-sm sm:text-base dark:text-black">My Profile</p>
       </div>
