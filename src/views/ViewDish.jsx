@@ -86,12 +86,13 @@ const ViewDish = () => {
                   </ul>
                 </div>
                 <br />
+                </div> <br />
                 <div onClick={() => handleDirection(id)}>
                   <Button title="Show directions" />
                 </div>
               </div>
             </div>
-          </div>
+          
         ) : (
           <p>No dish found.</p>
         )}
