@@ -27,11 +27,11 @@ function ShoppingCategory() {
               <p className="text-md md:text-xl font-semibold">
                 {shopArray.name}
               </p>
-              <p>{shopArray.noOfRecipes} recipes</p>
-              <p>{shopArray.noOfIngredients} ingredients</p>
+              {/* <p>{shopArray.noOfRecipes} recipes</p> */}
+              <p>{shopArray.noOfIngredients} ingredients.</p>
             </div>
             <div className="ml-auto">
-              <Link to={"/savedrecipe"}>
+              <Link to={`/SavedRecipe/${shopArray.name}`}>
                 <button>
                   <img
                     src="/public/assets/right arrow.png"

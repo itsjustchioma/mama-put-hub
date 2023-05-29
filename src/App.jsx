@@ -42,7 +42,6 @@ function App() {
         <Route path="/Messaging" element={<Messaging />} />
         <Route path="/YourLibrary" element={<YourLibrary />} />
         <Route path="/MyProfile" element={<MyProfile />} />
-        {/* <Route path="/Achievement" element={<Achievement />} /> */}
         <Route
           path="/Achievement"
           element={<Achievement closeModal={closeModal} />}
@@ -52,7 +51,10 @@ function App() {
         <Route path="/ViewDish/:id" element={<ViewDish />} />
         <Route path="/RecipeDirection/:id" element={<RecipeDirection />} />
         <Route path="/CommentSection" element={<CommentSection />} />
-        <Route path="/SavedRecipe" element={<SavedRecipe />} />
+        <Route
+          path="/SavedRecipe/:category"
+          element={<SavedRecipe closeModal={closeModal} />}
+        />
 
         <Route path="/AllDone" element={<AllDone />} />
         <Route path="/Logout" element={<Logout />} />

@@ -1,6 +1,4 @@
-import React from "react";
 import ShoppingCategory from "../components/Shopping/ShoppingCategory";
-
 function Shopping() {
   return (
     <div className="overflow-scroll no-scrollbar h-[90vh]">
