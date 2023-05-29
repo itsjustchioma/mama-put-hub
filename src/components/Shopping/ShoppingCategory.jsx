@@ -28,7 +28,7 @@ function ShoppingCategory() {
                 {shopArray.name}
               </p>
               {/* <p>{shopArray.noOfRecipes} recipes</p> */}
-              <p>{shopArray.noOfIngredients} ingredients</p>
+              <p>{shopArray.noOfIngredients} ingredients.</p>
             </div>
             <div className="ml-auto">
               <Link to={`/SavedRecipe/${shopArray.name}`}>
