@@ -72,7 +72,7 @@ export default function Header({ showNotification }) {
   
 
   return (
-    <header className="flex justify-end items-center py-2">
+    <header className="flex justify-end items-center py-2 flex-wrap">
       <h1 onClick={handleClick}>
         {showSearchButton && <img src={search} className="w-6 mr-4" alt="" />}
       </h1>
