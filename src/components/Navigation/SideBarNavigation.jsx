@@ -32,7 +32,7 @@ const SideBarNavigation = () => {
         ) : (
           <img
             src={burger}
-            className="z-[999] sm:block absolute top-10 left-10 w-14 hidden"
+            className="z-[999] md:block absolute top-10 left-10 w-14 hidden"
             alt="Burger Menu"
           />
         )}
