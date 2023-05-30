@@ -18,8 +18,8 @@ export default function FilterModal({ closeModal }) {
   
   
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-white z-[9999]">
-      <div className="modal-content p-5 overflow-scroll h-[90vh]">
+    <div className="fixed top-0 left-0 w-full h-full bg-white z-[9999] no-scrollbar">
+      <div className="modal-content p-5 overflow-scroll h-[90vh] no-scrollbar">
         <div className="flex justify-between">
           <BackArrow onClick={handleBackClick} />
           

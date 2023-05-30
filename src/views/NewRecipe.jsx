@@ -6,6 +6,7 @@ import BackArrow from "../components/BackClick/BackArrow";
 import { Link, useNavigate } from "react-router-dom";
 import { tags } from "../components/Tags";
 import IngredientForm from "../components/IngredientForm";
+import AllDone from "./AllDone";
 
 const LevelTags = [
   { name: "Easy" },
@@ -130,6 +131,7 @@ function NewRecipe() {
     }));
     console.log("Form submitted:", formData);
     setStep((prevStep) => prevStep + 1);
+    navigate("/AllDone");
   };
 
   const handleIncrement = () => {

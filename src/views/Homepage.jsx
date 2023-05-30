@@ -10,7 +10,7 @@ import WelcomeFrame from "../components/WelcomeFrame";
 
 const Homepage = (props) => {
   return (
-    <div className="bg-background-color h-[90vh] overflow-scroll  m-auto md:h-[100vh]">
+    <div className="bg-background-color h-[93vh] overflow-scroll  m-auto md:h-[100vh] no-scrollbar">
       <Header />
 
       <div className="w-10/12 mx-auto">

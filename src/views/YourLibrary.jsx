@@ -32,7 +32,7 @@ export default function YourLibrary() {
   };
 
   return (
-    <div className="overflow-scroll h-[90vh]">
+    <div className="overflow-scroll h-[93vh] no-scrollbar">
       <div className="m-4 w-5/6  mx-auto  md:h-100vh ">
         <Header />
         <h1 className="text-xl font-semibold">Saved Recipes</h1>

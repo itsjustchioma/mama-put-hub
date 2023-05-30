@@ -7,7 +7,7 @@ const Navigation = () => {
   const [active, setActive] = useState(0);
 
   return (
-    <nav className="bg-slate-300 fixed bottom-0 left-0 right-0 z-10 md:hidden">
+    <nav className="bg-slate-300 fixed -bottom-1 left-0 right-0 z-10 md:hidden">
       <ul className="flex justify-around py-2">
         {Menus.map((menu, i) => (
           <li key={i}>

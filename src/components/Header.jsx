@@ -114,7 +114,7 @@ export default function Header({ showNotification }) {
             onClick={handleBellClick}
           />
           {showNotifications && (
-            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer mr-4 z-20 text-[12px] overflow-scroll h-64">
+            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer mr-4 z-20 text-[12px] overflow-scroll h-64 no-scrollbar">
               {notifications.map((notification) => (
                 <p key={notification.id} className=" hover:bg-pastel-pink p-4">
                   {notification.message} <br />

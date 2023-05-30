@@ -55,9 +55,10 @@ function App() {
           path="/SavedRecipe/:category"
           element={<SavedRecipe closeModal={closeModal} />}
         />
-
         <Route path="/AllDone" element={<AllDone />} />
+
         <Route path="/Logout" element={<Logout />} />
+
       </Routes>
       <Navigation />
       <SideBarNavigation />
