@@ -44,8 +44,8 @@ function SavedRecipe() {
   const remainingIngredients = noOfIngredients - checkedIngredients.length;
 
   return (
-    <div className="ml-6 mt-4 flex flex-col ">
-      <div className="flex items-end">
+    <div className="mx-auto w-[80%] mt-4 flex flex-col h-[90vh] md:h-[100vh] overflow-scroll no-scrollbar">
+      <div className="flex justify-between mb-4">
         <BackArrow onClick={handleBackClick} />
         <img
           src="/public/assets/delete.png"
@@ -64,7 +64,7 @@ function SavedRecipe() {
       <h1 className="mt-4 font-semibold text-center text-lg md:text-xl">
         {name}
       </h1>
-      <p>
+      <p className="text-[12px]">
         {remainingIngredients}/{noOfIngredients} ingredients left
       </p>
       <br />
@@ -79,6 +79,7 @@ function SavedRecipe() {
                   checked={checkedIngredients.includes(index)}
                   onChange={() => handleCheckboxChange(index)}
                 />
+                &nbsp; &nbsp;
                 <span
                   className={
                     checkedIngredients.includes(index) ? "text-grey-text" : ""
