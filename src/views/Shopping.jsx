@@ -10,7 +10,9 @@ function Shopping() {
       <Link to="/addshoppingcategory">
         <img src="/assets/plus.png" alt="" className="w-8 h-8 mx-auto" />
       </Link>
-      <ShoppingCategory />
+     <div className="mb-16">
+     <ShoppingCategory />
+     </div>
     </div>
   );
 }

@@ -11,7 +11,7 @@ function ProfileTag() {
         alt="userimage"
         className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
       />
-      <div className="">
+      <div className=" ml-2">
         <h4 className="text-md sm:text-lg font-semibold text-black">
           {UserInfo.name}
         </h4>

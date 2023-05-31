@@ -54,7 +54,7 @@ function SavedRecipe() {
           onClick={handleDeleteClick}
         />
       </div>
-      <div className="flex justify-center">
+      <div className="flex flex-wrap justify-center">
         <img
           src={img}
           alt="image"

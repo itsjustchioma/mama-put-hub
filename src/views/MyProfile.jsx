@@ -52,7 +52,7 @@ function MyProfile() {
         <h3 className="text-lg font-semibold">Bookmarked by</h3>
         <p className="text-3xl font-bold">36</p>
       </div>
-      <div className="p-4 bg-gray-200 rounded mt-4">
+      <div className="p-4 bg-gray-200 rounded mt-4 mb-16">
         <h3 className="text-lg font-semibold">Achievements</h3>
         <ul className="list-disc pl-6">
           {Badges.map((badge, i) => (

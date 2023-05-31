@@ -12,7 +12,7 @@ function Achievement() {
   };
 
   return (
-    <div className="bg-pastel-blue h-[93vh] overflow-scroll  no-scrollbar">
+    <div className="bg-pastel-blue h-[95vh] overflow-scroll  no-scrollbar">
       <div className="w-5/6 mx-auto">
         <div className="flex">
           <BackArrow onClick={handleBackClick} />
@@ -22,7 +22,9 @@ function Achievement() {
         </div>
         <AchievementAvatar />
         <br />
-        <AchievementBadges />
+      <div className="mb-16"> 
+      <AchievementBadges />
+      </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ function ShoppingCategory() {
             margin: "10px",
           }}
         >
-          <div className="flex items-center">
+          <div className="flex  flex-wrap items-center">
             <div>
               <img
                 src={shopArray.img}

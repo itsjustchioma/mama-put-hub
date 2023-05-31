@@ -53,7 +53,7 @@ function Settings() {
   };
 
   return (
-    <div className="px-4 py-6 h-[90vh] overflow-scroll no-scrollbar  md:w-[80%] md:mx-auto">
+    <div className="px-4 py-6 h-[90vh] overflow-scroll no-scrollbar mb-16  md:w-[80%] md:mx-auto">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center justify-between mb-4">
         <BackArrow onClick={handleBackClick} />

@@ -39,7 +39,7 @@ export default function YourLibrary() {
         <ImageCarouselFrame />
         <h1 className="text-xl font-semibold">My Recipes</h1>
 
-        <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80">
+        <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-10">
           <motion.div className="inner-carousel flex justify-start  ">
             {CarouselISavedRecipe.CarouselISavedRecipe.map((item, index) => (
               <motion.div className="item w-64 h-64" key={index}>
