@@ -44,13 +44,13 @@ export default function RecipesPage(props) {
   };
 
   return (
-    <div className="w-[90%] mx-auto  h-[90vh] overflow-scroll">
+    <div className="w-[90%] mx-auto  h-[90vh] overflow-scroll no-scrollbar">
         <Header/>
       <Tags />
       <h1 className="text-xl font-semibold">{props.title}</h1>
 
       <div className="carousel overflow-x-scroll no-scrollbar m-auto ">
-        <div className="inner-carousel  flex flex-wrap justify-start  ">
+        <div className="inner-carousel  flex flex-wrap  justify-center  ">
           {displayedItems.map((item, index) => (
             <div className="item w-64 h-[22rem]" key={index}>
               <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
