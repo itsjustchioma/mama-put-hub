@@ -44,7 +44,7 @@ export default function RecipesPage(props) {
   };
 
   return (
-    <div className="w-[90%] mx-auto ">
+    <div className="w-[90%] mx-auto  h-[90vh] overflow-scroll">
         <Header/>
       <Tags />
       <h1 className="text-xl font-semibold">{props.title}</h1>
