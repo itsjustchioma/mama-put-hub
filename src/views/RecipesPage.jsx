@@ -90,7 +90,7 @@ export default function RecipesPage(props) {
         </div>
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mb-24">
         {/* Step 6: Add previous and next page navigation */}
         {currentPage > 1 && (
           <button className="mx-2" onClick={goToPreviousPage}>
