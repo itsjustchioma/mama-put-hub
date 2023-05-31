@@ -44,6 +44,7 @@ const CarouselImageGallery = [
       },
       { step: "Step 5: Serve hot with your favorite toppings.", time: 5 },
     ],
+    author: "Sarah Pala",
   },
   {
     imageURL: dish2,
@@ -79,6 +80,7 @@ const CarouselImageGallery = [
         time: 3,
       },
     ],
+    author: "John Doe",
   },
   {
     imageURL: dish3,
@@ -113,6 +115,8 @@ const CarouselImageGallery = [
       },
       { step: "Step 6: Serve hot and enjoy!", time: 51 },
     ],
+    author: "Chioma Nwosu",
+
   },
   {
     imageURL: dish4,
@@ -146,6 +150,8 @@ const CarouselImageGallery = [
         time: 5,
       },
     ],
+    author: "David Ajanaku",
+
   },
   {
     imageURL: dish5,
@@ -182,6 +188,8 @@ const CarouselImageGallery = [
       },
       { step: "Step 5: Serve hot with your favorite toppings.", time: 5 },
     ],
+    author: "Winner Abalaogu",
+
   },
   {
     imageURL: dish6,
@@ -220,6 +228,8 @@ const CarouselImageGallery = [
       },
       { step: "Step 7: Cook for a few meand serve hot.", time: 5 },
     ],
+    author: "Michael  Asomugha",
+
   },
   {
     imageURL: dish7,
@@ -259,6 +269,8 @@ const CarouselImageGallery = [
       },
       { step: "Step 7: Enjoy your homemade pizza!", time: 5 },
     ],
+    author: "Greg Pala",
+
   },
   {
     imageURL: dish8,
@@ -288,8 +300,12 @@ const CarouselImageGallery = [
       },
       { step: "Step 4: Serve chilled and enjoy!", time: 6 },
     ],
+    author: "Celestine Nwachukwu",
+
   },
 ];
+
+
 
 const CarouselISavedRecipe = [
   {

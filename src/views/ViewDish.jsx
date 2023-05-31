@@ -49,6 +49,16 @@ const ViewDish = () => {
                 </h1>
 
                 <div className="flex  justify-center justify-evenly mt-4 flex-wrap items-center">
+                <p className="text-sm border-r-2 border-black pl-3 pr-3">
+                    {" "}
+                    Recipe Author:  &nbsp;
+                    <span className="text-lemon-meringue">
+                    <Link to={"/MyProfile"}> 
+                 {dish.author}
+                 </Link>
+                    </span>
+                 
+                  </p>
                   <span className="flex items-center  text-sm pr-3">
                     <img src={starRating} className="w-10" alt="" />{" "}
                     {dish.rating}

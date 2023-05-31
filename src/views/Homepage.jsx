@@ -17,6 +17,7 @@ const Homepage = (props) => {
         <Tags />
         <WelcomeFrame />
         <ImageCarouselFrame title={"What do you want to eat today?"} />
+     
         <ImageCarouselFrame title={"Popular Recipes"} />
       </div>
     </div>

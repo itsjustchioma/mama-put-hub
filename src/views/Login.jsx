@@ -61,7 +61,7 @@ export default function Login() {
                 </div>
                 <button
                   className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
-                  onClick={handleLogin}
+                  
                 >
                   <span className="relative z-10">
                     <span className="wave-on-hover">Log In</span>
