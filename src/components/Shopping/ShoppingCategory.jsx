@@ -1,6 +1,7 @@
 import React from "react";
 import { ShoppingArray } from "./ShoppingCategoryArray";
 import { Link } from "react-router-dom";
+import AddShopping from "/public/assets/right arrow.png";
 
 function ShoppingCategory() {
   return (
@@ -34,7 +35,7 @@ function ShoppingCategory() {
               <Link to={`/SavedRecipe/${shopArray.name}`}>
                 <button>
                   <img
-                    src="/public/assets/right arrow.png"
+                    src={AddShopping}
                     alt="right arrow"
                     className="w-4"
                   />

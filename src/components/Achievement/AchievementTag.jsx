@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import chefHat from "/public/assets/chef-hat.png";
 
 function AchievementTag() {
   return (
-    <div className="p-10 sm:p-12 rounded-round-shadow bg-pastel-blue relative flex items-center justify-between">
+    <div className="p-10 sm:p-12 rounded-round-shadow bg-pastel-blue relative flex flex-wrap items-center justify-between">
       <div className="">
         <h4 className="text-md sm:text-lg font-semibold text-black">
           Achievements
@@ -13,9 +14,9 @@ function AchievementTag() {
         </p>
       </div>
       <img
-        src="/public/assets/chef-hat.png"
+        src={chefHat}
         alt="userimage"
-        className="self-start flex-shrink-0 w-14 ml-2 md:ml-24 md:w-24 h-14 md:h-24 "
+        className="self-start w-9 h-8 flex-shrink-0 w-14 ml-2 md:ml-24 md:w-20 h-4 md:h-24 "
       />
 
       <Link to={"/achievement"}>

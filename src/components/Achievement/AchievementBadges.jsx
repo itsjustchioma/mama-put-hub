@@ -15,8 +15,8 @@ function AchievementBadges() {
   return (
     <>
       <h1 className="font-bold text-center">Achievement Badges</h1>
-      <div className="p-10 sm:p-12 bg-pastel-blue relative items-center h-[40vh]  ">
-        <div className="grid grid-cols-2 md:grid-cols-3 text-sm md:text-lg ">
+      <div className="p-10 sm:p-12 bg-pastel-blue relative items-center h-[40vh]  text-center ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-sm md:text-lg ">
           {Badges.map((badge, i) => (
             <div
               key={i}

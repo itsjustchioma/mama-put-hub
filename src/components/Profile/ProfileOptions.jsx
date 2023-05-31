@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ProfileMenu } from "./ProfileMenu";
 import HorizontalLine from "../HorizontalLine";
+import rightArrow from "/public/assets/right arrow.png";
 
 function ProfileOptions() {
   return (
@@ -22,7 +23,7 @@ function ProfileOptions() {
             <Link to={pMenu.path}>
               <button className="absolute right-6 top-1/2 transform -translate-y-1/2">
                 <img
-                  src="/public/assets/right arrow.png"
+                  src={rightArrow}
                   alt="right arrow"
                   className="w-4"
                 />

@@ -27,7 +27,7 @@ export default function FilterModal({ closeModal }) {
         <h1 className="text-lg font-semibold mt-4">Filter</h1>
         <FilterTags onTagsCleared={handleTagsCleared} clearTags={clearTags} />
       </div>
-      <div className="mb-20 absolute left-0 right-0 bottom-3">
+      <div className="mb-8 absolute left-0 right-0 bottom-3">
         <Button title="Showing 87 results" />
       </div>
     </div>
