@@ -48,7 +48,7 @@ function SavedRecipe() {
       <div className="flex justify-between mb-4">
         <BackArrow onClick={handleBackClick} />
         <img
-          src="/public/assets/delete.png"
+          src="/assets/delete.png"
           alt=""
           className="w-8 h-8 ml-2 cursor-pointer"
           onClick={handleDeleteClick}

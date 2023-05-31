@@ -1,7 +1,7 @@
 import React from "react";
 import { ShoppingArray } from "./ShoppingCategoryArray";
 import { Link } from "react-router-dom";
-import AddShopping from "/public/assets/right arrow.png";
+import AddShopping from "/assets/right arrow.png";
 
 function ShoppingCategory() {
   return (

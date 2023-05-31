@@ -1,5 +1,5 @@
 import React from "react";
-import user from "/public/assets/user.png";
+import user from "/assets/user.png";
 import { Link, useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow";
 import { Badges } from "../components/Achievement/AchievementBadgesList";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserInfo } from "./UserInfo";
-import rightArrow from "/public/assets/right arrow.png";
+import rightArrow from "/assets/right arrow.png";
 
 function ProfileTag() {
   return (

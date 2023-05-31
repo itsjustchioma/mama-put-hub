@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ProfileMenu } from "./ProfileMenu";
 import HorizontalLine from "../HorizontalLine";
-import rightArrow from "/public/assets/right arrow.png";
+import rightArrow from "/assets/right arrow.png";
 
 function ProfileOptions() {
   return (

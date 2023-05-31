@@ -13,7 +13,7 @@ function AchievementAvatar() {
           </p>
         </div>
         <img
-          src="public/assets/25percent.png"
+          src="/assets/25percent.png"
           alt="userimage"
           className="self-start flex-shrink-0 w-24 ml-4 md:ml-24 md:w-24 h-24 md:h-24 "
         />

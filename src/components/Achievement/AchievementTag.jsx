@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import chefHat from "/public/assets/chef-hat.png";
+import chefHat from "/assets/chef-hat.png";
 
 function AchievementTag() {
   return (
@@ -22,7 +22,7 @@ function AchievementTag() {
       <Link to={"/achievement"}>
         <button className="absolute right-6 top-1/2 transform -translate-y-1/2">
           <img
-            src="/public/assets/right arrow grey.png"
+            src="/assets/right arrow grey.png"
             alt="right arrow"
             className="w-4"
           />
