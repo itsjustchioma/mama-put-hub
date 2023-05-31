@@ -102,7 +102,7 @@ const handleBackClick = () => {
             <option value="laurel-green">Laurel Green</option>
             <option value="copper-orange">Copper Orange</option>
             <option value="pastel-pink">Pastel Pink</option>
-            <option value="grey-text">Grey Tone</option>
+            <option value="lemon-meringue">Lemon Meringue</option>
           </select>
         </div>
         <div>
