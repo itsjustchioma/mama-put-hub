@@ -1,7 +1,6 @@
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Client, Account } from "appwrite";
 // import Homepage from "./Homepage";
 
 export default function Login() {
@@ -9,25 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
 
-    const client = new Client();
-    const account = new Account(client);
-
-    client
-      .setEndpoint("https://cloud.appwrite.io/v1")
-      .setProject("64676cf547e8830694b8");
-
-    try {
-      const response = await account.createEmailSession(email, password);
-      console.log("Login success:", response);
-      navigate("/home"); // Replace '/homepage' with your desired route
-    } catch (error) {
-      console.error("Login failed:", error);
-      // Handle error and provide appropriate feedback to the user
-    }
-  };
 
   return (
     <div className="container bg-background-color">
@@ -108,7 +89,7 @@ export default function Login() {
               >
                 Forgot password?
               </a>
-              <Link to="/Signup">
+              <Link to="/">
                 <p className="text-text-grey text-center text-sm my-4 underline">
                   Don't have an account? Sign Up.
                 </p>
