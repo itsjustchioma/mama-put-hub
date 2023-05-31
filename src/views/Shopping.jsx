@@ -8,7 +8,7 @@ function Shopping() {
         Shopping List
       </h1>
       <Link to="/addshoppingcategory">
-        <img src="/public/assets/plus.png" alt="" className="w-8 h-8 mx-auto" />
+        <img src="/assets/plus.png" alt="" className="w-8 h-8 mx-auto" />
       </Link>
       <ShoppingCategory />
     </div>
