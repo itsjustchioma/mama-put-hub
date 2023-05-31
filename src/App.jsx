@@ -22,6 +22,7 @@ import CommentSection from "./components/CommentSection";
 import SavedRecipe from "./views/SavedRecipe";
 import AllDone from "./views/AllDone";
 import Logout from "./views/Logout";
+import AddShoppingCategory from "./views/AddShoppingCategory";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -56,6 +57,7 @@ function App() {
           element={<SavedRecipe closeModal={closeModal} />}
         />
         <Route path="/AllDone" element={<AllDone />} />
+        <Route path="/AddShoppingCategory" element={<AddShoppingCategory />} />
 
         <Route path="/Logout" element={<Logout />} />
 
