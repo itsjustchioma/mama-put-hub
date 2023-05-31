@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 function Settings() {
+
+   // State variables to store form data
   const [photo, setPhoto] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,6 +14,8 @@ function Settings() {
   const [Bio, setBio] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
 
+
+    // Event handlers for form input changes
   const handlePhotoChange = (event) => {
     const selectedPhoto = event.target.files[0];
     setPhoto(selectedPhoto);

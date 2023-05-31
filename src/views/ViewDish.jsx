@@ -9,7 +9,7 @@ import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
 
 const ViewDish = () => {
-  const { id } = useParams(); // Retrieve the id (index) from the URL parameter
+  const { id } = useParams(); // Retrieves the id (index) from the URL parameter
   const navigate = useNavigate();
 
   // Get the dish information based on the id (index)

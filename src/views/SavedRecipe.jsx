@@ -17,15 +17,20 @@ function SavedRecipe() {
     navigate("/Shopping");
   };
 
+
+  // This function is called when the delete button is clicked
   const handleDeleteClick = () => {
     setShowModal(true);
   };
 
+  // It removes the category from the shopping list by calling the removeCategory and navigating to shopping page
   const handleConfirmDelete = () => {
     removeCategory(category);
     navigate("/Shopping");
   };
 
+
+  // This function is called when a checkbox for an ingredient is changed.
   const handleCheckboxChange = (index) => {
     if (checkedIngredients.includes(index)) {
       setCheckedIngredients(checkedIngredients.filter((i) => i !== index));
@@ -69,6 +74,7 @@ function SavedRecipe() {
       </p>
       <br />
       <div>
+          {/* Ingredients list */}
         <h2 className="font-semibold">All Ingredients</h2>
         <ul>
           {ingredients.map((ingredient, index) => (

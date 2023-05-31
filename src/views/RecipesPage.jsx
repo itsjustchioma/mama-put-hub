@@ -8,11 +8,16 @@ import { useNavigate } from "react-router-dom";
 import Tags from "../components/Tags";
 import Header from "../components/Header";
 
+// The RecipesPage component is a functional component that displays a carousel of recipes.
+
 export default function RecipesPage(props) {
+
+  // Stores the bookmark status of each recipe.
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Step 1: Add current page state
   const navigate = useNavigate();
 
+  // Toggles the bookmark status of a recipe at the specified index.
   const handleBookMarkClick = (index) => {
     const updatedStatus = [...bookmarkStatus];
     updatedStatus[index] = !updatedStatus[index];

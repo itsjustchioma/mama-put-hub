@@ -11,6 +11,8 @@ function UserPreferencePage() {
   const [allergyOptionsToShow, setAllergyOptionsToShow] = useState(4);
   const [favoriteDishesOptionsToShow, setFavoriteDishesOptionsToShow] = useState(4);
 
+
+    // Handler for selecting/deselecting a diet option
   const handleDietOptionSelect = (option) => {
     if (selectedDietOptions.includes(option)) {
       setSelectedDietOptions(selectedDietOptions.filter((item) => item !== option));
@@ -19,6 +21,8 @@ function UserPreferencePage() {
     }
   };
 
+
+   // Handler for selecting/deselecting an allergy option
   const handleAllergyOptionSelect = (option) => {
     if (selectedAllergyOptions.includes(option)) {
       setSelectedAllergyOptions(selectedAllergyOptions.filter((item) => item !== option));
@@ -27,6 +31,8 @@ function UserPreferencePage() {
     }
   };
 
+
+    // Handler for selecting/deselecting a favorite dishes option
   const handleFavoriteDishesOptionSelect = (option) => {
     if (selectedFavoriteDishesOptions.includes(option)) {
       setSelectedFavoriteDishesOptions(selectedFavoriteDishesOptions.filter((item) => item !== option));
@@ -35,22 +41,36 @@ function UserPreferencePage() {
     }
   };
 
+
+   // Function to check if an option is selected
   const isOptionSelected = (option, selectedOptions) => selectedOptions.includes(option);
 
+
+   // Handler for showing more diet options
   const handleViewMoreDietOptions = () => {
     setDietOptionsToShow(dietOptionsToShow + 4);
   };
 
+
+   // Handler for showing more allergy options
   const handleViewMoreAllergyOptions = () => {
     setAllergyOptionsToShow(allergyOptionsToShow + 4);
   };
 
+
+  // Handler for showing more favorite dishes options
   const handleViewMoreFavoriteDishesOptions = () => {
     setFavoriteDishesOptionsToShow(favoriteDishesOptionsToShow + 4);
   };
 
+
+    // Get the diet options to display based on the current value of dietOptionsToShow
   const dietOptions = PreferencesMenu.dietOptions.slice(0, dietOptionsToShow);
+
+    // Get the allergy options to display based on the current value of allergyOptionsToShow
   const allergyOptions = PreferencesMenu.allergyOptions.slice(0, allergyOptionsToShow);
+
+    // Get the favorite dishes options to display based on the current value of favoriteDishesOptionsToShow
   const favoriteDishesOptions = PreferencesMenu.favoriteDishesOptions.slice(0, favoriteDishesOptionsToShow);
 
   const navigate = useNavigate();

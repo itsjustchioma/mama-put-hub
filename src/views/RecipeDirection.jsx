@@ -10,16 +10,19 @@ import pause from "/assets/pause.png";
 import rightArrow from "/assets/right arrow.png";
 import unpause from "/public/assets/unpause.png";
 
+
 export default function RecipeDirection() {
   const { id } = useParams();
   const directions = CarouselImageGallery.CarouselImageGallery[Number(id)];
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [timer, setTimer] = useState(null);
-  const [remainingTime, setRemainingTime] = useState("");
+  const [currentStep, setCurrentStep] = useState(0);// State variable to track the current step index
+  const [timer, setTimer] = useState(null);// State variable for the timer interval ID
+  const [remainingTime, setRemainingTime] = useState(""); // State variable for the remaining time of the current step
 
   const navigate = useNavigate();
 
+
+   // Function to start the timer for the current step
   const startTimer = (time) => {
     if (time > 0) {
       setRemainingTime(time);
@@ -29,7 +32,7 @@ export default function RecipeDirection() {
             const remainingSeconds = prevTime - 1;
             if (remainingSeconds <= 0) {
               clearInterval(timer);
-              moveToNextStep();
+              moveToNextStep();// Move to the next step when the time is up
               return "";
             }
             return remainingSeconds;
@@ -38,12 +41,15 @@ export default function RecipeDirection() {
       );
     }
   };
-
+// Function to pause the timer
   const pauseTimer = () => {
     clearInterval(timer);
   };
 
+
+    // Function to move to the next step
   const moveToNextStep = () => {
+    
     if (currentStep < directions.steps.length - 1) {
       setCurrentStep((prevStep) => {
         const nextStep = prevStep + 1;
@@ -51,10 +57,12 @@ export default function RecipeDirection() {
         return nextStep;
       });
     } else {
-      navigate("/alldone");
+      navigate("/alldone");// Navigate to "/alldone" when all steps are completed
     }
   };
 
+
+  // Function to move to the previous step
   const moveToPreviousStep = () => {
     if (currentStep > 0) {
       setCurrentStep((prevStep) => prevStep - 1);
@@ -66,11 +74,15 @@ export default function RecipeDirection() {
     navigate(-1); // Go back to the previous page
   };
 
+
+  
+ // Set the initial remaining time for the current step when the component mounts
   useEffect(() => {
     if (directions) {
       setRemainingTime(directions.steps[currentStep].time);
     }
     return () => {
+           // Clean up the timer interval when the component unmounts or variables change
       clearInterval(timer);
     };
   }, [currentStep, directions, timer]);

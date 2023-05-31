@@ -13,9 +13,9 @@ import CarouselISavedRecipe from "../components/CarouselImageGallery";
 export default function YourLibrary() {
   const firstItem = CarouselISavedRecipe.CarouselISavedRecipe[0]; // Get the first item from the array
 
-  const clickedItems = [];
+  const clickedItems = []; // An empty array to store clicked items
 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);// State variable to store the selected item
 
   const navigate = useNavigate();
 
@@ -23,10 +23,10 @@ export default function YourLibrary() {
     setSelectedItem(item);
     clickedItems.push(item);
 
-    navigate(`/ViewDish/${index}`, {
+    navigate(`/ViewDish/${index}`, {// Navigates to a specific route with parameters
       state: {
-        selectedImage: item,
-        array: CarouselISavedRecipe.CarouselISavedRecipe,
+        selectedImage: item,// Passes the selected image as a parameter
+        array: CarouselISavedRecipe.CarouselISavedRecipe, // Passes the entire array of saved recipes
       },
     });
   };
@@ -39,7 +39,7 @@ export default function YourLibrary() {
         <ImageCarouselFrame />
         <h1 className="text-xl font-semibold">My Recipes</h1>
 
-        <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-10">
+        <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
           <motion.div className="inner-carousel flex justify-start  ">
             {CarouselISavedRecipe.CarouselISavedRecipe.map((item, index) => (
               <motion.div className="item w-64 h-64" key={index}>
