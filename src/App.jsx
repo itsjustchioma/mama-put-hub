@@ -23,7 +23,6 @@ import SavedRecipe from "./views/SavedRecipe";
 import AllDone from "./views/AllDone";
 import Logout from "./views/Logout";
 import AddShoppingCategory from "./views/AddShoppingCategory";
-import RecipesPage from "./views/RecipesPage";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -33,8 +32,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route path="/Onboarding" element={<Onboarding />} />
+        <Route path="/" element={<Onboarding />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Home" element={<Homepage />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Login" element={<Login />} />
@@ -58,8 +57,6 @@ function App() {
           element={<SavedRecipe closeModal={closeModal} />}
         />
         <Route path="/AllDone" element={<AllDone />} />
-        <Route path="/RecipesPage" element={<RecipesPage />} />
-
         <Route path="/AddShoppingCategory" element={<AddShoppingCategory />} />
 
         <Route path="/Logout" element={<Logout />} />
