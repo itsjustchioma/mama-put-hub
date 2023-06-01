@@ -33,6 +33,7 @@ export default function SignUp() {
       function (error) {
         console.log("Failed, sorry :(");
         console.log(error); //failure
+        console.log("Not working");
       }
     );
   };
