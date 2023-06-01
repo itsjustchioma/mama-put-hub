@@ -39,7 +39,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="font-acumin main-container bg-background-color">
+    <div className="font-acumin main-container bg-background-color h-[100vh]">
       <div className="wrapper-container grid grid-cols-1    overflow-hidden  md:grid-cols-2">
         {/* 1. IMAGE CONTAINER */}
         <Logo isSignUp={true} />

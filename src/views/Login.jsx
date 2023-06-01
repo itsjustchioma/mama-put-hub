@@ -11,7 +11,7 @@ export default function Login() {
 
 
   return (
-    <div className="container bg-background-color">
+    <div className="container bg-background-color h-[100vh]">
       <div className="wrapper-container grid grid-cols-1  md:grid-cols-2  overflow-hidden">
         <Logo isSignUp={false} />
         {/* 2. FORM CONTAINER */}
