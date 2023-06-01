@@ -8,7 +8,15 @@ client
 
 export const account = new Account(client);
 
-// Database
+// Database≠
 export const databases = new Databases(client, "64773737337f23de254d");
  
 
+// const account = new Account(client);
+
+// Register User
+// createAccount: (email, password, name) => {
+//   return api.provider
+// }
+
+// export const account = sdk.account;

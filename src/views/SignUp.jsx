@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import React, { useState } from "react";
-import { account } from "../services/appwriteConfig.js";
+import { account } from "../services/appwriteConfig";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,9 +27,11 @@ export default function SignUp() {
     promise.then(
       function (response) {
         console.log(response);
+        console.log("Successfully created");
         navigate("/profile"); //success
       },
       function (error) {
+        console.log("Failed, sorry :(");
         console.log(error); //failure
         console.log("Not working");
       }
