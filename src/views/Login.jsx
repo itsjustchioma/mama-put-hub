@@ -1,17 +1,30 @@
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { account } from "../services/appwriteConfig";
 // import Homepage from "./Homepage";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
+  const loginUser = async (e) => {
+    e.preventDefault();
+
+    try {
+      await account.createEmailSession(user.email, user.password);
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="container bg-background-color h-[100vh]">
+    <div className=" bg-background-color h-[100vh]">
       <div className="wrapper-container grid grid-cols-1  md:grid-cols-2  overflow-hidden">
         <Logo isSignUp={false} />
         {/* 2. FORM CONTAINER */}
@@ -35,8 +48,12 @@ export default function Login() {
                 type="email"
                 required
                 placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    email: e.target.value,
+                  });
+                }}
                 className="mt-1 block w-full h-12 my-4 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1"
               />
@@ -47,8 +64,12 @@ export default function Login() {
               <input
                 type="password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    password: e.target.value,
+                  });
+                }}
                 className="mt-1 my-4 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
               focus:outline-none focus:border-laurel-green focus:ring-1 
           "
@@ -61,7 +82,7 @@ export default function Login() {
                 </div>
                 <button
                   className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
-                  
+                  onClick={loginUser}
                 >
                   <span className="relative z-10">
                     <span className="wave-on-hover">Log In</span>

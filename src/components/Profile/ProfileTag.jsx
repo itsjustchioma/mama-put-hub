@@ -1,19 +1,36 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { UserInfo } from "./UserInfo";
 import rightArrow from "/assets/right arrow.png";
+import { account } from "../../services/appwriteConfig";
+import Login from "../../views/Login";
+
 
 function ProfileTag() {
+  const [userDetails, setUserDetails] = useState();
+
+  useEffect(() => {
+    const getData = account.get()
+    getData.then(
+      function(response){
+        setUserDetails(response)
+      },
+      function(error){
+        console.log(error);
+      }
+    )
+  }, [])
   return (
-    <div className="p-6 sm:p-12 rounded-md relative flex items-center">
+    <>
+    {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
       <img
-        src={UserInfo.profilePicture}
+        src={userDetails.name}
         alt="userimage"
         className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
       />
       <div className=" ml-2">
         <h4 className="text-md sm:text-lg font-semibold text-black">
-          {UserInfo.name}
+          {userDetails.name}
         </h4>
         <p className="text-sm sm:text-base dark:text-black">My Profile</p>
       </div>
@@ -26,7 +43,10 @@ function ProfileTag() {
           />
         </button>
       </Link>
-    </div>
+    </div>) : (
+        <Login />)} 
+   
+    </>
   );
 }
 
