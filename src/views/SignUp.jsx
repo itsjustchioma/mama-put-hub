@@ -1,27 +1,39 @@
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
-import { Client, Account } from "appwrite";
-
-// import { useState } from "react";
+import React, { useState } from "react";
+import { account } from "../services/appwriteConfig.js";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 export default function SignUp() {
-  // const client = new Client();
-  // const account = new Account(client);
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  // client
-  //   .setEndpoint("https://cloud.appwrite.io/v1")
-  //   .setProject("64676cf547e8830694b8");
+  // Sign up
+  const signupUser = async (e) => {
+    e.preventDefault();
 
-  //   const promise = account.createEmailSession("email@example.com", "password");
+    const promise = account.create(
+      uuidv4(),
+      user.email,
+      user.password,
+      user.name
+    );
 
-  //   promise.then(
-  //     function (response) {
-  //       console.log(response); // Success
-  //     },
-  //     function (error) {
-  //       console.log(error); // Failure
-  //     }
-  //   );
+    promise.then(
+      function (response) {
+        console.log(response);
+        navigate("/profile"); //success
+      },
+      function (error) {
+        console.log(error); //failure
+      }
+    );
+  };
 
   return (
     <div className="font-acumin main-container bg-background-color">
@@ -42,18 +54,30 @@ export default function SignUp() {
             </div>
 
             {/* 3. MAIN FORM  */}
-            <form className="flex flex-col my-8 ">
-              <span className="block text-sm font-medium text-laurel-green ">
+            <form className="flex flex-col my-8 " action="#" method="POST">
+              <label
+                className="block text-sm font-medium text-laurel-green "
+                htmlFor="name"
+              >
                 First Name
-              </span>
+              </label>
               <input
+                id="name"
+                name="name"
+                autoComplete="name"
                 type="text"
                 required
                 placeholder="Your First Name"
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    name: e.target.value,
+                  });
+                }}
                 className="mt-1 block w-full h-12 my-2 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1 "
               />
-              <span className="block text-sm font-medium text-laurel-green ">
+              {/* <span className="block text-sm font-medium text-laurel-green ">
                 Last Name
               </span>
               <input
@@ -62,29 +86,49 @@ export default function SignUp() {
                 placeholder="Your Last Name"
                 className="mt-1 block w-full h-12 my-2 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1 "
-              />
-              <span className="block text-sm font-medium text-laurel-green ">
+              /> */}
+              <label
+                className="block text-sm font-medium text-laurel-green "
+                htmlFor="email"
+              >
                 Email
-              </span>
+              </label>
               <input
                 type="email"
+                id="email"
+                name="email"
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    email: e.target.value,
+                  });
+                }}
                 required
                 placeholder="you@example.com"
                 className="mt-1 block w-full h-12 my-2 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1"
               />
 
-              <span className="block text-sm font-medium  text-laurel-green ">
+              <label className="block text-sm font-medium  text-laurel-green ">
                 Password
-              </span>
+              </label>
               <input
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    password: e.target.value,
+                  });
+                }}
                 type="password"
                 required
                 className="mt-1 my-2 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1
           "
               />
-              <span className="block text-sm font-medium  text-laurel-green ">
+              {/* <span className="block text-sm font-medium  text-laurel-green ">
                 Confirm Password
               </span>
               <input
@@ -94,16 +138,20 @@ export default function SignUp() {
             focus:outline-none focus:border-laurel-green focus:ring-1
                
           "
-              />
+              /> */}
 
               <div className="flex justify-between  flex-wrap  items-center">
                 <div>
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
                 </div>
-                <button className="relative bg-laurel-green py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md">
+                <button
+                  className="relative bg-laurel-green py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
+                  type="submit"
+                  onClick={signupUser}
+                >
                   <span className="relative z-10">
-                    <span className="wave-on-hover">Log In</span>
+                    <span className="wave-on-hover">Sign Up</span>
                   </span>
                   <svg
                     className="w-4 h-4 ml-2"
