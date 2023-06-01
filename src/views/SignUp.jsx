@@ -31,6 +31,7 @@ export default function SignUp() {
       },
       function (error) {
         console.log(error); //failure
+        console.log("Not working");
       }
     );
   };
