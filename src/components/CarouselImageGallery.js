@@ -226,7 +226,7 @@ const CarouselImageGallery = [
         step: "Step 6: Add the roasted beef, steamed broccoli, and wine to the pan.",
         time: 8,
       },
-      { step: "Step 7: Cook for a few meand serve hot.", time: 5 },
+      { step: " ", time: 5 },
     ],
     author: "Michael  Asomugha",
 

@@ -24,11 +24,15 @@ export default function SignUp() {
       user.name
     );
 
+
+    account.createVerification("http://localhost:5173/")
+    console.log("Successfully sent");
+
     promise.then(
       function (response) {
         console.log(response);
         console.log("Successfully created");
-        navigate("/profile"); //success
+        navigate("/login"); //success
       },
       function (error) {
         console.log("Failed, sorry :(");

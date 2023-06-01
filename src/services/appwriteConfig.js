@@ -1,4 +1,4 @@
-import { Client, Account, Databases } from "appwrite";
+import { Client, Account, Databases, Query } from "appwrite";
 
 const client = new Client();
 
@@ -12,6 +12,20 @@ export const account = new Account(client);
 export const databases = new Databases(client, "64773737337f23de254d");
  
 
+
+let promise = databases.listDocuments(
+  "64773737337f23de254d",
+  "647905d239ca167a89f1",
+  [
+      
+  ]
+);
+
+promise.then(function (response) {
+  console.log(response);
+}, function (error) {
+  console.log(error);
+});
 // const account = new Account(client);
 
 // Register User

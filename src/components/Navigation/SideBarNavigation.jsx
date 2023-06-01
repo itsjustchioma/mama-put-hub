@@ -2,8 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { Menus } from "./menuData";
 import burger from "/assets/burger.png";
 import HorizontalLine from "../HorizontalLine";
+import { account } from "../../services/appwriteConfig";
+import { useNavigate } from "react-router-dom";
+
 
 const SideBarNavigation = () => {
+  const navigate = useNavigate();
+
   const [isVisible, setIsVisible] = useState(false);
   const sidebarRef = useRef(null);
 
@@ -23,6 +28,15 @@ const SideBarNavigation = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handlelogout = async ( )=> {
+    try{
+      await account.deleteSession("current")
+      navigate("/login")
+    }catch(error){
+      console.log(error);
+    }
+  } 
 
   return (
     <div className="z-[999]">
@@ -76,7 +90,7 @@ const SideBarNavigation = () => {
             ))}
           </ul>
         </div>
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer">
+        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer" onClick={handlelogout}>
           <img src="/public/assets/back-arrow.png" alt="" className="w-4" />
           <span className="text-[15px] ml-4">Logout</span>
         </div>
