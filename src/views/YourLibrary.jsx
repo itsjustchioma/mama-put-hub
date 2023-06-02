@@ -80,7 +80,7 @@ export default function YourLibrary() {
                     <Link to={`/ViewDish/${index}`}>
                       <div className="mt-2">
                         <h5 className="text-[14px] font-semibold">
-                          {item.name}
+                          {item.food_name}
                         </h5>
                         <p className="flex items-center text-[14px]">
                           <img
@@ -146,6 +146,7 @@ export default function YourLibrary() {
                           <h5 className="text-[14px] font-semibold">
                             {item.name}
                           </h5>
+                          
                           <p className="flex items-center text-[14px]">
                             <img
                               src={starRating}
@@ -154,6 +155,8 @@ export default function YourLibrary() {
                             />
                             : {item.rating}
                           </p>
+                          <p className="text-[14px]">{item.type}</p>
+
                         </div>
                       </Link>
                     </div>
