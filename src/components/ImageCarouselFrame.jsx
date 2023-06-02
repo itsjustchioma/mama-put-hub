@@ -46,11 +46,11 @@ const handleBookMarkClick = async (index) => {
       level: recipe.level,
       type: recipe.type,
       food_name: recipe.food_name,
-      time: recipe.time,
+      // time: recipe.time,
       servings: recipe.servings,
       author: recipe.author,
       steps: recipe.steps,
-      rating: recipe.rating,
+      // rating: recipe.rating,
       ingredients: recipe.ingredients,
     });
 

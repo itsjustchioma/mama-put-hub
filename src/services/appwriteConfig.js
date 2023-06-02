@@ -45,10 +45,10 @@ export const saveBookmark = async (recipe) => {
     console.log("Document ID:", documentId); // Log the generated UUID
 
    const savedRecipe = await databases.createDocument(
-     "64676cf547e8830694b8", // Your project ID
+     "64773737337f23de254d", // Your project ID
      "6479a9441b13f7a9ad4d", // Collection ID for User Saved Recipe collection
      documentId, // Use the generated UUID as the document ID
-     { data: recipe }
+     recipe
    );
 
     console.log("Saved Recipe:", savedRecipe);
