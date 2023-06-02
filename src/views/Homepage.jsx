@@ -1,6 +1,7 @@
 import Navigation from "../components/Navigation/Navigation";
 import ImageCarouselFrame from "../components/ImageCarouselFrame";
 import SideBarNavigation from "../components/Navigation/SideBarNavigation";
+import { account } from "../services/appwriteConfig";
 import "../index.css";
 import React, { useEffect, useRef } from "react";
 
@@ -12,6 +13,7 @@ const Homepage = (props) => {
 
       <div className="w-10/12 mx-auto">
         <WelcomeFrame />
+        
         <ImageCarouselFrame title={"What do you want to eat today?"} />
      
      <div className=" mb-24">

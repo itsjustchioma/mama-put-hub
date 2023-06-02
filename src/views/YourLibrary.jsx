@@ -1,42 +1,104 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import ImageCarouselFrame from "../components/ImageCarouselFrame";
-// import CarouselImageGallery from "../components/CarouselImageGallery";
+import { databases } from "../services/appwriteConfig";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
-
 import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
+import { saveBookmark } from "../services/appwriteConfig";
 
 export default function YourLibrary() {
-  const firstItem = CarouselISavedRecipe.CarouselISavedRecipe[0]; // Get the first item from the array
-
-  const clickedItems = []; // An empty array to store clicked items
-
-  const [selectedItem, setSelectedItem] = useState(null);// State variable to store the selected item
-
+  const [carouselItems, setCarouselItems] = useState([]);
   const navigate = useNavigate();
 
-  const handleImageClick = (item, index) => {
-    setSelectedItem(item);
-    clickedItems.push(item);
+  const handleBookmark = async (recipe) => {
+    try {
+      const savedRecipe = await saveBookmark(recipe);
+      // Optionally, you can do something with the saved recipe, such as displaying a success message
+      console.log("Recipe saved:", savedRecipe);
+    } catch (error) {
+      // Handle the error, such as displaying an error message
+      console.error("Error saving recipe:", error);
+    }
+  };
 
-    navigate(`/ViewDish/${index}`, {// Navigates to a specific route with parameters
+  useEffect(() => {
+    const fetchSavedRecipes = async () => {
+      try {
+        const response = await databases.listDocuments(
+          "64773737337f23de254d",
+          "6479a9441b13f7a9ad4d",
+          []
+        );
+        console.log(response);
+        setCarouselItems(response.documents);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSavedRecipes();
+  }, []);
+
+  const handleImageClick = (item, index) => {
+    navigate(`/ViewDish/${index}`, {
       state: {
-        selectedImage: item,// Passes the selected image as a parameter
-        array: CarouselISavedRecipe.CarouselISavedRecipe, // Passes the entire array of saved recipes
+        selectedImage: item,
+        array: carouselItems,
       },
     });
   };
 
   return (
     <div className="overflow-scroll h-[93vh] no-scrollbar">
-      <div className="m-4 w-5/6  mx-auto  md:h-100vh ">
+      <div className="m-4 w-5/6 mx-auto md:h-100vh ">
         <Header />
         <h1 className="text-xl font-semibold">Saved Recipes</h1>
-        <ImageCarouselFrame />
+        {carouselItems.length === 0 ? (
+          <p>No saved recipes</p>
+        ) : (
+          <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
+            <motion.div className="inner-carousel flex justify-start">
+              {carouselItems.map((item, index) => (
+                <motion.div className="item w-64 h-64" key={index}>
+                  <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                    <button className="absolute right-5">
+                      <img
+                        src={fullBookmarkIcon}
+                        className="w-5 my-2"
+                        alt="bookmark"
+                      />
+                    </button>
+                    <img
+                      src={item.imageURL}
+                      className="rounded-md h-full w-full"
+                      alt=""
+                      onClick={() => handleImageClick(item, index)}
+                    />
+                    <Link to={`/ViewDish/${index}`}>
+                      <div className="mt-2">
+                        <h5 className="text-[14px] font-semibold">
+                          {item.name}
+                        </h5>
+                        <p className="flex items-center text-[14px]">
+                          <img
+                            src={starRating}
+                            className="w-4"
+                            alt="rating"
+                          />
+                          : {item.rating}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+
         <h1 className="text-xl font-semibold">My Recipes</h1>
 
         <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">

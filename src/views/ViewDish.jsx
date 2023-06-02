@@ -1,9 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import CarouselImageGallery from "../components/CarouselImageGallery";
+import React, { useEffect } from "react";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import starRating from "/assets/preference.png";
 import Button from "../components/Button";
-import { Link, useNavigate } from "react-router-dom";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
@@ -11,9 +9,9 @@ import CommentSection from "../components/CommentSection";
 const ViewDish = () => {
   const { id } = useParams(); // Retrieves the id (index) from the URL parameter
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Get the dish information based on the id (index)
-  const dish = CarouselImageGallery.CarouselImageGallery[Number(id)];
+  const dish = location.state?.dish;
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
@@ -22,9 +20,14 @@ const ViewDish = () => {
 
   const handleDirection = (index) => {
     navigate(`/RecipeDirection/${index}`, {
-      state: { recipeArray: CarouselImageGallery.CarouselImageGallery },
+      state: { recipeArray: carouselItems },
     });
   };
+
+  useEffect(() => {
+    // Add any additional code you need to fetch and update dish information based on the id (index)
+    // Example: fetchDishInfo(id)
+  }, [id]);
 
   return (
     <div className="h-[90vh] overflow-scroll no-scrollbar md:h-[100vh] md:w-5/6  mx-auto">
@@ -42,22 +45,19 @@ const ViewDish = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="overflow-scroll   meda  overscroll-contain  -mt-3">
-              <div className=" bg-copper-orange inset-0 p-4   overflow-y-auto overscroll-contain">
+            <div className="overflow-scroll meda overscroll-contain -mt-3">
+              <div className="bg-copper-orange inset-0 p-4 overflow-y-auto overscroll-contain">
                 <h1 className="text-2xl text-center font-medium">
                   {dish.name}
                 </h1>
 
-                <div className="flex  justify-center justify-evenly mt-4 flex-wrap items-center">
-                <p className="text-sm border-r-2 border-black pl-3 pr-3">
+                <div className="flex justify-center justify-evenly mt-4 flex-wrap items-center">
+                  <p className="text-sm border-r-2 border-black pl-3 pr-3">
                     {" "}
-                    Recipe Author:  &nbsp;
+                    Recipe Author: &nbsp;
                     <span className="text-lemon-meringue">
-                    <Link to={"/MyProfile"}> 
-                 {dish.author}
-                 </Link>
+                      <Link to={"/MyProfile"}>{dish.author}</Link>
                     </span>
-                 
                   </p>
                   <span className="flex items-center  text-sm pr-3">
                     <img src={starRating} className="w-10" alt="" />{" "}
@@ -80,7 +80,7 @@ const ViewDish = () => {
                     Servings: {dish.servings}
                   </p>
                   <span className="text-sm text-cyan-400  border-l-2 border-black pl-3 pr-3">
-                    <Link to={'/CommentSection'}>25 reviews</Link>
+                    <Link to={"/CommentSection"}>25 reviews</Link>
                   </span>
                 </div>
 
@@ -89,20 +89,18 @@ const ViewDish = () => {
                   <ul className="text-sm">
                     {dish.ingredients.map((ingredient, index) => (
                       <li key={index} className="flex justify-between">
-                        <span>{ingredient.name}</span>
-                        <span>{ingredient.quantity}</span>
+                        <span>{ingredient}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <br />
-                </div> <br />
-                <div onClick={() => handleDirection(id)}>
-                  <Button title="Show directions" />
-                </div>
+              </div>
+              <br />
+              <div onClick={() => handleDirection(id)}>
+                <Button title="Show directions" />
               </div>
             </div>
-          
+          </div>
         ) : (
           <p>No dish found.</p>
         )}
