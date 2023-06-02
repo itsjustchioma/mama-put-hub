@@ -90,6 +90,8 @@ export default function YourLibrary() {
                           />
                           : {item.rating}
                         </p>
+                        <p className="text-[14px]">{item.type}</p>
+
                       </div>
                     </Link>
                   </div>
@@ -119,6 +121,7 @@ export default function YourLibrary() {
                         <h5 className="text-[14px] font-semibold">
                           {item.name}
                         </h5>
+                        
                       </div>
                     </div>
                   </Link>
@@ -155,7 +158,6 @@ export default function YourLibrary() {
                             />
                             : {item.rating}
                           </p>
-                          <p className="text-[14px]">{item.type}</p>
 
                         </div>
                       </Link>
