@@ -5,15 +5,12 @@ import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { databases } from "../services/appwriteConfig";
 import { saveBookmark } from "../services/appwriteConfig";
-
+import { v4 as uuidv4 } from "uuid";
 
 export default function ImageCarouselFrame(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [carouselItems, setCarouselItems] = useState([]);
   const navigate = useNavigate();
-
-  
-  
 
   const handleImageClick = (index) => {
     navigate(`/ViewDish/${index}`, { state: { dish: carouselItems[index] } });
@@ -40,29 +37,32 @@ export default function ImageCarouselFrame(props) {
     );
   }, []);
 
+const handleBookMarkClick = async (index) => {
+  try {
+    const recipe = carouselItems[index];
 
-  const handleBookMarkClick = async (recipe) => {
-    try {
-      const savedRecipe = await saveBookmark({
-        level: recipe.level,
-        type: recipe.type,
-        food_name: recipe.food_name,
-        time: recipe.time,
-        servings: recipe.servings,
-        author: recipe.author,
-        steps: recipe.steps,
-        rating: recipe.rating,
-        ingredients: recipe.ingredients
-      });
-  
-      console.log("Recipe saved:", savedRecipe);
-      // Optionally, you can do something with the saved recipe, such as displaying a success message
-    } catch (error) {
-      // Handle the error, such as displaying an error message
-      console.error("Error saving recipe:", error);
-    }
-  };
-  
+    const documentId = uuidv4(); // Generate a unique document ID
+    const savedRecipe = await saveBookmark({
+      level: recipe.level,
+      type: recipe.type,
+      food_name: recipe.food_name,
+      time: recipe.time,
+      servings: recipe.servings,
+      author: recipe.author,
+      steps: recipe.steps,
+      rating: recipe.rating,
+      ingredients: recipe.ingredients,
+    });
+
+    console.log("Recipe saved:", savedRecipe);
+    // Optionally, you can do something with the saved recipe, such as displaying a success message
+  } catch (error) {
+    // Handle the error, such as displaying an error message
+    console.error("Error saving recipe:", error);
+  }
+};
+
+
   return (
     <div className="">
       <h1 className="text-xl font-semibold">{props.title}</h1>
@@ -97,11 +97,7 @@ export default function ImageCarouselFrame(props) {
                         {item.food_name}
                       </h5>
                       <p className="flex items-center text-[14px]">
-                        <img
-                          src={starRating}
-                          className="w-4 f"
-                          alt="rating"
-                        />
+                        <img src={starRating} className="w-4 f" alt="rating" />
                         {item.rating}
                       </p>
                       <p className="text-[14px]">{item.type}</p>
