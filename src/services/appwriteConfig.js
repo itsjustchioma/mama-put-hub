@@ -38,6 +38,14 @@ promise.then(
   }
 );
 
+ export const userId = account.get();
+
+userId.then(function (response) {
+    console.log(response.$id);
+}, function (error) {
+    console.log(error);
+});
+
 export const saveBookmark = async (recipe) => {
   try {
     const documentId = uuidv4(); // Generate a random UUID
@@ -57,6 +65,8 @@ export const saveBookmark = async (recipe) => {
     throw new Error(error);
   }
 };
+
+
 
 // const account = new Account(client);
 

@@ -8,21 +8,11 @@ import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
 import { saveBookmark } from "../services/appwriteConfig";
+import { account } from "../services/appwriteConfig";
 
 export default function YourLibrary() {
   const [carouselItems, setCarouselItems] = useState([]);
   const navigate = useNavigate();
-
-  const handleBookmark = async (recipe) => {
-    try {
-      const savedRecipe = await saveBookmark(recipe);
-      // Optionally, you can do something with the saved recipe, such as displaying a success message
-      console.log("Recipe saved:", savedRecipe);
-    } catch (error) {
-      // Handle the error, such as displaying an error message
-      console.error("Error saving recipe:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchSavedRecipes = async () => {
@@ -42,6 +32,17 @@ export default function YourLibrary() {
     fetchSavedRecipes();
   }, []);
 
+  const handleBookmark = async (recipe) => {
+    try {
+      const savedRecipe = await saveBookmark(recipe);
+      // Optionally, you can do something with the saved recipe, such as displaying a success message
+      console.log("Recipe saved:", savedRecipe);
+    } catch (error) {
+      // Handle the error, such as displaying an error message
+      console.error("Error saving recipe:", error);
+    }
+  };
+
   const handleImageClick = (item, index) => {
     navigate(`/ViewDish/${index}`, {
       state: {
@@ -50,6 +51,38 @@ export default function YourLibrary() {
       },
     });
   };
+
+  const filterRecipesByUserId = async (userId) => {
+    try {
+      const response = await databases.listDocuments(
+        "64773737337f23de254d",
+        "6479a9441b13f7a9ad4d",
+        []
+      );
+
+      const filteredRecipes = response.documents.filter(
+        (recipe) => recipe.userId === userId
+      );
+
+      setCarouselItems(filteredRecipes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const userIdPromise = account.get();
+
+    userIdPromise.then(
+      (response) => {
+        const userId = response.$id;
+        filterRecipesByUserId(userId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   return (
     <div className="overflow-scroll h-[93vh] no-scrollbar">
@@ -91,7 +124,6 @@ export default function YourLibrary() {
                           : {item.rating}
                         </p>
                         <p className="text-[14px]">{item.type}</p>
-
                       </div>
                     </Link>
                   </div>
@@ -121,7 +153,6 @@ export default function YourLibrary() {
                         <h5 className="text-[14px] font-semibold">
                           {item.name}
                         </h5>
-                        
                       </div>
                     </div>
                   </Link>
@@ -149,7 +180,6 @@ export default function YourLibrary() {
                           <h5 className="text-[14px] font-semibold">
                             {item.name}
                           </h5>
-                          
                           <p className="flex items-center text-[14px]">
                             <img
                               src={starRating}
@@ -158,7 +188,6 @@ export default function YourLibrary() {
                             />
                             : {item.rating}
                           </p>
-
                         </div>
                       </Link>
                     </div>

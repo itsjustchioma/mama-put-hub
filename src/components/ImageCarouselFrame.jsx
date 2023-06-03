@@ -6,6 +6,7 @@ import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { databases } from "../services/appwriteConfig";
 import { saveBookmark } from "../services/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
+import { account } from "../services/appwriteConfig";
 
 export default function ImageCarouselFrame(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
@@ -37,12 +38,22 @@ export default function ImageCarouselFrame(props) {
     );
   }, []);
 
+   const userId = account.get();
+
+  userId.then(function (response) {
+    console.log(response);
+      console.log(response.$id);
+  }, function (error) {
+      console.log(error);
+  });
+
 const handleBookMarkClick = async (index) => {
   try {
     const recipe = carouselItems[index];
 
     const documentId = uuidv4(); // Generate a unique document ID
     const savedRecipe = await saveBookmark({
+      userId: (await userId).$id,
       level: recipe.level,
       type: recipe.type,
       food_name: recipe.food_name,
