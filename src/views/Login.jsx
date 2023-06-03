@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { account } from "../services/appwriteConfig";
 // import Homepage from "./Homepage";
+// import { handleLogin } from "../App";
 
-export default function Login() {
+// eslint-disable-next-line react/prop-types
+export default function Login({ handleLogin }) {
   const navigate = useNavigate();
-
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -17,9 +20,17 @@ export default function Login() {
 
     try {
       await account.createEmailSession(user.email, user.password);
-      navigate("/profile");
+      setSuccessMessage("Successfully logged in.");
+      setTimeout(() => {
+        setSuccessMessage("");
+        handleLogin(); // Call the handleLogin function
+        navigate("/profile");
+      }, 3000);
     } catch (error) {
-      console.log(error);
+      setErrorMessage("Wrong email/password.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
     }
   };
 
@@ -116,6 +127,13 @@ export default function Login() {
                 </p>
               </Link>
             </form>
+
+            {successMessage && (
+              <div className="success-message">{successMessage}</div>
+            )}
+            {errorMessage && (
+              <div className="error-message">{errorMessage}</div>
+            )}
           </div>
         </div>
       </div>

@@ -5,7 +5,8 @@ import { account } from "../services/appwriteConfig";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-export default function SignUp() {
+// eslint-disable-next-line react/prop-types
+export default function SignUp({ handleLogin }) {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -13,7 +14,9 @@ export default function SignUp() {
     password: "",
   });
 
-  // Sign up
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const signupUser = async (e) => {
     e.preventDefault();
 
@@ -24,22 +27,23 @@ export default function SignUp() {
       user.name
     );
 
-
-    account.createVerification("http://localhost:5173/")
+    account.createVerification("http://localhost:5173/");
     console.log("Successfully sent");
 
-    promise.then(
-      function (response) {
-        console.log(response);
-        console.log("Successfully created");
-        navigate("/login"); //success
-      },
-      function (error) {
-        console.log("Failed, sorry :(");
-        console.log(error); //failure
-        console.log("Not working");
-      }
-    );
+    try {
+      await promise;
+      setSuccessMessage("Successfully created an account.");
+      setTimeout(() => {
+        setSuccessMessage("");
+        handleLogin(); // Call the handleLogin function
+        navigate("/login");
+      }, 3000);
+    } catch (error) {
+      setErrorMessage("The email already exists in the database.");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
   };
 
   return (
@@ -186,6 +190,13 @@ export default function SignUp() {
                 </button>
               </Link>
             </form>
+
+            {successMessage && (
+              <div className="success-message">{successMessage}</div>
+            )}
+            {errorMessage && (
+              <div className="error-message">{errorMessage}</div>
+            )}
           </div>
         </div>
       </div>

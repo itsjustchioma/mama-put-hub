@@ -1,6 +1,6 @@
 export const Menus = [
   {
-    name: "Search",
+    name: "Home",
     icon: "/assets/search.png",
     dis: "translate-x-0",
     path: "/Home",
