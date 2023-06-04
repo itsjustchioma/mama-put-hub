@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import Button from "./Button";
 
 function IngredientForm({ formData, setFormData, handlePrevious }) {
-  const [ingredients, setIngredients] = useState([{ name: "", quantity: "" }]);
+  const [ingredients, setIngredients] = useState([{ name: "" }]);
 
   const handleChange = (e, index) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     const updatedIngredients = [...ingredients];
-    updatedIngredients[index][name] = value;
+    updatedIngredients[index].name = value;
     setIngredients(updatedIngredients);
     setFormData((prevData) => ({
       ...prevData,
-      ingredients: updatedIngredients,
+      ingredients: updatedIngredients.map((ingredient) => ingredient.name),
     }));
   };
 
   const handleAddIngredient = () => {
-    setIngredients([...ingredients, { name: "", quantity: "" }]);
+    setIngredients([...ingredients, { name: "" }]);
   };
 
   const handleRemoveIngredient = (index) => {
@@ -44,16 +44,7 @@ function IngredientForm({ formData, setFormData, handlePrevious }) {
             />
           </label>{" "}
           <br />
-          <label className="font-medium">
-            Quantity: <br />
-            <input
-              type="text"
-              name="quantity"
-              value={ingredient.quantity}
-              onChange={(e) => handleChange(e, index)}
-              className="my-2 p-2 rounded border border-gray-300"
-            />
-          </label>
+
           {index > 0 && (
             <button type="button" onClick={() => handleRemoveIngredient(index)}>
               Remove

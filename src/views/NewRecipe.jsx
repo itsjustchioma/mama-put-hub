@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dummyImage from "/assets/user.png";
 import Button from "../components/Button";
 import leftarrow from "/assets/left arrow.png";
@@ -7,69 +7,75 @@ import { Link, useNavigate } from "react-router-dom";
 import { tags } from "../components/Tags";
 import IngredientForm from "../components/IngredientForm";
 import AllDone from "./AllDone";
+import { account } from "../services/appwriteConfig";
+import { createRecipe } from "../services/appwriteConfig";
+
 
 const LevelTags = [
   { name: "Easy" },
   { name: "Medium" },
   { name: "Like a PRO" },
 ];
+ const userId = account.get();
+
+userId.then(function (response) {
+    console.log(response.$id);
+}, function (error) {
+    console.log(error);
+});
+
 
 function FoodForm({ formData, setFormData, handlePrevious }) {
-  const [foods, setFoods] = useState([{ name: "", time: "" }]);
+  const [steps, setSteps] = useState([{ name: "" }]);
 
   const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    const updatedFoods = [...foods];
-    updatedFoods[index][name] = value;
-    setFoods(updatedFoods);
+    const { value } = e.target;
+    const updatedSteps = [...steps];
+    updatedSteps[index].name = value;
+    setSteps(updatedSteps);
     setFormData((prevData) => ({
       ...prevData,
-      steps: updatedFoods,
+      steps: updatedSteps.map((step) => step.name),
     }));
   };
+  
 
-  const handleAddFood = () => {
-    setFoods([...foods, { name: "", time: "" }]);
+
+
+
+  const handleAddStep = () => {
+    setSteps([...steps, { name: "" }]);
   };
 
-  const handleRemoveFood = (index) => {
-    const updatedFoods = [...foods];
-    updatedFoods.splice(index, 1);
-    setFoods(updatedFoods);
+
+  
+  const handleRemoveStep = (index) => {
+    const updatedSteps = [...steps];
+    updatedSteps.splice(index, 1);
+    setSteps(updatedSteps);
     setFormData((prevData) => ({
       ...prevData,
-      steps: updatedFoods,
+      steps: updatedSteps.map((step) => step.name),
     }));
   };
 
   return (
     <div>
-      {foods.map((food, index) => (
+        {steps.map((step, index) => (
         <div key={index}>
           <label className="font-medium">
-            Food Name: <br />
+            Step Name: <br />
             <input
               type="text"
-              name="name"
-              value={food.name}
+              value={step.name}
               onChange={(e) => handleChange(e, index)}
               className="my-2 p-2 rounded border border-gray-300"
             />
           </label>{" "}
           <br />
-          <label className="font-medium">
-            Time: <br />
-            <input
-              type="text"
-              name="time"
-              value={food.time}
-              onChange={(e) => handleChange(e, index)}
-              className="my-2 p-2 rounded border border-gray-300"
-            />
-          </label>
-          
+
           {index > 0 && (
-            <button type="button" onClick={() => handleRemoveFood(index)}>
+            <button type="button" onClick={() => handleRemoveStep(index)}>
               Remove
             </button>
           )}
@@ -77,7 +83,7 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
       ))}
       <br />
 
-      <div onClick={handleAddFood}>
+      <div onClick={handleAddStep}>
         <Button title="Add More Steps" />
       </div>
       <br />
@@ -89,17 +95,35 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
 
 
 function NewRecipe() {
+
+  
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    picture: null,
+    picture: "",
     name: "",
-    password: "",
     description: "",
     level: "",
-    count: 0,
+    servings: 0,
     type: "",
+    ingredients: [],
     steps: [],
+    userId : "",
+    
   });
+
+  useEffect(() => {
+    account.get().then(
+      (response) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          userId: response.$id,
+        }));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,13 +141,24 @@ function NewRecipe() {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+      try {
+    const response = await createRecipe(formData);
+    console.log('Recipe created:', response);
+    // Handle any further actions or redirection after creating the recipe
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    // Handle the error appropriately
+  }
     const totalTime = calculateTotalTime();
     const updatedSteps = formData.steps.map((step) => ({
       ...step,
       totalTime: step.time ? parseInt(step.time) : 0,
     }));
+
+
+    
     setFormData((prevData) => ({
       ...prevData,
       steps: updatedSteps,
@@ -137,18 +172,19 @@ function NewRecipe() {
   const handleIncrement = () => {
     setFormData((prevData) => ({
       ...prevData,
-      count: prevData.count + 1,
+      servings: prevData.servings + 1,
     }));
   };
-
+  
   const handleDecrement = () => {
-    if (formData.count > 0) {
+    if (formData.servings > 0) {
       setFormData((prevData) => ({
         ...prevData,
-        count: prevData.count - 1,
+        servings: prevData.servings - 1,
       }));
     }
   };
+  
 
   const handlePictureChange = (e) => {
     const file = e.target.files[0];
@@ -173,6 +209,8 @@ function NewRecipe() {
   };
 
   const navigate = useNavigate();
+
+  
 
   return (
     <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
@@ -236,7 +274,7 @@ function NewRecipe() {
                   <button type="button" onClick={handleDecrement}>
                     -
                   </button>
-                  {formData.count}
+                  {formData.servings}
                   <button type="button" onClick={handleIncrement}>
                     +
                   </button>
@@ -348,6 +386,8 @@ function NewRecipe() {
         )}
 
         {step === 4 && (
+
+
           <div>
             <h1 className="text-lg font-bold">Recipe Publication</h1>
 
@@ -358,7 +398,7 @@ function NewRecipe() {
             <br />
 
             <p className="mb-2 ">
-              <b>Servings:</b> {formData.count}
+              <b>Servings:</b> {formData.servings}
             </p>
             <br />
 

@@ -67,6 +67,57 @@ export const saveBookmark = async (recipe) => {
 };
 
 
+export const saveProfile = async (profile) => {
+  try {
+    const documentId = uuidv4(); // Generate a random UUID
+    console.log("Profile:", profile);
+    console.log("Document ID:", documentId); // Log the generated UUID
+
+    const savedProfile = await databases.createDocument(
+      
+      "64773737337f23de254d", // Your project ID
+      "647b7649a8bd0a7073be", // Collection ID for the user profiles collection
+      
+        documentId,
+       profile, // Pass the profile object as the value for the 'data' parameter
+      
+      
+    );
+    console.log("Saved Profile:", savedProfile);
+    return savedProfile;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+
+
+export const createRecipe = async (formData) => {
+  try {
+    const documentId = uuidv4(); // Generate a random UUID
+    console.log('Recipe:', formData);
+    console.log('Document ID:', documentId);
+
+    const response = await databases.createDocument(
+      "64773737337f23de254d", // Your project ID
+      "647b9e24d59661e7bfbe", // Your collection ID
+      documentId, // Use the generated UUID as the document ID
+      formData,
+    );
+
+    console.log('Recipe created:', response);
+    return response; // Optionally, return the created recipe document
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    throw error;
+  }
+};
+
+
+
+
+
+
 
 // const account = new Account(client);
 

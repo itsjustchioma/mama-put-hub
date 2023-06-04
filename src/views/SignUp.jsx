@@ -17,8 +17,16 @@ export default function SignUp({ handleLogin }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+
+  // Sign up
   const signupUser = async (e) => {
     e.preventDefault();
+
+    // Check if all fields are filled in
+    if (!user.name || !user.email || !user.password) {
+      setErrorMessage("Please fill in all fields");
+      return;
+    }
 
     const promise = account.create(
       uuidv4(),
@@ -28,6 +36,7 @@ export default function SignUp({ handleLogin }) {
     );
 
     account.createVerification("http://localhost:5173/");
+    account.createVerification("http://localhost:5173/Onboarding");
     console.log("Successfully sent");
 
     try {
@@ -88,16 +97,7 @@ export default function SignUp({ handleLogin }) {
                 className="mt-1 block w-full h-12 my-2 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
             focus:outline-none focus:border-laurel-green focus:ring-1 "
               />
-              {/* <span className="block text-sm font-medium text-laurel-green ">
-                Last Name
-              </span>
-              <input
-                type="text"
-                required
-                placeholder="Your Last Name"
-                className="mt-1 block w-full h-12 my-2 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-            focus:outline-none focus:border-laurel-green focus:ring-1 "
-              /> */}
+
               <label
                 className="block text-sm font-medium text-laurel-green "
                 htmlFor="email"
@@ -139,17 +139,6 @@ export default function SignUp({ handleLogin }) {
             focus:outline-none focus:border-laurel-green focus:ring-1
           "
               />
-              {/* <span className="block text-sm font-medium  text-laurel-green ">
-                Confirm Password
-              </span>
-              <input
-                type="password"
-                required
-                className="mt-1 my-2 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-            focus:outline-none focus:border-laurel-green focus:ring-1
-               
-          "
-              /> */}
 
               <div className="flex justify-between  flex-wrap  items-center">
                 <div>
@@ -181,8 +170,12 @@ export default function SignUp({ handleLogin }) {
                 </button>
               </div>
 
+              {errorMessage && (
+                <p className="text-red-500 text-sm my-2">{errorMessage}</p>
+              )}
+
               <Link
-                to="/Login"
+                to="/login"
                 className="border-2 text-sm py-3 my-4  rounded-lg border-laurel-green text-center"
               >
                 <button className="text-laurel-green">

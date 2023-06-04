@@ -1,9 +1,9 @@
-import Logo from "../components/Logo";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { account } from "../services/appwriteConfig";
 // import Homepage from "./Homepage";
 // import { handleLogin } from "../App";
+import Logo from "../components/Logo";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ handleLogin }) {
@@ -14,6 +14,7 @@ export default function Login({ handleLogin }) {
     email: "",
     password: "",
   });
+
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -31,15 +32,15 @@ export default function Login({ handleLogin }) {
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
+      setErrorMessage("Invalid username or password");
     }
   };
 
   return (
-    <div className=" bg-background-color h-[100vh]">
+    <div className="bg-background-color h-[100vh]">
       <div className="wrapper-container grid grid-cols-1  md:grid-cols-2  overflow-hidden">
         <Logo isSignUp={false} />
-        {/* 2. FORM CONTAINER */}
-        <div className="main-form-container  my-16 mx-auto w-4/5  md:w-3/5">
+        <div className="main-form-container my-16 mx-auto w-4/5 md:w-3/5">
           <div className="">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl font-extrabold text-copper-orange">
@@ -50,9 +51,8 @@ export default function Login({ handleLogin }) {
               </p>
             </div>
 
-            {/* 3. MAIN FORM  */}
-            <form className="flex flex-col my-8  md:my-20 ">
-              <span className="block text-sm font-medium text-copper-orange ">
+            <form className="flex flex-col my-8 md:my-20">
+              <span className="block text-sm font-medium text-copper-orange">
                 Email
               </span>
               <input
@@ -65,11 +65,10 @@ export default function Login({ handleLogin }) {
                     email: e.target.value,
                   });
                 }}
-                className="mt-1 block w-full h-12 my-4 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-            focus:outline-none focus:border-laurel-green focus:ring-1"
+                className="mt-1 block w-full h-12 my-4 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-laurel-green focus:ring-1"
               />
 
-              <span className="block text-sm font-medium  text-copper-orange ">
+              <span className="block text-sm font-medium  text-copper-orange">
                 Password
               </span>
               <input
@@ -81,12 +80,14 @@ export default function Login({ handleLogin }) {
                     password: e.target.value,
                   });
                 }}
-                className="mt-1 my-4 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-              focus:outline-none focus:border-laurel-green focus:ring-1 
-          "
+                className="mt-1 my-4 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-laurel-green focus:ring-1"
               />
 
-              <div className="flex justify-between  items-center  flex-wrap">
+              {errorMessage && (
+                <p className="text-red-500 text-sm mb-2">{errorMessage}</p>
+              )}
+
+              <div className="flex justify-between items-center flex-wrap">
                 <div>
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
@@ -115,10 +116,7 @@ export default function Login({ handleLogin }) {
                 </button>
               </div>
 
-              <a
-                className="text-copper-orange text-center text-sm my-4"
-                href="#"
-              >
+              <a className="text-copper-orange text-center text-sm my-4" href="#">
                 Forgot password?
               </a>
               <Link to="/">

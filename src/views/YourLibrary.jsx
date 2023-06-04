@@ -9,9 +9,14 @@ import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
 import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
+import plusSign from "/public/assets/plus1.png";
+
 
 export default function YourLibrary() {
   const [carouselItems, setCarouselItems] = useState([]);
+  const [createdrecipes, setcreatedrecipes] = useState([]);
+
+  const [userId, setUserId] = useState(""); // Added userId state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +27,6 @@ export default function YourLibrary() {
           "6479a9441b13f7a9ad4d",
           []
         );
-        console.log(response);
         setCarouselItems(response.documents);
       } catch (error) {
         console.log(error);
@@ -35,10 +39,8 @@ export default function YourLibrary() {
   const handleBookmark = async (recipe) => {
     try {
       const savedRecipe = await saveBookmark(recipe);
-      // Optionally, you can do something with the saved recipe, such as displaying a success message
       console.log("Recipe saved:", savedRecipe);
     } catch (error) {
-      // Handle the error, such as displaying an error message
       console.error("Error saving recipe:", error);
     }
   };
@@ -70,13 +72,47 @@ export default function YourLibrary() {
     }
   };
 
+  const filterRecipesByUserID = async (userId) => {
+    try {
+      const response = await databases.listDocuments(
+        "64773737337f23de254d",
+        "647b9e24d59661e7bfbe",
+        []
+      );
+
+      const filteredRecipes = response.documents.filter(
+        (recipe) => recipe.userId === userId
+      );
+
+      setcreatedrecipes(filteredRecipes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const userIdPromise = account.get();
 
     userIdPromise.then(
       (response) => {
         const userId = response.$id;
+        setUserId(userId); // Set the userId state
         filterRecipesByUserId(userId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    const userIdPromise = account.get();
+
+    userIdPromise.then(
+      (response) => {
+        const userId = response.$id;
+        setUserId(userId); // Set the userId state
+        filterRecipesByUserID(userId);
       },
       (error) => {
         console.log(error);
@@ -133,8 +169,10 @@ export default function YourLibrary() {
           </motion.div>
         )}
 
-        <h1 className="text-xl font-semibold">My Recipes</h1>
 
+
+
+        <h1 className="text-xl font-semibold">My Recipes</h1>
         <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
           <motion.div className="inner-carousel flex justify-start  ">
             {CarouselISavedRecipe.CarouselISavedRecipe.map((item, index) => (
@@ -159,7 +197,7 @@ export default function YourLibrary() {
                 ) : (
                   <div>
                     {/* Render other items without the link */}
-                    <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
+                    <div className="  w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
                       <button className="absolute right-5 ">
                         <img
                           src={fullBookmarkIcon}
@@ -195,6 +233,49 @@ export default function YourLibrary() {
                 )}
               </motion.div>
             ))}
+          </motion.div>
+        </motion.div>
+       
+        
+
+        <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
+          
+          <motion.div className="inner-carousel flex justify-start  ">
+          {createdrecipes.map((item, index) => (
+                <motion.div className="item w-64 h-64" key={index}>
+                  <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                    <button className="absolute right-5">
+                      <img
+                        src={fullBookmarkIcon}
+                        className="w-5 my-2"
+                        alt="bookmark"
+                      />
+                    </button>
+                    <img
+                      src={item.imageURL}
+                      className="rounded-md h-full w-full"
+                      alt=""
+                      onClick={() => handleImageClick(item, index)}
+                    />
+                    <Link to={`/ViewDish/${index}`}>
+                      <div className="mt-2">
+                        <h5 className="text-[14px] font-semibold">
+                          {item.food_name}
+                        </h5>
+                        <p className="flex items-center text-[14px]">
+                          <img
+                            src={starRating}
+                            className="w-4"
+                            alt="rating"
+                          />
+                          : {item.rating}
+                        </p>
+                        <p className="text-[14px]">{item.type}</p>
+                      </div>
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
           </motion.div>
         </motion.div>
       </div>

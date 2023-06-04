@@ -11,15 +11,17 @@ const ViewDish = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const dish = location.state?.dish;
+  const carouselItems = location.state?.array;
+  const dish = carouselItems[id];
+
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
 
   console.log(dish);
 
-  const handleDirection = (index) => {
-    navigate(`/RecipeDirection/${index}`, {
+  const handleDirection = () => {
+    navigate(`/RecipeDirection/${id}`, {
       state: { recipeArray: carouselItems },
     });
   };
@@ -41,14 +43,14 @@ const ViewDish = () => {
             <div className="h-72 md:h-[50vh]">
               <img
                 src={dish.imageURL}
-                alt={dish.name}
+                alt={dish.food_name}
                 className="h-full w-full object-cover"
               />
             </div>
             <div className="overflow-scroll meda overscroll-contain -mt-3">
               <div className="bg-copper-orange inset-0 p-4 overflow-y-auto overscroll-contain">
                 <h1 className="text-2xl text-center font-medium">
-                  {dish.name}
+                  {dish.food_name}
                 </h1>
 
                 <div className="flex justify-center justify-evenly mt-4 flex-wrap items-center">
@@ -96,7 +98,7 @@ const ViewDish = () => {
                 </div>
               </div>
               <br />
-              <div onClick={() => handleDirection(id)}>
+              <div onClick={handleDirection}>
                 <Button title="Show directions" />
               </div>
             </div>

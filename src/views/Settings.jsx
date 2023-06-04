@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { saveProfile } from '../services/appwriteConfig';
+import { account } from '../services/appwriteConfig';
 
 import BackArrow from '../components/BackClick/BackArrow';
 import { Link, useNavigate } from "react-router-dom";
 
-
 function Settings() {
-
-   // State variables to store form data
   const [photo, setPhoto] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,8 +14,6 @@ function Settings() {
   const [Bio, setBio] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
 
-
-    // Event handlers for form input changes
   const handlePhotoChange = (event) => {
     const selectedPhoto = event.target.files[0];
     setPhoto(selectedPhoto);
@@ -37,17 +35,44 @@ function Settings() {
     setBio(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const userId = account.get();
+
+  userId.then(function (response) {
+    console.log(response);
+      console.log(response.$id);
+  }, function (error) {
+      console.log(error);
+  });
+
+
+   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Perform necessary actions with the form data, such as updating the user's profile
+    try {
+      const profileData = {
+        userId: (await userId).$id,
 
-    // Reset form fields
-    setPhoto('');
-    setPassword('');
-    setConfirmPassword('');
-    setEmail('');
-    setBio('');
+        photo: photo,
+        password: password,
+        confirmPassword: confirmPassword,
+        email: email,
+        bio: Bio,
+      };
+
+      const savedProfile = await saveProfile(profileData);
+      console.log("Profile saved:", savedProfile);
+      // Optionally, you can do something with the saved profile, such as displaying a success message
+
+      // Reset form fields
+      setPhoto('');
+      setPassword('');
+      setConfirmPassword('');
+      setEmail('');
+      setBio('');
+    } catch (error) {
+      // Handle the error, such as displaying an error message
+      console.error("Error saving profile:", error);
+    }
   };
 
   const navigate = useNavigate();
@@ -60,8 +85,7 @@ function Settings() {
     <div className="px-4 py-6 h-[90vh] overflow-scroll no-scrollbar mb-16  md:w-[80%] md:mx-auto">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center justify-between mb-4">
-        <BackArrow onClick={handleBackClick} />
-
+          <BackArrow onClick={handleBackClick} />
           <button type="submit">
             <div className="bg-green-500 rounded-full p-2">
               <svg
@@ -122,7 +146,8 @@ function Settings() {
               onChange={handlePhotoChange}
             />
           </label>
-        </div>    <div className="mb-6">
+        </div>
+        <div className="mb-6">
           <label htmlFor="Bio" className="block font-medium mb-1">
             Bio:
           </label>
@@ -145,7 +170,6 @@ function Settings() {
             onChange={handleEmailChange}
           />
         </div>
-      
         <div className="mb-6">
           <label htmlFor="password" className="block font-medium mb-1">
             New Password:
@@ -170,14 +194,6 @@ function Settings() {
             onChange={handleConfirmPasswordChange}
           />
         </div>
-     
-    
-        {/* <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-        >
-          Save Changes
-        </button> */}
       </form>
     </div>
   );
