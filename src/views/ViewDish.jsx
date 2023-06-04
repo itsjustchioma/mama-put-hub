@@ -7,19 +7,28 @@ import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
 
 const ViewDish = () => {
+
+  // THE VIEW DISH VIEW REPRESENTS THE VIEW FOR A SPECIFIC DISH
+
+
+
   const { id } = useParams(); // Retrieves the id (index) from the URL parameter
   const navigate = useNavigate();
   const location = useLocation();
 
   const carouselItems = location.state?.array;
-  const dish = carouselItems[id];
+  const dish = carouselItems && carouselItems[id];
 
+
+    // Navigates back to the previous page when the back arrow is clicked
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
 
   console.log(dish);
 
+
+    // Navigates to the recipe directions page for the selected dish
   const handleDirection = () => {
     navigate(`/RecipeDirection/${id}`, {
       state: { recipeArray: carouselItems },
@@ -58,7 +67,9 @@ const ViewDish = () => {
                     {" "}
                     Recipe Author: &nbsp;
                     <span className="text-lemon-meringue">
-                      <Link to={"/MyProfile"}>{dish.author}</Link>
+                      <Link to={"/MyProfile"}>{dish.author}
+                      {dish.username}
+                      </Link>
                     </span>
                   </p>
                   <span className="flex items-center  text-sm pr-3">

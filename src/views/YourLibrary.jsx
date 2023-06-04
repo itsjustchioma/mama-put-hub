@@ -11,14 +11,19 @@ import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
 import plusSign from "/public/assets/plus1.png";
 
-
 export default function YourLibrary() {
+
+  // THE LIBRARY VIEW SAVES RECIPES AND CREATES RECIPES
+
+  // State variables
   const [carouselItems, setCarouselItems] = useState([]);
   const [createdrecipes, setcreatedrecipes] = useState([]);
 
   const [userId, setUserId] = useState(""); // Added userId state
   const navigate = useNavigate();
 
+
+   // Fetch saved recipes from the database
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
@@ -36,6 +41,8 @@ export default function YourLibrary() {
     fetchSavedRecipes();
   }, []);
 
+
+  // Function to handle bookmarking a recipe
   const handleBookmark = async (recipe) => {
     try {
       const savedRecipe = await saveBookmark(recipe);
@@ -45,6 +52,7 @@ export default function YourLibrary() {
     }
   };
 
+  // Function to handle image click and navigate to a recipe detail page
   const handleImageClick = (item, index) => {
     navigate(`/ViewDish/${index}`, {
       state: {
@@ -54,6 +62,18 @@ export default function YourLibrary() {
     });
   };
 
+  const handleImageClicks = (item, index) => {
+    navigate(`/ViewDish/${index}`, {
+      state: {
+        selectedImage: item,
+        array: createdrecipes,
+      },
+    });
+  };
+
+
+
+    // Function to filter saved recipes by user ID
   const filterRecipesByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
@@ -72,6 +92,8 @@ export default function YourLibrary() {
     }
   };
 
+
+  // Function to filter user's own recipes by user ID
   const filterRecipesByUserID = async (userId) => {
     try {
       const response = await databases.listDocuments(
@@ -90,6 +112,7 @@ export default function YourLibrary() {
     }
   };
 
+    // Fetches the userId and filter created recipes by userId when the component mounts
   useEffect(() => {
     const userIdPromise = account.get();
 
@@ -152,25 +175,18 @@ export default function YourLibrary() {
                           {item.food_name}
                         </h5>
                         <p className="flex items-center text-[14px]">
-                          <img
-                            src={starRating}
-                            className="w-4"
-                            alt="rating"
-                          />
-                          : {item.rating}
+                          <img src={starRating} className="w-4" alt="rating" />:{" "}
+                          {item.rating}
                         </p>
                         <p className="text-[14px]">{item.type}</p>
                       </div>
                     </Link>
-                  </div>
+                  </div>s
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
         )}
-
-
-
 
         <h1 className="text-xl font-semibold">My Recipes</h1>
         <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
@@ -235,47 +251,44 @@ export default function YourLibrary() {
             ))}
           </motion.div>
         </motion.div>
-       
-        
 
         <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
-          
           <motion.div className="inner-carousel flex justify-start  ">
-          {createdrecipes.map((item, index) => (
-                <motion.div className="item w-64 h-64" key={index}>
-                  <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
-                    <button className="absolute right-5">
-                      <img
-                        src={fullBookmarkIcon}
-                        className="w-5 my-2"
-                        alt="bookmark"
-                      />
-                    </button>
+            {createdrecipes.map((item, index) => (
+              <motion.div className="item w-64 h-64" key={index}>
+                <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                  <button className="absolute right-5">
                     <img
-                      src={item.imageURL}
-                      className="rounded-md h-full w-full"
-                      alt=""
-                      onClick={() => handleImageClick(item, index)}
+                      src={fullBookmarkIcon}
+                      className="w-5 my-2"
+                      alt="bookmark"
                     />
-                    <Link to={`/ViewDish/${index}`}>
-                      <div className="mt-2">
-                        <h5 className="text-[14px] font-semibold">
-                          {item.food_name}
-                        </h5>
-                        <p className="flex items-center text-[14px]">
-                          {/* <img
+                  </button>
+                  <img
+                    src={item.imageURL}
+                    className="rounded-md h-full w-full"
+                    alt=""
+                    onClick={() => handleImageClicks(item, index)}
+                  />
+                  <Link to={`/ViewDish/${index}`}>
+                    <div className="mt-2">
+                      <h5 className="text-[14px] font-semibold">
+                        {item.food_name}
+                      </h5>
+                      <p className="flex items-center text-[14px]">
+                        {/* <img
                             src={starRating}
                             className="w-4"
                             alt="rating"
                           /> */}
-                           {item.level}
-                        </p>
-                        <p className="text-[14px]">{item.type}</p>
-                      </div>
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
+                        {item.level}
+                      </p>
+                      <p className="text-[14px]">{item.type}</p>
+                    </div>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>

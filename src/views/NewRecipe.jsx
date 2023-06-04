@@ -20,6 +20,7 @@ const LevelTags = [
 
 userId.then(function (response) {
     console.log(response.$id);
+    console.log(response.name);
 }, function (error) {
     console.log(error);
 });
@@ -108,6 +109,7 @@ function NewRecipe() {
     ingredients: [],
     steps: [],
     userId : "",
+
     
   });
 
@@ -117,6 +119,7 @@ function NewRecipe() {
         setFormData((prevData) => ({
           ...prevData,
           userId: response.$id,
+          username: response.name,
         }));
       },
       (error) => {

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Tags from "../components/Tags";
 import Header from "../components/Header";
 import { databases } from "../services/appwriteConfig";
+import RecipeDirection from "./RecipeDirection";
 
 export default function RecipesPage(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
@@ -41,14 +42,24 @@ export default function RecipesPage(props) {
     setBookmarkStatus(updatedStatus);
   };
 
-  const handleImageClick = (index) => {
-    navigate(`/ViewDish/${index}`);
+  // const handleImageClick = (index) => {
+  //   navigate(`/ViewDish/${index}`);
+  // };
+
+  const handleImageClick = (recipe, index) => {
+    navigate(`/ViewDish/${index}`, {
+      state: {
+        selectedImage: recipe,
+        array: displayedRecipes,
+      },
+    });
   };
+  
 
   useEffect(() => {
     let promise = databases.listDocuments(
       "64773737337f23de254d",
-      "647905d239ca167a89f1",
+      "647b9e24d59661e7bfbe",
       []
     );
 
@@ -131,7 +142,7 @@ export default function RecipesPage(props) {
                   src={recipe.imageURL}
                   className="rounded-md bg-slate-200 h-full w-full"
                   alt=""
-                  onClick={() => handleImageClick(index)}
+                  onClick={() => handleImageClick(recipe, index)}
                 />
                 <Link to={`/ViewDish/${index}`}>
                   <div className=" mt-2 ">

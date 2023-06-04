@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingArray } from "../components/Shopping/ShoppingCategoryArray.js";
 import BackArrow from "../components/BackClick/BackArrow.jsx";
+import { account, databases } from "../services/appwriteConfig.js";
+import { v4 as uuidv4 } from "uuid";
+
 
 const AddShoppingCategory = () => {
   const navigate = useNavigate();
@@ -43,20 +46,103 @@ const handleBackClick = () => {
     setIngredientList(updatedIngredientList);
   };
 
-  const handleSaveCategory = () => {
-    const newCategory = {
-      name: categoryName,
-      img: selectedImage ? URL.createObjectURL(selectedImage) : "",
-      backgroundColor: selectedColor,
-      ingredients: ingredientList,
-      get noOfIngredients() {
-        return this.ingredients.length;
-      },
-    };
+  useEffect(() => {
+    let promise = databases.listDocuments(
+      "64773737337f23de254d",
+      "647905e0a9f44dd4d1a4",
+      [
+        // Query.equal('food_name')
+      ]
+    );
 
-    ShoppingArray.push(newCategory);
-    navigate("/shopping"); // Redirect back to Shopping component
+    promise.then(
+      function (response) {
+        console.log(response);
+        setCarouselItems(response.documents);
+        setBookmarkStatus(Array(response.documents.length).fill(false));
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+  }, []);
+
+
+  const userId = account.get();
+
+  userId.then(function (response) {
+    console.log(response);
+      console.log(response.$id);
+  }, function (error) {
+      console.log(error);
+  });
+  const handleSaveCategory = async () => {
+    const documentId = uuidv4(); // Generate a random UUID
+  
+    const newCategory = {
+      userId: (await userId).$id,
+      category_name: categoryName,
+      image: selectedImage ? URL.createObjectURL(selectedImage) : "",
+      color: selectedColor,
+      ingredients: ingredientList,
+      
+    };
+  
+    console.log("New Category:", newCategory); // Log the new category object
+  
+    // try {
+    //   // Save the new category to the database or any other storage service
+    //   const savedList = await saveShoppingList({ documentId, ...newCategory });
+    //   console.log("Shopping list saved:", savedList);
+    // } catch (error) {
+    //   console.error("Error saving shopping list:", error);
+    // }
+
+    try {
+      const documentId = uuidv4(); // Generate a random UUID
+      console.log('Recipe:', newCategory);
+      console.log('Document ID:', documentId);
+  
+      const response = await databases.createDocument(
+        "64773737337f23de254d", // Your project ID
+        "647905e0a9f44dd4d1a4", // Your collection ID
+        documentId, // Use the generated UUID as the document ID
+        newCategory,
+      );
+  
+      console.log('Recipe created:', response);
+      return response; // Optionally, return the created recipe document
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      throw error;
+    }
+  
+    // Redirect back to the Shopping component or any other route you prefer
+    navigate("/shopping");
   };
+  
+  
+  
+  
+  
+  
+  const saveShoppingList = async (formData) => {
+    try {
+      const collectionId = "64773737337f23de254d"; // Replace with your actual collection ID
+      const document = await databases.createDocument(collectionId, formData);
+  
+      console.log("Shopping list created:", document);
+      return document;
+    } catch (error) {
+      console.error("Error saving shopping list:", error);
+      throw new Error("Failed to save shopping list: " + error.message);
+    }
+  };
+  
+  
+  
+  
+  
 
   return (
     <div className="max-w-lg mx-auto my-12 p-4">
