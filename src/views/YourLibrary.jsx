@@ -263,12 +263,12 @@ export default function YourLibrary() {
                           {item.food_name}
                         </h5>
                         <p className="flex items-center text-[14px]">
-                          <img
+                          {/* <img
                             src={starRating}
                             className="w-4"
                             alt="rating"
-                          />
-                          : {item.rating}
+                          /> */}
+                           {item.level}
                         </p>
                         <p className="text-[14px]">{item.type}</p>
                       </div>
