@@ -178,9 +178,13 @@ export default function YourLibrary() {
                       <div className="mt-2">
                         <h5 className="text-[14px] font-semibold">
                           {item.food_name}
+                          {item.name}
+
                         </h5>
                         <p className="flex items-center text-[14px]">
-                          <img src={starRating} className="w-4" alt="rating" />:{" "}
+                          {item.level}
+                        </p>
+                        <p className="flex items-center text-[14px]">
                           {item.rating}
                         </p>
                         <p className="text-[14px]">{item.type}</p>
@@ -279,6 +283,7 @@ export default function YourLibrary() {
                     <div className="mt-2">
                       <h5 className="text-[14px] font-semibold">
                         {item.name}
+
                       </h5>
                       <p className="flex items-center text-[14px]">
                         {/* <img

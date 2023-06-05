@@ -16,6 +16,7 @@ export default function RecipesPage(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [recipes, setRecipes] = useState([]);
   const [carouselItems, setCarouselItems] = useState([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const userId = account.get();
   const navigate = useNavigate();
@@ -37,40 +38,41 @@ export default function RecipesPage(props) {
     setCurrentPage(1); // Reset current page to 1
   };
 
-  console.log(recipes.username);
-  console.log(recipes);
-
-
-
-
   const handleBookMarkClick = async (index) => {
     try {
       const recipe = recipes[index];
+      const user = await account.get(); // Get the current logged-in user
+      const username = user.name; 
       const { author, food_name } = recipe;
-    console.log(recipe);
-  
+
       const documentId = uuidv4(); // Generate a unique document ID
       const savedRecipe = await saveBookmark({
         userId: (await userId).$id,
         level: recipe.level,
         type: recipe.type,
-        food_name: food_name,
+        food_name: recipe.name,
         time: recipe.time ? recipe.time.toString().slice(0, 17) : "",
         servings: recipe.servings,
         author: author,
+        username: username,
+
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,
       });
-  
+
       console.log("Recipe saved:", savedRecipe);
-      // Optionally, you can do something with the saved recipe, such as displaying a success message
+      setShowSuccessModal(true);
+
+      // Hide the success modal after 2 seconds
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 2000);
     } catch (error) {
       // Handle the error, such as displaying an error message
       console.error("Error saving recipe:", error);
     }
   };
-  
 
   const handleImageClick = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {
@@ -143,18 +145,22 @@ export default function RecipesPage(props) {
   };
 
   return (
-    <div className="w-[90%] mx-auto  h-[90vh] overflow-scroll no-scrollbar">
+    <div className="w-[90%] mx-auto h-[90vh] overflow-scroll no-scrollbar">
       <Header />
-      <Tags onTagClick={handleTagClick} />      <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
+      <Tags onTagClick={handleTagClick} />
+      <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
 
       <h1 className="text-xl font-semibold">{props.title}</h1>
 
-      <div className="carousel overflow-x-scroll no-scrollbar m-auto ">
-        <div className="inner-carousel  flex flex-wrap  justify-center  ">
+      <div className="carousel overflow-x-scroll no-scrollbar m-auto">
+        <div className="inner-carousel flex flex-wrap justify-center">
           {displayedRecipes.map((recipe, index) => (
             <div className="item w-64 h-[22rem]" key={index}>
               <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
-                <button className="absolute right-5" onClick={() => handleBookMarkClick(index)}>
+                <button
+                  className="absolute right-5"
+                  onClick={() => handleBookMarkClick(index)}
+                >
                   <img
                     src={bookmarkStatus[index] ? fullBookmarkIcon : emptyBookmarkIcon}
                     className="w-5 my-2"
@@ -168,7 +174,7 @@ export default function RecipesPage(props) {
                   onClick={() => handleImageClick(recipe, index)}
                 />
                 <Link to={`/ViewDish/${index}`}>
-                  <div className=" mt-2 ">
+                  <div className="mt-2">
                     <h5 className="text-[14px] font-semibold">{recipe.name}</h5>
                     <p className="flex items-center text-[14px]">
                       {recipe.rating}
@@ -194,6 +200,14 @@ export default function RecipesPage(props) {
           </button>
         )}
       </div>
+
+      {showSuccessModal && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-4">
+            <p className="text-green-500 font-semibold">Recipe bookmarked!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
