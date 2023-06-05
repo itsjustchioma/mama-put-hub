@@ -31,6 +31,8 @@ function SavedRecipe() {
     navigate("/Shopping");
   };
 
+
+  // This function is called when the delete button is clicked
   const handleDeleteClick = () => {
     setShowModal(true);
   };
