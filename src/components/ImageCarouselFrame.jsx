@@ -14,8 +14,10 @@ export default function ImageCarouselFrame(props) {
   const navigate = useNavigate();
 
   const handleImageClick = (index) => {
-    navigate(`/ViewDish/${index}`, { state: { dish: carouselItems[index] } });
+    const selectedDish = carouselItems[index];
+    navigate(`/ViewDish/${index}`, { state: { dish: selectedDish, array: carouselItems } });
   };
+  
 
   useEffect(() => {
     let promise = databases.listDocuments(

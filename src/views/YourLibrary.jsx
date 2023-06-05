@@ -278,7 +278,7 @@ export default function YourLibrary() {
                   <Link to={`/ViewDish/${index}`}>
                     <div className="mt-2">
                       <h5 className="text-[14px] font-semibold">
-                        {item.food_name}
+                        {item.name}
                       </h5>
                       <p className="flex items-center text-[14px]">
                         {/* <img

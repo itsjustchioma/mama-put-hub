@@ -145,7 +145,8 @@ export default function RecipesPage(props) {
   return (
     <div className="w-[90%] mx-auto  h-[90vh] overflow-scroll no-scrollbar">
       <Header />
-      <Tags onTagClick={handleTagClick} />
+      <Tags onTagClick={handleTagClick} />      <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
+
       <h1 className="text-xl font-semibold">{props.title}</h1>
 
       <div className="carousel overflow-x-scroll no-scrollbar m-auto ">
@@ -168,9 +169,8 @@ export default function RecipesPage(props) {
                 />
                 <Link to={`/ViewDish/${index}`}>
                   <div className=" mt-2 ">
-                    <h5 className="text-[14px] font-semibold">{recipe.food_name}</h5>
+                    <h5 className="text-[14px] font-semibold">{recipe.name}</h5>
                     <p className="flex items-center text-[14px]">
-                      <img src={starRating} className="w-4 f" alt="rating" />
                       {recipe.rating}
                     </p>
                     <p className="text-[14px]">{recipe.type}</p>
