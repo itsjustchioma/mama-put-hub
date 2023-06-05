@@ -111,6 +111,7 @@ const handleBackClick = () => {
       );
   
       console.log('Recipe created:', response);
+      navigate("/shopping");
       return response; // Optionally, return the created recipe document
     } catch (error) {
       console.error('Error creating recipe:', error);
@@ -118,7 +119,7 @@ const handleBackClick = () => {
     }
   
     // Redirect back to the Shopping component or any other route you prefer
-    navigate("/shopping");
+  
   };
   
   

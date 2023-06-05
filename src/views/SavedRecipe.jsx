@@ -1,36 +1,53 @@
-import React, { useState } from "react";
+// SavedRecipe.js
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow";
 import Modal from "../components/Modal";
-import {
-  ShoppingArray,
-  removeCategory,
-} from "../components/Shopping/ShoppingCategoryArray";
+import { databases } from "../services/appwriteConfig";
 
 function SavedRecipe() {
   const navigate = useNavigate();
   const { category } = useParams();
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [categoryInfo, setCategoryInfo] = useState(null);
+  useEffect(() => {
+    const fetchCategoryInfo = async () => {
+      try {
+        const response = await databases.getDocument("64773737337f23de254d", "647905e0a9f44dd4d1a4", category);
+        console.log(response);
+        setCategoryInfo(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchCategoryInfo();
+  }, [category]);
+  
+  
 
   const handleBackClick = () => {
     navigate("/Shopping");
   };
 
-
-  // This function is called when the delete button is clicked
   const handleDeleteClick = () => {
     setShowModal(true);
   };
 
-  // It removes the category from the shopping list by calling the removeCategory and navigating to shopping page
   const handleConfirmDelete = () => {
-    removeCategory(category);
+    // Perform delete operation in Appwrite database
+
+    const promise = databases.deleteDocument('64773737337f23de254d', '647905e0a9f44dd4d1a4', category);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
     navigate("/Shopping");
   };
 
-
-  // This function is called when a checkbox for an ingredient is changed.
   const handleCheckboxChange = (index) => {
     if (checkedIngredients.includes(index)) {
       setCheckedIngredients(checkedIngredients.filter((i) => i !== index));
@@ -38,8 +55,6 @@ function SavedRecipe() {
       setCheckedIngredients([...checkedIngredients, index]);
     }
   };
-
-  const categoryInfo = ShoppingArray.find((item) => item.name === category);
 
   if (!categoryInfo) {
     return <div>Category not found</div>;
@@ -67,14 +82,14 @@ function SavedRecipe() {
         />
       </div>
       <h1 className="mt-4 font-semibold text-center text-lg md:text-xl">
-        {name}
+        {categoryInfo.category_name}
+        
       </h1>
       <p className="text-[12px]">
-        {remainingIngredients}/{noOfIngredients} ingredients left
+        {ingredients.length}/{ingredients.length} ingredients left
       </p>
       <br />
       <div>
-          {/* Ingredients list */}
         <h2 className="font-semibold">All Ingredients</h2>
         <ul>
           {ingredients.map((ingredient, index) => (
@@ -99,7 +114,6 @@ function SavedRecipe() {
         </ul>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <Modal>
           <div className="flex flex-col items-center">

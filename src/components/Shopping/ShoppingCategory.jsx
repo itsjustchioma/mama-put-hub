@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddShopping from "/assets/right arrow.png";
-
 import { databases, account } from "../../services/appwriteConfig.js";
 
 function ShoppingCategory() {
@@ -19,18 +18,40 @@ function ShoppingCategory() {
         console.log(error);
       }
     };
-  
+
     fetchShoppingCategories();
   }, []);
-  
+
+  useEffect(() => {
+    const fetchShoppingCategories = async () => {
+      try {
+        const response = await databases.listDocuments(
+          "64773737337f23de254d", // Your collection ID
+          "647905e0a9f44dd4d1a4", // Your collection permission ID
+          []
+        );
+        console.log(response);
+
+        setCreatedShoppings(response.documents);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchShoppingCategories();
+  }, []);
 
   const filterShoppingCategoriesByUserId = async (userId) => {
     try {
-      const response = await databases.listDocuments("64773737337f23de254d", "647905e0a9f44dd4d1a4", []);
+      const response = await databases.listDocuments(
+        "64773737337f23de254d",
+        "647905e0a9f44dd4d1a4",
+        []
+      );
       console.log(response);
 
       const filteredCategories = response.documents.filter(
-        (category) => category.fields && category.fields.userId === userId
+        (category) => category.userId === userId
       );
 
       setCreatedShoppings(filteredCategories);
@@ -41,9 +62,9 @@ function ShoppingCategory() {
 
   return (
     <div className="mt-2 md:mt-12 md:ml-24 ml-16">
-      {createdShoppings.map((category, index) => (
+      {createdShoppings.map((category) => (
         <div
-          key={index}
+          key={category.$id}
           className={`bg-${category.color} rounded-lg p-4 m-15 relative h-32`}
           style={{
             borderTopLeftRadius: "50px",
@@ -60,19 +81,15 @@ function ShoppingCategory() {
               />
             </div>
             <div className="md:ml-8 ml-6 text-sm md:text-lg">
-              <p className="text-md md:text-xl font-semibold">{category.fields.title}</p>
-              <p>{category.fields.description}</p>
+              <p className="text-md md:text-xl font-semibold">
+                {category.category_name}
+              </p>
               <div>
-                <p className="font-semibold">Ingredients:</p>
-                <ul>
-                  {category.fields.ingredients.map((ingredient, i) => (
-                    <li key={i}>{ingredient}</li>
-                  ))}
-                </ul>
+                <ul>{category.ingredients.length} ingredients.</ul>
               </div>
             </div>
             <div className="ml-auto">
-              <Link to={`/SavedRecipe/${category.id}`}>
+              <Link to={`/SavedRecipe/${category.$id}`}> {/* Pass the document ID */}
                 <button>
                   <img src={AddShopping} alt="right arrow" className="w-4" />
                 </button>

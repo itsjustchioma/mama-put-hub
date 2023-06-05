@@ -181,7 +181,7 @@ export default function YourLibrary() {
                         <p className="text-[14px]">{item.type}</p>
                       </div>
                     </Link>
-                  </div>s
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
