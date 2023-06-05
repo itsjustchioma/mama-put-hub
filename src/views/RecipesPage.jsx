@@ -41,29 +41,33 @@ export default function RecipesPage(props) {
   const handleBookMarkClick = async (index) => {
     try {
       const recipe = recipes[index];
-      const user = await account.get(); // Get the current logged-in user
-      const username = user.name; 
-      const { author, food_name } = recipe;
-
-      const documentId = uuidv4(); // Generate a unique document ID
+      const recipeDocument = await databases.getDocument(
+        "64773737337f23de254d",
+        "647b9e24d59661e7bfbe",
+        recipe.$id
+      );
+  
+      const username = recipeDocument.username;
+      console.log(username);
+  
       const savedRecipe = await saveBookmark({
         userId: (await userId).$id,
         level: recipe.level,
         type: recipe.type,
+        description: recipe.description,
         food_name: recipe.name,
         time: recipe.time ? recipe.time.toString().slice(0, 17) : "",
         servings: recipe.servings,
-        author: author,
-        username: username,
-
+        author: recipe.author,
+        username: username, // Update the username here
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,
       });
-
+  
       console.log("Recipe saved:", savedRecipe);
       setShowSuccessModal(true);
-
+  
       // Hide the success modal after 2 seconds
       setTimeout(() => {
         setShowSuccessModal(false);
@@ -73,6 +77,7 @@ export default function RecipesPage(props) {
       console.error("Error saving recipe:", error);
     }
   };
+  
 
   const handleImageClick = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {

@@ -6,14 +6,9 @@ import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
 import { databases } from "../services/appwriteConfig";
-import deleteButton from "/assets/delete.png"
+import deleteButton from "/assets/delete.png";
 
 const ViewDish = () => {
-
-  // THE VIEW DISH VIEW REPRESENTS THE VIEW FOR A SPECIFIC DISH
-
-
-
   const { id } = useParams(); // Retrieves the id (index) from the URL parameter
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,20 +16,16 @@ const ViewDish = () => {
   const carouselItems = location.state?.array;
   const dish = carouselItems && carouselItems[id];
 
-
-    // Navigates back to the previous page when the back arrow is clicked
+  // Navigates back to the previous page when the back arrow is clicked
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
 
   console.log(carouselItems);
 
-
-    // Navigates to the recipe directions page for the selected dish
+  // Navigates to the recipe directions page for the selected dish
   const handleDirection = () => {
-    navigate(`/RecipeDirection/${id}`, {
-      state: { recipeArray: carouselItems },
-    });
+    navigate(`/RecipeDirection/${id}`, { state: { dish: dish } });
   };
 
   useEffect(() => {
@@ -42,30 +33,41 @@ const ViewDish = () => {
     // Example: fetchDishInfo(id)
   }, [id]);
 
-
   const handleConfirmDelete = () => {
     // Perform delete operation in Appwrite database
+    const promise = databases.deleteDocument(
+      "64773737337f23de254d",
+      "6479a9441b13f7a9ad4d",
+      dish.$id
+    );
 
-    const promise = databases.deleteDocument('64773737337f23de254d', '6479a9441b13f7a9ad4d', dish.$id);
-
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
     navigate("/YourLibrary");
   };
 
   const handleConfirmDeleteCreatedRecipe = () => {
     // Perform delete operation in Appwrite database
+    const promise = databases.deleteDocument(
+      "64773737337f23de254d",
+      "647b9e24d59661e7bfbe",
+      dish.$id
+    );
 
-    const promise = databases.deleteDocument('64773737337f23de254d', '647b9e24d59661e7bfbe', dish.$id);
-
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
     navigate("/YourLibrary");
   };
 
@@ -76,8 +78,12 @@ promise.then(function (response) {
           <BackArrow onClick={handleBackClick} />
 
           <div onClick={handleConfirmDelete}>
-          <img src={deleteButton} className="w-6 h-6" alt="" onClick={handleConfirmDeleteCreatedRecipe} />
-
+            <img
+              src={deleteButton}
+              className="w-6 h-6"
+              alt=""
+              onClick={handleConfirmDeleteCreatedRecipe}
+            />
           </div>
         </div>
         {dish ? (
@@ -100,12 +106,12 @@ promise.then(function (response) {
                     {" "}
                     Recipe Author: &nbsp;
                     <span className="text-lemon-meringue">
-                      <Link to={"/MyProfile"}>{dish.author}
-                      {dish.username}
+                      <Link to={"/MyProfile"}>
+                        {dish.author}
+                        {dish.username}
                       </Link>
                     </span>
                   </p>
-                  
 
                   <p className="text-sm border-l-2 border-black pl-3 pr-3">
                     {" "}
@@ -115,19 +121,20 @@ promise.then(function (response) {
                     {" "}
                     {dish.level}
                   </p>
-                  <p className="text-sm border-l-2 border-black pl-3 pr-3">
-                    {" "}
-                    {dish.time} min
-                  </p>
+                 
                   <p className="text-sm border-l-2 border-black pl-3 pr-3">
                     Servings: {dish.servings}
                   </p>
-                  <span className="text-sm text-cyan-400  border-l-2 border-black pl-3 pr-3">
-                    <Link to={"/CommentSection"}>25 reviews</Link>
-                  </span>
+               
                 </div>
 
                 <div className="mt-4">
+                  <div>
+                    <h1 className="text-xl font-medium">Description</h1>
+                    <p>{dish.description}</p>
+                  </div>
+                  <br />
+                  <br />
                   <h1 className="text-xl font-medium">Ingredients</h1>
                   <ul className="text-sm">
                     {dish.ingredients.map((ingredient, index) => (

@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useLocation } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import CarouselImageGallery from "../components/CarouselImageGallery";
-import starRating from "/assets/preference.png";
-import { Link, useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow";
-import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import leftArrow from "/assets/left arrow.png";
 import pause from "/assets/pause.png";
 import rightArrow from "/assets/right arrow.png";
 import unpause from "/public/assets/unpause.png";
 
-
 export default function RecipeDirection() {
   const { id } = useParams();
+  const dish = location.state?.dish;
+  console.log(dish);
   const directions = CarouselImageGallery.CarouselImageGallery[Number(id)];
 
-  const [currentStep, setCurrentStep] = useState(0);// State variable to track the current step index
-  const [timer, setTimer] = useState(null);// State variable for the timer interval ID
-  const [remainingTime, setRemainingTime] = useState(""); // State variable for the remaining time of the current step
+  const [currentStep, setCurrentStep] = useState(0);
+  const [timer, setTimer] = useState(null);
+  const [remainingTime, setRemainingTime] = useState("");
 
   const navigate = useNavigate();
 
-
-   // Function to start the timer for the current step
-  const startTimer = (time) => {
+  const startTimer = (time) => {r
     if (time > 0) {
       setRemainingTime(time);
       setTimer(
@@ -32,7 +28,7 @@ export default function RecipeDirection() {
             const remainingSeconds = prevTime - 1;
             if (remainingSeconds <= 0) {
               clearInterval(timer);
-              moveToNextStep();// Move to the next step when the time is up
+              moveToNextStep();
               return "";
             }
             return remainingSeconds;
@@ -41,15 +37,12 @@ export default function RecipeDirection() {
       );
     }
   };
-// Function to pause the timer
+
   const pauseTimer = () => {
     clearInterval(timer);
   };
 
-
-    // Function to move to the next step
   const moveToNextStep = () => {
-    
     if (currentStep < directions.steps.length - 1) {
       setCurrentStep((prevStep) => {
         const nextStep = prevStep + 1;
@@ -57,12 +50,10 @@ export default function RecipeDirection() {
         return nextStep;
       });
     } else {
-      navigate("/alldone");// Navigate to "/alldone" when all steps are completed
+      navigate("/alldone");
     }
   };
 
-
-  // Function to move to the previous step
   const moveToPreviousStep = () => {
     if (currentStep > 0) {
       setCurrentStep((prevStep) => prevStep - 1);
@@ -71,18 +62,14 @@ export default function RecipeDirection() {
   };
 
   const handleBackClick = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1);
   };
 
-
-  
- // Set the initial remaining time for the current step when the component mounts
   useEffect(() => {
     if (directions) {
       setRemainingTime(directions.steps[currentStep].time);
     }
     return () => {
-           // Clean up the timer interval when the component unmounts or variables change
       clearInterval(timer);
     };
   }, [currentStep, directions, timer]);
@@ -92,7 +79,6 @@ export default function RecipeDirection() {
       <div className="p-4">
         <div className="flex justify-between pb-4 ">
           <BackArrow onClick={handleBackClick} />
-          {/* <img src={""} className="w-4" alt="" /> */}
         </div>
         {directions ? (
           <div>
@@ -119,9 +105,8 @@ export default function RecipeDirection() {
             <div className="mt-28">
               <h1 className="text-2xl font-medium">Steps</h1>
               <div>
-                
+                <p>{directions.steps[currentStep].step}</p>
               </div>
-              <p>{directions.steps[currentStep].step}</p>
               <div className="flex justify-between  mt-4">
                 {timer ? (
                   <button

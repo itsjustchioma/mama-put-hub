@@ -25,7 +25,7 @@ function SavedRecipe() {
     fetchCategoryInfo();
   }, [category]);
   
-  
+  console.log(user.id);
 
   const handleBackClick = () => {
     navigate("/Shopping");
