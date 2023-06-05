@@ -5,6 +5,8 @@ import Button from "../components/Button";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
+import { databases } from "../services/appwriteConfig";
+import deleteButton from "/assets/delete.png"
 
 const ViewDish = () => {
 
@@ -40,12 +42,43 @@ const ViewDish = () => {
     // Example: fetchDishInfo(id)
   }, [id]);
 
+
+  const handleConfirmDelete = () => {
+    // Perform delete operation in Appwrite database
+
+    const promise = databases.deleteDocument('64773737337f23de254d', '6479a9441b13f7a9ad4d', dish.$id);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+    navigate("/YourLibrary");
+  };
+
+  const handleConfirmDeleteCreatedRecipe = () => {
+    // Perform delete operation in Appwrite database
+
+    const promise = databases.deleteDocument('64773737337f23de254d', '647b9e24d59661e7bfbe', dish.$id);
+
+promise.then(function (response) {
+    console.log(response); // Success
+}, function (error) {
+    console.log(error); // Failure
+});
+    navigate("/YourLibrary");
+  };
+
   return (
     <div className="h-[90vh] overflow-scroll no-scrollbar md:h-[100vh] md:w-5/6  mx-auto">
       <div className="p-4">
         <div className="flex justify-between pb-4">
           <BackArrow onClick={handleBackClick} />
-          <img src={fullBookmarkIcon} className="w-6 h-6" alt="" />
+
+          <div onClick={handleConfirmDelete}>
+          <img src={deleteButton} className="w-6 h-6" alt="" onClick={handleConfirmDeleteCreatedRecipe} />
+
+          </div>
         </div>
         {dish ? (
           <div>

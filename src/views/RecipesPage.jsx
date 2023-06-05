@@ -6,45 +6,71 @@ import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { useNavigate } from "react-router-dom";
 import Tags from "../components/Tags";
 import Header from "../components/Header";
-import { databases } from "../services/appwriteConfig";
+import { databases, account } from "../services/appwriteConfig";
 import RecipeDirection from "./RecipeDirection";
+import { v4 as uuidv4 } from "uuid";
+import { saveBookmark } from "../services/appwriteConfig";
 
 export default function RecipesPage(props) {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipes, setRecipes] = useState([]);
-  
+  const [carouselItems, setCarouselItems] = useState([]);
 
+  const userId = account.get();
   const navigate = useNavigate();
 
   const handleTagClick = (tag) => {
     let filteredRecipes = [];
-  
+
     if (tag.name === "All") {
       // If "All" tag is selected, display all recipes
       filteredRecipes = recipes;
     } else {
       // Filter recipes based on the selected tag
-      filteredRecipes = recipes.filter((recipe) => recipe.tags.includes(tag.name));
+      filteredRecipes = recipes.filter((recipe) =>
+        recipe.tags.includes(tag.name)
+      );
     }
-  
+
     setRecipes(filteredRecipes);
     setCurrentPage(1); // Reset current page to 1
   };
-  
-  
-  
-  
-  
-  const handleBookMarkClick = (index) => {
-    const updatedStatus = [...bookmarkStatus];
-    updatedStatus[index] = !updatedStatus[index];
-    setBookmarkStatus(updatedStatus);
-  };
 
-  // const handleImageClick = (index) => {
-  //   navigate(`/ViewDish/${index}`);
-  // };
+  console.log(recipes.username);
+  console.log(recipes);
+
+
+
+
+  const handleBookMarkClick = async (index) => {
+    try {
+      const recipe = recipes[index];
+      const { author, food_name } = recipe;
+    console.log(recipe);
+  
+      const documentId = uuidv4(); // Generate a unique document ID
+      const savedRecipe = await saveBookmark({
+        userId: (await userId).$id,
+        level: recipe.level,
+        type: recipe.type,
+        food_name: food_name,
+        time: recipe.time ? recipe.time.toString().slice(0, 17) : "",
+        servings: recipe.servings,
+        author: author,
+        steps: recipe.steps,
+        rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
+        ingredients: recipe.ingredients,
+      });
+  
+      console.log("Recipe saved:", savedRecipe);
+      // Optionally, you can do something with the saved recipe, such as displaying a success message
+    } catch (error) {
+      // Handle the error, such as displaying an error message
+      console.error("Error saving recipe:", error);
+    }
+  };
+  
 
   const handleImageClick = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {
@@ -54,7 +80,6 @@ export default function RecipesPage(props) {
       },
     });
   };
-  
 
   useEffect(() => {
     let promise = databases.listDocuments(
@@ -81,7 +106,7 @@ export default function RecipesPage(props) {
 
   const getTagsForRecipe = (recipe) => {
     const tags = [];
-  
+
     if (recipe.type && recipe.type.includes("Dessert")) {
       tags.push("Dessert");
     }
@@ -95,14 +120,12 @@ export default function RecipesPage(props) {
       tags.push("Salad");
     }
     // Add more conditions for other tags
-  
+
     // If you want to include all as a tag
     tags.push("All");
-  
+
     return tags;
   };
-  
-  
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(recipes.length / itemsPerPage);
@@ -130,12 +153,11 @@ export default function RecipesPage(props) {
           {displayedRecipes.map((recipe, index) => (
             <div className="item w-64 h-[22rem]" key={index}>
               <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
-                <button className="absolute right-5">
+                <button className="absolute right-5" onClick={() => handleBookMarkClick(index)}>
                   <img
                     src={bookmarkStatus[index] ? fullBookmarkIcon : emptyBookmarkIcon}
                     className="w-5 my-2"
                     alt="bookmark"
-                    onClick={() => handleBookMarkClick(index)}
                   />
                 </button>
                 <img
