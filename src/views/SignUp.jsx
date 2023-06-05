@@ -17,7 +17,6 @@ export default function SignUp({ handleLogin }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-
   // Sign up
   const signupUser = async (e) => {
     e.preventDefault();
@@ -46,12 +45,12 @@ export default function SignUp({ handleLogin }) {
         setSuccessMessage("");
         handleLogin(); // Call the handleLogin function
         navigate("/login");
-      }, 3000);
+      }, 1000);
     } catch (error) {
       setErrorMessage("The email already exists in the database.");
       setTimeout(() => {
         setErrorMessage("");
-      }, 3000);
+      }, 1000);
     }
   };
 
@@ -141,10 +140,10 @@ export default function SignUp({ handleLogin }) {
               />
 
               <div className="flex justify-between  flex-wrap  items-center">
-                <div>
+                {/* <div>
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
-                </div>
+                </div> */}
                 <button
                   className="relative bg-laurel-green py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
                   type="submit"

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SignUp from "./views/SignUp";
@@ -33,22 +33,30 @@ const closeModal = () => {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [isMobileNavigationVisible, setIsMobileNavigationVisible] =
-    useState(false);
+   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setIsDataLoaded(true);
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    setIsMobileNavigationVisible(true);
+    setIsVisible(false);
+    localStorage.setItem("isLoggedIn", "true");
   };
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsVisible(false);
+    localStorage.setItem("isLoggedIn", "false");
+  };
+
   
 
   return (
@@ -94,12 +102,15 @@ function App() {
               element={<AddShoppingCategory />}
             />
             <Route path="/RecipesPage" element={<RecipesPage />} />
-            <Route path="/Logout" element={<Logout />} />
+            <Route
+              path="/Logout"
+              element={<Logout handleLogout={handleLogout} />}
+            />
           </Routes>
-          {isLoggedIn && isMobileNavigationVisible && (
+          {isLoggedIn && (
             <>
               <Navigation />
-              <SideBarNavigation />
+              <SideBarNavigation setIsVisible={setIsVisible} />
             </>
           )}
         </>

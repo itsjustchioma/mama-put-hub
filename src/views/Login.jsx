@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { account } from "../services/appwriteConfig";
-// import Homepage from "./Homepage";
 
-export default function Login() {
+export default function Login({ handleLogin }) {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -12,16 +12,33 @@ export default function Login() {
     password: "",
   });
 
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+
   const loginUser = async (e) => {
     e.preventDefault();
 
     try {
       await account.createEmailSession(user.email, user.password);
-      navigate("/profile");
+      handleLogin();
+      setIsSuccessModalOpen(true);
+      setTimeout(() => {
+        setIsSuccessModalOpen(false);
+        navigate("/onboarding");
+        console.log("Successful log in ");
+      }, 1000);
     } catch (error) {
-      console.log(error);
+      setIsErrorModalOpen(true);
+      setTimeout(() => {
+        setIsErrorModalOpen("");
+        console.log(error, "error");
+      }, 1000);
     }
   };
+
+  // setTimeout(() => {
+  //   setErrorMessage("");
+  // }, 1000);
 
   return (
     <div className=" bg-background-color h-[100vh]">
@@ -76,10 +93,10 @@ export default function Login() {
               />
 
               <div className="flex justify-between  items-center  flex-wrap">
-                <div>
+                {/* <div>
                   <input type="checkbox" id="checkbox" />
                   <label>I agree to the terms and conditions</label>
-                </div>
+                </div> */}
                 <button
                   className="relative bg-copper-orange py-3 px-6 text-white text-sm flex items-center my-4 w-32 overflow-hidden rounded-md"
                   onClick={loginUser}
@@ -119,6 +136,23 @@ export default function Login() {
           </div>
         </div>
       </div>
+
+      {isSuccessModalOpen && (
+        <div className="fixed z-10 inset-0 flex items-center justify-center">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <p className="text-green-500">Successfully logged in!</p>
+          </div>
+        </div>
+      )}
+      {isErrorModalOpen && (
+        <div className="fixed z-10 inset-0 flex items-center justify-center">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <p className="text-red-500">
+              Incorrect email/password. Please try again.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

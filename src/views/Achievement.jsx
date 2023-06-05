@@ -4,7 +4,8 @@ import AchievementAvatar from "../components/Achievement/AchievementAvatar";
 import AchievementBadges from "../components/Achievement/AchievementBadges";
 import BackArrow from "../components/BackClick/BackArrow";
 
-function Achievement() {
+// eslint-disable-next-line react/prop-types
+function Achievement({ handleLogin }) {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
