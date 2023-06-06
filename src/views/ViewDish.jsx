@@ -95,7 +95,7 @@ const ViewDish = () => {
                 className="h-full w-full object-scale-down"
               />
             </div>
-            <div className="overflow-scroll meda overscroll-contain -mt-3">
+            <div className="overflow-scroll meda overscroll-contain ">
               <div className="bg-copper-orange inset-0 p-4 overflow-y-auto overscroll-contain">
                 <h1 className="text-2xl text-center font-medium">
                   {dish.food_name}
