@@ -90,9 +90,9 @@ const ViewDish = () => {
           <div>
             <div className="h-72 md:h-[50vh]">
               <img
-                src={dish.imageURL}
+                src={dish.picture}
                 alt={dish.food_name}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-scale-down"
               />
             </div>
             <div className="overflow-scroll meda overscroll-contain -mt-3">

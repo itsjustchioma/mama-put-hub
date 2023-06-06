@@ -7,8 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { tags } from "../components/Tags";
 import IngredientForm from "../components/IngredientForm";
 import AllDone from "./AllDone";
-import { account } from "../services/appwriteConfig";
+import { account, storage } from "../services/appwriteConfig";
 import { createRecipe } from "../services/appwriteConfig";
+import { v4 as uuidv4 } from "uuid";
+
 
 
 const LevelTags = [
@@ -94,24 +96,12 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
 
 
 
-
 function NewRecipe() {
 
-  
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    picture: "",
-    name: "",
-    description: "",
-    level: "",
-    servings: 0,
-    type: "",
-    ingredients: [],
-    steps: [],
-    userId : "",
+  const [selectedPicture, setSelectedPicture] = useState(null);
 
-    
-  });
+  const [step, setStep] = useState(1);
+  
 
   useEffect(() => {
     account.get().then(
@@ -146,31 +136,32 @@ function NewRecipe() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-    const response = await createRecipe(formData);
-    console.log('Recipe created:', response);
-    // Handle any further actions or redirection after creating the recipe
-  } catch (error) {
-    console.error('Error creating recipe:', error);
-    // Handle the error appropriately
-  }
+  
+  
+    try {
+      const response = await createRecipe(formData);
+      console.log('Recipe created:', response);
+      // Handle any further actions or redirection after creating the recipe
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      // Handle the error appropriately
+    }
+  
     const totalTime = calculateTotalTime();
     const updatedSteps = formData.steps.map((step) => ({
       ...step,
       totalTime: step.time ? parseInt(step.time) : 0,
     }));
-
-
-    
+  
     setFormData((prevData) => ({
       ...prevData,
       steps: updatedSteps,
       totalTime: totalTime,
     }));
-    console.log("Form submitted:", formData);
     setStep((prevStep) => prevStep + 1);
     navigate("/AllDone");
   };
+  
 
   const handleIncrement = () => {
     setFormData((prevData) => ({
@@ -188,14 +179,60 @@ function NewRecipe() {
     }
   };
   
+  let picture= " ";
 
-  const handlePictureChange = (e) => {
-    const file = e.target.files[0];
+ const handlePictureChange = async (event) => {
+  const fileIm = event.target.files[0];
+  setSelectedPicture(URL.createObjectURL(fileIm));
+  console.log(fileIm);
+  const fileId = uuidv4(); // Generate a random UUID
+
+  const userId = account.get();
+
+  userId.then(function (response) {
+    console.log(response.$id);
+    console.log(userId);
+  }, function (error) {
+    console.log(error);
+  });
+
+  try {
+    // Upload the file to the storage
+    const newImage = await storage.createFile("647e6735532e8f214235", fileId, fileIm);
+    console.log(newImage);
+
+    console.log(newImage.URL);
+    const result = storage.listFiles('647e6735532e8f214235');
+console.log(result);
+
+const urlLink = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
+console.log(urlLink);
+
+setFormData((prevData) => ({
+  ...prevData,
+  picture: {
+    url: urlLink,
+  },
+}));
+picture = {
+  url: urlLink,
+};
+console.log(urlLink);
+
+   
+    // Update the formData with the new image
     setFormData((prevData) => ({
       ...prevData,
-      picture: file,
+      picture: urlLink,
     }));
-  };
+    // Handle the successful upload (e.g., update UI or trigger further actions)
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    // Handle the error (e.g., show an error message)
+  }
+};
+
+  
 
   const calculateTotalTime = () => {
     let totalTime = 0;
@@ -213,6 +250,43 @@ function NewRecipe() {
 
   const navigate = useNavigate();
 
+
+  const [image, setImage] = useState();
+  const uploadImage = async (e) => {
+    e.preventDefault();
+  
+    // Get the file input element
+    const fileInput = document.getElementById('picture');
+    const file = fileInput.files[0];
+  
+    if (file) {
+      try {
+        // Upload the file to the storage
+        const newImage = await storage.createFile("647e6735532e8f214235", userId, file);
+        console.log(newImage);
+        // Handle the successful upload (e.g., update UI or trigger further actions)
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        // Handle the error (e.g., show an error message)
+      }
+    } else {
+      console.log("No picture selected");
+    }
+  };
+  
+  const [formData, setFormData] = useState({
+    picture: "",
+    name: "",
+    description: "",
+    level: "",
+    servings: 0,
+    type: "",
+    ingredients: [],
+    steps: [],
+    userId : "",
+
+    
+  });
   
 
   return (
@@ -232,7 +306,7 @@ function NewRecipe() {
                 <div className="bg-pastel-blue h-[30vh] mx-auto rounded-lg my-auto">
                   {formData.picture ? (
                     <img
-                      src={URL.createObjectURL(formData.picture)}
+                      src={selectedPicture}
                       alt="Selected"
                       className="mx-auto h-full"
                     />
@@ -251,12 +325,14 @@ function NewRecipe() {
                   {" "}
                   Add an image <br />
                   <input
-                    type="file"
-                    id="picture"
-                    accept="image/*"
-                    onChange={handlePictureChange}
-                    className="border border-gray-300 rounded-md p-2 w-72 font-normal"
-                  />
+  type="file"
+  id="picture"
+  accept="image/*"
+  onChange={handlePictureChange}
+  className="border border-gray-300 rounded-md p-2 w-72 font-normal"
+/>
+
+
                 </label>
               </div>
               <label className="font-medium">
@@ -285,7 +361,7 @@ function NewRecipe() {
               </div>
               <br />
               <div onClick={handleNext}>
-                <Button title="Next Step" />
+                <Button   onClick={(e) => uploadImage(e)} title="Next Step" />
               </div>
             </form>
             <div className="text-center text-sm mt-4">Step 1</div>
@@ -437,7 +513,7 @@ function NewRecipe() {
             <div className="mb-4">
               {formData.picture && (
                 <img
-                  src={URL.createObjectURL(formData.picture)}
+                  src={selectedPicture}
                   alt="Selected"
                   className="max-w-xs rounded"
                 />

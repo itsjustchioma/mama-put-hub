@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Query } from "appwrite";
+import { Client, Account, Databases, Query, Storage } from "appwrite";
 import { ID } from "appwrite";
 import { v4 as uuidv4 } from "uuid";
 
@@ -9,6 +9,8 @@ client
   .setProject("64676cf547e8830694b8"); // Your project ID
 
 export const account = new Account(client);
+
+export const storage = new Storage(client);
 
 // Database≠
 export const databases = new Databases(client, "64773737337f23de254d");

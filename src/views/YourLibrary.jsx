@@ -231,7 +231,7 @@ export default function YourLibrary() {
                         />
                       </button>
                       <img
-                        src={item.imageURL}
+                        src={item.picture}
                         className="rounded-md h-full w-full  "
                         alt=""
                         onClick={() => {
@@ -265,7 +265,7 @@ export default function YourLibrary() {
           <motion.div className="inner-carousel flex justify-start  ">
             {createdrecipes.map((item, index) => (
               <motion.div className="item w-64 h-64" key={index}>
-                <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                <div className="w-64 h-64 object-scale-down p-4 pl-4 relative cursor-pointer top-0">
                   <button className="absolute right-5">
                     <img
                       src={fullBookmarkIcon}
@@ -274,7 +274,7 @@ export default function YourLibrary() {
                     />
                   </button>
                   <img
-                    src={item.imageURL}
+                    src={item.picture}
                     className="rounded-md h-full w-full"
                     alt=""
                     onClick={() => handleImageClicks(item, index)}

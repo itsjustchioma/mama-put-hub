@@ -17,13 +17,15 @@ export default function RecipesPage(props) {
   const [recipes, setRecipes] = useState([]);
   const [carouselItems, setCarouselItems] = useState([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [tags, setTags] = useState([]);
 
   const userId = account.get();
   const navigate = useNavigate();
 
   const handleTagClick = (tag) => {
+    setCurrentPage(1); // Reset current page to 1
+  
     let filteredRecipes = [];
-
     if (tag.name === "All") {
       // If "All" tag is selected, display all recipes
       filteredRecipes = recipes;
@@ -33,10 +35,15 @@ export default function RecipesPage(props) {
         recipe.tags.includes(tag.name)
       );
     }
-
+  
+    // If "All" tag is selected, include all tags
+    const updatedTags = tag.name === "All" ? [] : [tag];
+  
     setRecipes(filteredRecipes);
     setCurrentPage(1); // Reset current page to 1
+    setTags(updatedTags);
   };
+  
 
   const handleBookMarkClick = async (index) => {
     try {
@@ -113,24 +120,41 @@ export default function RecipesPage(props) {
 
   const getTagsForRecipe = (recipe) => {
     const tags = [];
-
-    if (recipe.type && recipe.type.includes("Dessert")) {
-      tags.push("Dessert");
-    }
+  
     if (recipe.type && recipe.type.includes("Breakfast")) {
       tags.push("Breakfast");
+    }
+    if (recipe.type && recipe.type.includes("Brunch")) {
+      tags.push("Brunch");
     }
     if (recipe.type && recipe.type.includes("Lunch")) {
       tags.push("Lunch");
     }
+    if (recipe.type && recipe.type.includes("Dinner")) {
+      tags.push("Dinner");
+    }
+    if (recipe.type && recipe.type.includes("Snacks")) {
+      tags.push("Snacks");
+    }
+    if (recipe.type && recipe.type.includes("Appetizers")) {
+      tags.push("Appetizers");
+    }
     if (recipe.type && recipe.type.includes("Salad")) {
       tags.push("Salad");
     }
-    // Add more conditions for other tags
-
+    if (recipe.type && recipe.type.includes("Soups")) {
+      tags.push("Soups");
+    }
+    if (recipe.type && recipe.type.includes("Pasta and Noodles")) {
+      tags.push("Pasta and Noodles");
+    }
+    if (recipe.type && recipe.type.includes("Dessert")) {
+      tags.push("Dessert");
+    }
+  
     // If you want to include all as a tag
     tags.push("All");
-
+  
     return tags;
   };
 
@@ -173,7 +197,7 @@ export default function RecipesPage(props) {
                   />
                 </button>
                 <img
-                  src={recipe.imageURL}
+                  src={recipe.picture}
                   className="rounded-md bg-slate-200 h-full w-full"
                   alt=""
                   onClick={() => handleImageClick(recipe, index)}

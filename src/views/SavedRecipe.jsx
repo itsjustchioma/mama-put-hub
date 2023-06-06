@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow";
 import Modal from "../components/Modal";
-import { databases } from "../services/appwriteConfig";
+import { databases, account } from "../services/appwriteConfig";
 
 function SavedRecipe() {
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ function SavedRecipe() {
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [categoryInfo, setCategoryInfo] = useState(null);
+  const user= account.get();
+
   useEffect(() => {
     const fetchCategoryInfo = async () => {
       try {
