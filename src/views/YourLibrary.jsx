@@ -169,7 +169,7 @@ export default function YourLibrary() {
                       />
                     </button>
                     <img
-                      src={item.imageURL}
+                      src={item.picture}
                       className="rounded-md h-full w-full"
                       alt=""
                       onClick={() => handleImageClick(item, index)}

@@ -70,6 +70,7 @@ export default function RecipesPage(props) {
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,
+        picture : recipe.picture,
       });
   
       console.log("Recipe saved:", savedRecipe);
