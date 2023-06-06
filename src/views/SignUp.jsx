@@ -44,7 +44,7 @@ export default function SignUp({ handleLogin }) {
       setTimeout(() => {
         setSuccessMessage("");
         handleLogin(); // Call the handleLogin function
-        navigate("/onboarding");
+        navigate("/login");
       }, 1000);
     } catch (error) {
       setErrorMessage("The email already exists in the database.");
@@ -178,7 +178,7 @@ export default function SignUp({ handleLogin }) {
                 className="border-2 text-sm py-3 my-4  rounded-lg border-laurel-green text-center"
               >
                 <button className="text-laurel-green">
-                  Already have an account? Log in
+                  Already have an account? Log in.
                 </button>
               </Link>
             </form>

@@ -24,7 +24,7 @@ export default function Login({ handleLogin }) {
       setIsSuccessModalOpen(true);
       setTimeout(() => {
         setIsSuccessModalOpen(false);
-        navigate("/home");
+        navigate("/onboarding");
         console.log("Successful log in ");
       }, 1000);
     } catch (error) {

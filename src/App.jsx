@@ -49,14 +49,12 @@ function App() {
   const handleLogin = () => {
     setIsLoggedIn(true);
     setIsVisible(false);
-    console.log("Logged In ....");
     localStorage.setItem("isLoggedIn", "true");
   };
   const handleLogout = () => {
     setIsLoggedIn(false);
     setIsVisible(false);
     localStorage.setItem("isLoggedIn", "false");
-    console.log("Logged Out .....");
   };
 
   
