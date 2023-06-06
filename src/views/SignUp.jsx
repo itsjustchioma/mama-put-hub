@@ -44,7 +44,7 @@ export default function SignUp({ handleLogin }) {
       setTimeout(() => {
         setSuccessMessage("");
         handleLogin(); // Call the handleLogin function
-        navigate("/login");
+        navigate("/onboarding");
       }, 1000);
     } catch (error) {
       setErrorMessage("The email already exists in the database.");

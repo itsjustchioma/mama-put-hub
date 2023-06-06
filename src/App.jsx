@@ -37,7 +37,7 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-   const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,8 +56,6 @@ function App() {
     setIsVisible(false);
     localStorage.setItem("isLoggedIn", "false");
   };
-
-  
 
   return (
     <Router>
