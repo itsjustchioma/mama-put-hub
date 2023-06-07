@@ -80,7 +80,7 @@ promise.then(function (response) {
       </div>
       <div className="flex flex-wrap justify-center">
         <img
-          src={img}
+          src={categoryInfo.picture}
           alt="image"
           className="h-72 md:h-[60vh] w-72 md:w-[60vh] object-cover rounded-xl dark:bg-gray-500 dark:border-gray-700 p-1"
         />

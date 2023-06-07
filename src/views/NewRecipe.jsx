@@ -499,14 +499,20 @@ console.log(urlLink);
             <ul>
               {formData.steps.map((step, index) => (
                 <li key={index}>
-                  {step.name}: {step.time} <b>minutes</b>
+                  {step}
                 </li>
               ))}
             </ul>
-
-            <p className="mb-2">
-              <b> Estimated Time:</b> {calculateTotalTime()} <b>minutes</b>
+            <p className="mb-2 ">
+              <b>Ingredients:</b>
             </p>
+            <ul>
+              {formData.ingredients.map((step, index) => (
+                <li key={index}>
+                  {step}
+                </li>
+              ))}
+            </ul>
 
             <br />
 

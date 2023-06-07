@@ -75,7 +75,7 @@ function ShoppingCategory() {
           <div className="flex flex-wrap items-center">
             <div>
               <img
-                src={category.image}
+                src={category.picture}
                 alt="Category"
                 className="w-14 h-14 rounded-lg dark:bg-gray-500 dark:border-gray-700 p-1 md:w-24 md:h-24 md:ml-6 ml-4"
               />

@@ -23,22 +23,22 @@ export const databases = new Databases(client, "64773737337f23de254d");
 //     console.log(error); // Failure
 // });
 
-let promise = databases.listDocuments(
-  "64773737337f23de254d",
-  "647905d239ca167a89f1",
-  [
-    // Query.equal('food_name')
-  ]
-);
+// let promise = databases.listDocuments(
+//   "64773737337f23de254d",
+//   "647905d239ca167a89f1",
+//   [
+//     // Query.equal('food_name')
+//   ]
+// );
 
-promise.then(
-  function (response) {
-    console.log(response);
-  },
-  function (error) {
-    console.log(error);
-  }
-);
+// promise.then(
+//   function (response) {
+//     console.log(response);
+//   },
+//   function (error) {
+//     console.log(error);
+//   }
+// );
 
  export const userId = account.get();
 

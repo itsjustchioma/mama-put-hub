@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingArray } from "../components/Shopping/ShoppingCategoryArray.js";
 import BackArrow from "../components/BackClick/BackArrow.jsx";
-import { account, databases } from "../services/appwriteConfig.js";
+import { account, databases, storage } from "../services/appwriteConfig.js";
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -12,6 +12,8 @@ const AddShoppingCategory = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedColor, setSelectedColor] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
+  const [selectedPicture, setSelectedPicture] = useState(null);
+
 
 const handleBackClick = () => {
   navigate("/Shopping");
@@ -76,16 +78,23 @@ const handleBackClick = () => {
   }, function (error) {
       console.log(error);
   });
-  const handleSaveCategory = async () => {
-    const documentId = uuidv4(); // Generate a random UUID
+  const handleSaveCategory = async (event) => {
+    // Other code...
+  
+    const fileInput = document.getElementById('imageUpload');
+    const file = fileInput.files[0];
+    const fileId = uuidv4(); // Generate a random UUID
+  
+    const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
+    const imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
+
   
     const newCategory = {
       userId: (await userId).$id,
       category_name: categoryName,
-      image: selectedImage ? URL.createObjectURL(selectedImage) : "",
+      picture: imageUrl, // Use the image URL in the newCategory object
       color: selectedColor,
       ingredients: ingredientList,
-      
     };
   
     console.log("New Category:", newCategory); // Log the new category object
@@ -117,10 +126,8 @@ const handleBackClick = () => {
       console.error('Error creating recipe:', error);
       throw error;
     }
-  
-    // Redirect back to the Shopping component or any other route you prefer
-  
   };
+  
   
   
   
