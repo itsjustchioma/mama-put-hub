@@ -26,6 +26,7 @@ import RecipesPage from "./views/RecipesPage";
 import AddShoppingCategory from "./views/AddShoppingCategory";
 import LoadingIndicator from "./components/LoadingIndicator";
 import { useNavigate } from "react-router-dom";
+import ForgotPasswordPage from "./views/ForgotPasswordPage";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -37,7 +38,7 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-   const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,8 +57,6 @@ function App() {
     setIsVisible(false);
     localStorage.setItem("isLoggedIn", "false");
   };
-
-  
 
   return (
     <Router>
@@ -92,6 +91,10 @@ function App() {
             <Route path="/ViewDish/:id" element={<ViewDish />} />
             <Route path="/RecipeDirection/:id" element={<RecipeDirection />} />
             <Route path="/CommentSection" element={<CommentSection />} />
+            <Route
+              path="/ForgotPasswordPage"
+              element={<ForgotPasswordPage />}
+            />
             <Route
               path="/SavedRecipe/:category"
               element={<SavedRecipe closeModal={closeModal} />}

@@ -16,7 +16,9 @@ export default function ImageCarouselFrame(props) {
 
   const handleImageClick = (index) => {
     const selectedDish = carouselItems[index];
-    navigate(`/ViewDish/${index}`, { state: { dish: selectedDish, array: carouselItems } });
+    navigate(`/ViewDish/${index}`, {
+      state: { dish: selectedDish, array: carouselItems },
+    });
   };
 
   useEffect(() => {
@@ -39,12 +41,15 @@ export default function ImageCarouselFrame(props) {
 
   const userId = account.get();
 
-  userId.then(function (response) {
-    console.log(response);
-    console.log(response.$id);
-  }, function (error) {
-    console.log(error);
-  });
+  userId.then(
+    function (response) {
+      console.log(response);
+      console.log(response.$id);
+    },
+    function (error) {
+      console.log(error);
+    }
+  );
 
   const handleBookMarkClick = async (index) => {
     try {
@@ -119,11 +124,7 @@ export default function ImageCarouselFrame(props) {
                         {item.food_name}
                       </h5>
                       <p className="flex items-center text-[14px]">
-                        <img
-                          src={starRating}
-                          className="w-4 f"
-                          alt="rating"
-                        />
+                        <img src={starRating} className="w-4 f" alt="rating" />
                         {item.rating}
                       </p>
                       <p className="text-[14px]">{item.type}</p>
@@ -137,7 +138,7 @@ export default function ImageCarouselFrame(props) {
       </div>
       <Link to={"/RecipesPage"}>
         <button className="-mt-4 mb-5 ml-4 bg-laurel-green p-2 text-[10px] rounded-full">
-          view more
+          View More
         </button>
       </Link>
 

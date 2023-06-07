@@ -121,12 +121,12 @@ export default function Login({ handleLogin }) {
                 </button>
               </div>
 
-              <a
+              <Link
                 className="text-copper-orange text-center text-sm my-4"
-                href="#"
+                to="/forgotpasswordpage"
               >
                 Forgot password?
-              </a>
+              </Link>
               <Link to="/">
                 <p className="text-text-grey text-center text-sm my-4 underline">
                   Don't have an account? Sign Up.
