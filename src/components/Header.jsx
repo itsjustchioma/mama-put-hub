@@ -90,11 +90,11 @@ export default function Header({ showNotification }) {
                 value={searchText}
                 onChange={handleInputChange}
               />
-              {searchText && (
+              {/* {searchText && (
                 <span className="cursor-pointer" onClick={clearInput}>
                   &#x2716;
                 </span>
-              )}
+              )} */}
             </div>
             <button
               type="submit"

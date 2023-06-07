@@ -1,51 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import starRating from "/assets/preference.png";
 import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { useNavigate } from "react-router-dom";
 import Tags from "../components/Tags";
 import Header from "../components/Header";
 import { databases, account } from "../services/appwriteConfig";
-import RecipeDirection from "./RecipeDirection";
-import { v4 as uuidv4 } from "uuid";
 import { saveBookmark } from "../services/appwriteConfig";
 
 export default function RecipesPage(props) {
- const [bookmarkStatus, setBookmarkStatus] = useState([]);
- const [currentPage, setCurrentPage] = useState(1);
- const [recipes, setRecipes] = useState([]);
- const [carouselItems, setCarouselItems] = useState([]);
- const [showSuccessModal, setShowSuccessModal] = useState(false);
- const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState(null); 
-
+  const [bookmarkStatus, setBookmarkStatus] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipes, setRecipes] = useState([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState(null);
 
   const userId = account.get();
   const navigate = useNavigate();
 
-const handleTagClick = (tag) => {
-  setCurrentPage(1); // Reset current page to 1
+  const handleTagClick = (tag) => {
+    setCurrentPage(1); // Reset current page to 1
 
-  let filteredRecipes = [];
-  if (tag.name === "All") {
-    // If "All" tag is selected, display all recipes
-    filteredRecipes = recipes;
-  } else {
-    // Filter recipes based on the selected tag
-    filteredRecipes = recipes.filter((recipe) =>
-      recipe.tags.includes(tag.name)
-    );
-  }
+    let filteredRecipes = [];
+    if (tag.name === "All") {
+      // If "All" tag is selected, display all recipes
+      filteredRecipes = recipes;
+    } else {
+      // Filter recipes based on the selected tag
+      filteredRecipes = recipes.filter((recipe) =>
+        recipe.type.includes(tag.name)
+      );
+    }
 
-  setRecipes(filteredRecipes);
-  setActiveTag(tag); // Update the active tag
-
-  // Optional: Log the clicked tag name
-  console.log("Clicked tag:", tag.name);
-};
-
-  
+    setRecipes(filteredRecipes);
+    setActiveTag(tag); // Update the active tag
+  };
 
   const handleBookMarkClick = async (index) => {
     try {
@@ -55,10 +45,10 @@ const handleTagClick = (tag) => {
         "647b9e24d59661e7bfbe",
         recipe.$id
       );
-  
+
       const username = recipeDocument.username;
       console.log(username);
-  
+
       const savedRecipe = await saveBookmark({
         userId: (await userId).$id,
         level: recipe.level,
@@ -72,12 +62,12 @@ const handleTagClick = (tag) => {
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,
-        picture : recipe.picture,
+        picture: recipe.picture,
       });
-  
+
       console.log("Recipe saved:", savedRecipe);
       setShowSuccessModal(true);
-  
+
       // Hide the success modal after 2 seconds
       setTimeout(() => {
         setShowSuccessModal(false);
@@ -87,7 +77,6 @@ const handleTagClick = (tag) => {
       console.error("Error saving recipe:", error);
     }
   };
-  
 
   const handleImageClick = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {
@@ -123,7 +112,7 @@ const handleTagClick = (tag) => {
 
   const getTagsForRecipe = (recipe) => {
     const tags = [];
-  
+
     if (recipe.type && recipe.type.includes("Breakfast")) {
       tags.push("Breakfast");
     }
@@ -154,10 +143,10 @@ const handleTagClick = (tag) => {
     if (recipe.type && recipe.type.includes("Dessert")) {
       tags.push("Dessert");
     }
-  
+
     // If you want to include all as a tag
     tags.push("All");
-  
+
     return tags;
   };
 
@@ -216,6 +205,10 @@ const handleTagClick = (tag) => {
                       {recipe.rating}
                     </p>
                     <p className="text-[14px]">{recipe.type}</p>
+                    <p className="text-[14px]">
+                      {recipe.time ? recipe.time.toString().slice(0, 17) : ""}
+                    </p>
+                    <p className="text-[14px]">{recipe.servings}</p>
                   </div>
                 </Link>
               </div>
@@ -224,26 +217,26 @@ const handleTagClick = (tag) => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-4 mb-24">
-        {currentPage > 1 && (
-          <button className="mx-2" onClick={goToPreviousPage}>
-            Previous
-          </button>
-        )}
-        {currentPage < totalPages && (
-          <button className="mx-2" onClick={goToNextPage}>
-            Next
-          </button>
-        )}
+      <div className="flex justify-center mt-6">
+        <button
+          className={`px-4 py-2 rounded-md ${
+            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={currentPage === 1}
+          onClick={goToPreviousPage}
+        >
+          Previous
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${
+            currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={currentPage === totalPages}
+          onClick={goToNextPage}
+        >
+          Next
+        </button>
       </div>
-
-      {showSuccessModal && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-4">
-            <p className="text-green-500 font-semibold">Recipe bookmarked!</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
