@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import homeBackground from "/assets/homeBackground.svg";
 
 function WelcomeFrame() {
@@ -9,13 +9,19 @@ function WelcomeFrame() {
         alt=""
         className="md:h-[30%] md:w-[60%] animate-fadeIn"
       />
-      <div className="animate-fadeIn">
-        <h1 className="text-6xl">Welcome ooo!!</h1>
-        <span className="text-2xl">You don come MaMaPutHub</span>
-        <p className="text-lg">where you fit find ogbonge food recipes!!</p>
+      <div className="animate-fadeIn text-center">
+        <h1 className="text-4xl font-bold">Welcome to Mamaput Hub!</h1>
+        <span className="text-lg italic text-copper-orange">
+          The ultimate destination for food lovers of all kinds.
+        </span>
+        <br /> <br />
+        <p className="text-normal">
+          Discover, share, and collaborate on delicious recipes with fellow food
+          enthusiasts, and let your taste buds embark on a flavorful journey.
+        </p>
       </div>
     </div>
   );
 }
 
-export default WelcomeFrame
+export default WelcomeFrame;

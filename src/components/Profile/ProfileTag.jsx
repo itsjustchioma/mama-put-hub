@@ -24,7 +24,8 @@ function ProfileTag() {
     <>
     {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
       <img
-        src={userDetails.name}
+        // src={userDetails.name}
+        src="/assets/user.png"
         alt="userimage"
         className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
       />

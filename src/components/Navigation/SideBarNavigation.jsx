@@ -58,7 +58,7 @@ const SideBarNavigation = () => {
           isVisible ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="font-bold text-center mt-5 text-lg">MamaPutHub</div>
+        <div className="font-bold text-center mt-5 text-lg">Mamaput Hub</div>
         <div className="p-2.5 mt-2">
           <div>
             <form action="">

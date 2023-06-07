@@ -106,7 +106,7 @@ export default function Header({ showNotification }) {
         </>
       )}
       <div className="flex items-center">
-        <span className="text-lg">
+        {/* <span className="text-lg">
           <img
             src={bell}
             className="w-6 mr-4 cursor-pointer"
@@ -126,7 +126,7 @@ export default function Header({ showNotification }) {
               ))}
             </div>
           )}
-        </span>
+        </span> */}
         <span
           className="text-lg FilterModalBtn"
           onClick={() => {
