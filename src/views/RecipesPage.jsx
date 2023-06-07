@@ -12,13 +12,13 @@ import { v4 as uuidv4 } from "uuid";
 import { saveBookmark } from "../services/appwriteConfig";
 
 export default function RecipesPage(props) {
-  const [bookmarkStatus, setBookmarkStatus] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recipes, setRecipes] = useState([]);
-  const [carouselItems, setCarouselItems] = useState([]);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState(null);
+ const [bookmarkStatus, setBookmarkStatus] = useState([]);
+ const [currentPage, setCurrentPage] = useState(1);
+ const [recipes, setRecipes] = useState([]);
+ const [carouselItems, setCarouselItems] = useState([]);
+ const [showSuccessModal, setShowSuccessModal] = useState(false);
+ const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState(null); 
 
 
   const userId = account.get();
@@ -38,14 +38,13 @@ const handleTagClick = (tag) => {
     );
   }
 
-  // If "All" tag is selected, include all tags
-  const updatedTags = tag.name === "All" ? [] : [tag];
-
   setRecipes(filteredRecipes);
-  setCurrentPage(1); // Reset current page to 1
-  setTags(updatedTags);
   setActiveTag(tag); // Update the active tag
+
+  // Optional: Log the clicked tag name
+  console.log("Clicked tag:", tag.name);
 };
+
   
 
   const handleBookMarkClick = async (index) => {
@@ -180,7 +179,7 @@ const handleTagClick = (tag) => {
   return (
     <div className="w-[90%] mx-auto h-[90vh] overflow-scroll no-scrollbar">
       <Header />
-      <Tags onTagClick={handleTagClick} />
+      <Tags activeTag={activeTag} onTagClick={handleTagClick} />
       <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
 
       <h1 className="text-xl font-semibold">{props.title}</h1>
@@ -195,7 +194,11 @@ const handleTagClick = (tag) => {
                   onClick={() => handleBookMarkClick(index)}
                 >
                   <img
-                    src={bookmarkStatus[index] ? fullBookmarkIcon : emptyBookmarkIcon}
+                    src={
+                      bookmarkStatus[index]
+                        ? fullBookmarkIcon
+                        : emptyBookmarkIcon
+                    }
                     className="w-5 my-2"
                     alt="bookmark"
                   />

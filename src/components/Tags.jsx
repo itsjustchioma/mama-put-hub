@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const tags = [
   { name: "Breakfast" },
@@ -15,11 +15,8 @@ export const tags = [
   { name: "All" },
 ];
 
-export default function Tags({ onTagClick }) {
-  const [activeTag, setActiveTag] = useState(null);
-
+export default function Tags({ activeTag, onTagClick }) {
   const handleTagClick = (tag) => {
-    setActiveTag(tag);
     onTagClick(tag);
   };
 
