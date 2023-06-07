@@ -7,9 +7,7 @@ import ProfileOptions from "../components/Profile/ProfileOptions";
 function Profile() {
   return (
     <div className="bg-background-color h-[95vh] w-5\6 md:h-[100vh] m-auto">
-      <Header />
       <div className="w-10/12 mx-auto">
-        <h1 className="text-2xl font-semibold">Profile</h1>
         <ProfileTag />
         <AchievementTag />
         <ProfileOptions />
