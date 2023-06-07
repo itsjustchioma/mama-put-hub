@@ -1,7 +1,7 @@
 export const Menus = [
   {
     name: "Home",
-    icon: "/assets/search.png",
+    icon: "/assets/home.png",
     dis: "translate-x-0",
     path: "/Home",
     colorName: "pastel-blue",
