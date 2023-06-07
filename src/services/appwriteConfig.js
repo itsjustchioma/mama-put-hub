@@ -9,6 +9,9 @@ client
   .setProject("64676cf547e8830694b8"); // Your project ID
 
 export const account = new Account(client);
+// const account = new Account(client);
+
+
 
 export const storage = new Storage(client);
 
@@ -121,7 +124,6 @@ export const createRecipe = async (formData) => {
 
 
 
-// const account = new Account(client);
 
 // Register User
 // createAccount: (email, password, name) => {

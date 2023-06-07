@@ -330,6 +330,7 @@ console.log(urlLink);
   accept="image/*"
   onChange={handlePictureChange}
   className="border border-gray-300 rounded-md p-2 w-72 font-normal"
+  required
 />
 
 
@@ -344,11 +345,12 @@ console.log(urlLink);
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  required
                 />
               </label>
               <div>
                 <br />
-                <label className="font-medium">
+                <label className="font-medium" required>
                   Servings: <br />
                   <button type="button" onClick={handleDecrement}>
                     -
@@ -382,6 +384,7 @@ console.log(urlLink);
                   value={formData.description}
                   onChange={handleChange}
                   className="border border-gray-300 rounded-md p-2 font-normal  w-72"
+                  required
                 />
               </label>
               <br /> <br />
