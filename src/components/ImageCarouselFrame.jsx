@@ -21,6 +21,9 @@ export default function ImageCarouselFrame(props) {
     });
   };
 
+
+  
+
   useEffect(() => {
     let promise = databases.listDocuments(
       "64773737337f23de254d",
@@ -60,13 +63,13 @@ export default function ImageCarouselFrame(props) {
         userId: (await userId).$id,
         level: recipe.level,
         type: recipe.type,
-        food_name: recipe.food_name,
-        time: recipe.time.toString().slice(0, 17),
+        name: recipe.name,
         servings: recipe.servings,
-        author: recipe.author,
+        username: recipe.username,
         steps: recipe.steps,
-        rating: recipe.rating.toString().slice(0, 11),
+        description: recipe.description,
         ingredients: recipe.ingredients,
+        picture: recipe.picture,
       });
 
       console.log("Recipe saved:", savedRecipe);
@@ -121,12 +124,9 @@ export default function ImageCarouselFrame(props) {
                   <Link to={`/ViewDish/${index}`}>
                     <div className=" mt-2 ">
                       <h5 className="text-[14px] font-semibold">
-                        {item.food_name}
+                        {item.name}
                       </h5>
-                      <p className="flex items-center text-[14px]">
-                        <img src={starRating} className="w-4 f" alt="rating" />
-                        {item.rating}
-                      </p>
+                    
                       <p className="text-[14px]">{item.type}</p>
                     </div>
                   </Link>

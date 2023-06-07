@@ -155,7 +155,7 @@ export default function RecipesPage(props) {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const displayedRecipes = recipes.slice(startIndex, endIndex);
+const displayedRecipes = recipes.slice(startIndex, endIndex);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -164,6 +164,8 @@ export default function RecipesPage(props) {
   const goToNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  console.log(displayedRecipes);
 
   return (
     <div className="w-[90%] mx-auto h-[90vh] overflow-scroll no-scrollbar">
