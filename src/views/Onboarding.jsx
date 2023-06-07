@@ -69,7 +69,7 @@ const Step1 = ({ onNext }) => {
       </p>
       <button
         onClick={onNext}
-        className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
+        className="p-4 w-40  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
       >
         Next
       </button>
@@ -108,13 +108,13 @@ const Step2 = ({ onNext, onPrevious }) => {
       <form>{/* Form fields */}</form>
       <button
         onClick={onPrevious}
-        className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4 mr-4"
+        className="p-4  w-40 justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4 mr-4"
       >
         Previous
       </button>
       <button
         onClick={onNext}
-        className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
+        className="p-4  w-40 justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
       >
         Next
       </button>
@@ -151,7 +151,7 @@ const Step3 = ({ onPrevious }) => {
       <Link to={"/home"}>
         <button
           // onClick={onPrevious}
-          className="p-4  justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
+          className="p-4  w-40 justify-center m-auto  rounded-xl  bg-pastel-blue  mt-4"
         >
           Let's get started
         </button>
