@@ -91,11 +91,11 @@ const Step2 = ({ onNext, onPrevious }) => {
         alt=""
       />
 
-      <img
+      {/* <img
         src={apron}
         className="w-14 translate-y-80 translate-x-64 md:translate-y-96"
         alt=""
-      />
+      /> */}
       <h2>Step 2</h2>
       <h1 className="text-5xl">Shopping List </h1>
 

@@ -65,6 +65,12 @@ export default function ImageCarouselFrame(props) {
       });
 
       console.log("Recipe saved:", savedRecipe);
+
+      // Toggle the bookmark status
+      const updatedBookmarkStatus = [...bookmarkStatus];
+      updatedBookmarkStatus[index] = !updatedBookmarkStatus[index];
+      setBookmarkStatus(updatedBookmarkStatus);
+
       setShowModal(true);
 
       setTimeout(() => {
@@ -74,6 +80,10 @@ export default function ImageCarouselFrame(props) {
       console.error("Error saving recipe:", error);
     }
   };
+
+  // const bookmarkMessage = bookmarkStatus[index]
+  //   ? "Recipe saved!"
+  //   : "Recipe unsaved";
 
   return (
     <div className="">

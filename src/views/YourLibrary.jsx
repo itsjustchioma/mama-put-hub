@@ -154,7 +154,7 @@ export default function YourLibrary() {
         <Header />
         <h1 className="text-xl font-semibold">Saved Recipes</h1>
         {carouselItems.length === 0 ? (
-          <p>No saved recipes</p>
+          <p className="text-copper-orange">You haven't saved any recipe.</p>
         ) : (
           <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
             <motion.div className="inner-carousel flex justify-start">
@@ -197,7 +197,7 @@ export default function YourLibrary() {
           </motion.div>
         )}
 
-        <h1 className="text-xl font-semibold">My Recipes</h1>
+        <h1 className="text-xl font-semibold pt-8">My Recipes</h1>
         <motion.div className="carousel overflow-scroll no-scrollbar m-auto h-80 mb-">
           <motion.div className="inner-carousel flex justify-start  ">
             {CarouselISavedRecipe.CarouselISavedRecipe.map((item, index) => (

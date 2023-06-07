@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow";
-import Modal from "../components/Modal";
+import Modal from "../components/Modals/Modal";
 import { databases, account } from "../services/appwriteConfig";
 
 function SavedRecipe() {

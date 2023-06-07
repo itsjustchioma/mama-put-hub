@@ -18,31 +18,34 @@ export default function RecipesPage(props) {
   const [carouselItems, setCarouselItems] = useState([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState(null);
+
 
   const userId = account.get();
   const navigate = useNavigate();
 
-  const handleTagClick = (tag) => {
-    setCurrentPage(1); // Reset current page to 1
-  
-    let filteredRecipes = [];
-    if (tag.name === "All") {
-      // If "All" tag is selected, display all recipes
-      filteredRecipes = recipes;
-    } else {
-      // Filter recipes based on the selected tag
-      filteredRecipes = recipes.filter((recipe) =>
-        recipe.tags.includes(tag.name)
-      );
-    }
-  
-    // If "All" tag is selected, include all tags
-    const updatedTags = tag.name === "All" ? [] : [tag];
-  
-    setRecipes(filteredRecipes);
-    setCurrentPage(1); // Reset current page to 1
-    setTags(updatedTags);
-  };
+const handleTagClick = (tag) => {
+  setCurrentPage(1); // Reset current page to 1
+
+  let filteredRecipes = [];
+  if (tag.name === "All") {
+    // If "All" tag is selected, display all recipes
+    filteredRecipes = recipes;
+  } else {
+    // Filter recipes based on the selected tag
+    filteredRecipes = recipes.filter((recipe) =>
+      recipe.tags.includes(tag.name)
+    );
+  }
+
+  // If "All" tag is selected, include all tags
+  const updatedTags = tag.name === "All" ? [] : [tag];
+
+  setRecipes(filteredRecipes);
+  setCurrentPage(1); // Reset current page to 1
+  setTags(updatedTags);
+  setActiveTag(tag); // Update the active tag
+};
   
 
   const handleBookMarkClick = async (index) => {

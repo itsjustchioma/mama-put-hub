@@ -22,7 +22,7 @@ function ProfileTag() {
   }, [])
   return (
     <>
-            <h1 className="text-xl  font-semibold pt-20 pl-8">Profile</h1>
+            <h1 className="text-xl  font-semibold pt-12 pl-8">Profile</h1>
 
     {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
       <img
