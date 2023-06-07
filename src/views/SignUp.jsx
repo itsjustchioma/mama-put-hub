@@ -73,7 +73,7 @@ export default function SignUp({ handleLogin }) {
         </h1>
         <p className="text-text-grey text-center">
           To stay connected with us, please sign up with your personal
-          info.
+          info
         </p>
       </div>
 
