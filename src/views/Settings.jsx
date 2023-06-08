@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { saveProfile } from '../services/appwriteConfig';
-import { account } from '../services/appwriteConfig';
+import { account,storage, databases } from '../services/appwriteConfig';
 
 import BackArrow from '../components/BackClick/BackArrow';
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +14,10 @@ function Settings() {
   const [Bio, setBio] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedPicture, setSelectedPicture] = useState(null);
+  const [documentID, setDocumentID] = useState(null);
+  
+  const navigate = useNavigate();
+
 
 
   const handlePhotoChange = (event) => {
@@ -48,52 +52,115 @@ function Settings() {
 
  let imageUrl;
 
-   const handleSubmit = async (event) => {
-    event.preventDefault();
+ 
 
-    const fileInput = document.getElementById('imageUpload');
-    const file = fileInput.files[0];
-  
-    if (file) {
-      setSelectedPicture(URL.createObjectURL(file));
-      const fileId = uuidv4(); // Generate a random UUID
-  
-    const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
-     imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
-
-  } else {
-    // Handle the case when no file is selected
-    console.log('Please select an image file');
-  }
-
+ useEffect(() => {
+  const fetchSavedRecipes = async () => {
     try {
-      const profileData = {
-        userId: (await userId).$id,
+      const response = await databases.listDocuments(
+        "64773737337f23de254d",
+        "647b7649a8bd0a7073be",
+        []
+      );
+      console.log(response);
 
-        photo: imageUrl,
-        password: password,
-        confirmPassword: confirmPassword,
-        email: email,
-        bio: Bio,
-      };
+      // Find the document with the current user ID
+      const currentUserID = (await userId).$id;
+      const foundDocument = response.documents.find(doc => doc.userId === currentUserID);
+        setDocumentID(foundDocument);
 
-      const savedProfile = await saveProfile(profileData);
-      console.log("Profile saved:", savedProfile);
-      // Optionally, you can do something with the saved profile, such as displaying a success message
 
-      // Reset form fields
-      setPhoto('');
-      setPassword('');
-      setConfirmPassword('');
-      setEmail('');
-      setBio('');
+      if (foundDocument) {
+        // Get the document ID from the found document and store it in the state variable
+        const documentId = foundDocument.$id;
+        console.log(documentId);
+        setDocumentID(documentId);
+      } else {
+        // No document found for the current user, handle accordingly
+        console.log("No document found for the current user");
+      }
     } catch (error) {
-      // Handle the error, such as displaying an error message
-      console.error("Error saving profile:", error);
+      console.log(error);
     }
   };
 
-  const navigate = useNavigate();
+  fetchSavedRecipes();
+}, []);
+
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('imageUpload');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    console.log('Please select an image file');
+    return;
+  }
+
+  setSelectedPicture(URL.createObjectURL(file));
+  const fileId = uuidv4(); // Generate a random UUID
+
+  const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
+  const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
+
+  try {
+    const profileData = {
+      userId: (await userId).$id,
+      photo: imageUrl,
+      email: email,
+      bio: Bio,
+    };
+
+    console.log(documentID);
+
+    // Call the UpdateProfile component and pass the profile data
+    const updatedProfile = await UpdateProfile(profileData);
+    console.log("Profile updated:", updatedProfile);
+    navigate("/myprofile");
+
+
+    // Reset form fields
+    setPhoto('');
+    setPassword('');
+    setConfirmPassword('');
+    setEmail('');
+    setBio('');
+  } catch (error) {
+    // Handle the error, such as displaying an error message
+    console.error("Error saving/updating profile:", error);
+  }
+};
+
+
+
+
+const UpdateProfile = async (profileData) => {
+  try {
+    console.log("Profile:", profileData);
+    console.log("Document ID:", documentID); // Log the document ID
+
+    // Save the profile data to the database or update the existing profile
+    const savedProfile = await databases.updateDocument(
+      "64773737337f23de254d",
+      "647b7649a8bd0a7073be",
+      documentID,
+       profileData ,
+    );
+    console.log("Saved Profile:", savedProfile);
+        navigate("/myprofile");
+
+    return savedProfile;
+    
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+
+
+
 
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
@@ -160,7 +227,7 @@ function Settings() {
               type="file"
               id="imageUpload"
               accept="image/*"
-              className="hidden"
+              className=""
               onChange={handlePhotoChange}
             />
           </label>
