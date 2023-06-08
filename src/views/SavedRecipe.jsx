@@ -11,28 +11,31 @@ function SavedRecipe() {
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [categoryInfo, setCategoryInfo] = useState(null);
-  const user= account.get();
+  const user = account.get();
 
   useEffect(() => {
     const fetchCategoryInfo = async () => {
       try {
-        const response = await databases.getDocument("64773737337f23de254d", "647905e0a9f44dd4d1a4", category);
+        const response = await databases.getDocument(
+          "64773737337f23de254d",
+          "647905e0a9f44dd4d1a4",
+          category
+        );
         console.log(response);
         setCategoryInfo(response);
       } catch (error) {
         console.log(error);
       }
     };
-  
+
     fetchCategoryInfo();
   }, [category]);
-  
+
   console.log(user.id);
 
   const handleBackClick = () => {
     navigate("/Shopping");
   };
-
 
   // This function is called when the delete button is clicked
   const handleDeleteClick = () => {
@@ -42,13 +45,20 @@ function SavedRecipe() {
   const handleConfirmDelete = () => {
     // Perform delete operation in Appwrite database
 
-    const promise = databases.deleteDocument('64773737337f23de254d', '647905e0a9f44dd4d1a4', category);
+    const promise = databases.deleteDocument(
+      "64773737337f23de254d",
+      "647905e0a9f44dd4d1a4",
+      category
+    );
 
-promise.then(function (response) {
-    console.log(response); // Success
-}, function (error) {
-    console.log(error); // Failure
-});
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
     navigate("/Shopping");
   };
 
@@ -87,7 +97,6 @@ promise.then(function (response) {
       </div>
       <h1 className="mt-4 font-semibold text-center text-lg md:text-xl">
         {categoryInfo.category_name}
-        
       </h1>
       <p className="text-[12px]">
         {ingredients.length}/{ingredients.length} ingredients left
