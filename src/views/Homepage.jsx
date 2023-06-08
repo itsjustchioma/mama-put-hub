@@ -4,11 +4,11 @@ import Navigation from "../components/Navigation/Navigation";
 import ImageCarouselFrame from "../components/ImageCarouselFrame";
 import SideBarNavigation from "../components/Navigation/SideBarNavigation";
 import { account, databases } from "../services/appwriteConfig";
-import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
+import emptyBookmarkIcon from "/assets/emptybookmark.png";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { saveBookmark } from "../services/appwriteConfig";
-import fullBookmarkIcon from "/public/assets/fullbookmark.png";
+import fullBookmarkIcon from "/assets/fullbookmark.png";
 
 import "../index.css";
 

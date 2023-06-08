@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import starRating from "/assets/preference.png";
 import Button from "../components/Button";
-import fullBookmarkIcon from "/public/assets/fullbookmark.png";
+import fullBookmarkIcon from "/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
 import CommentSection from "../components/CommentSection";
 import { databases } from "../services/appwriteConfig";

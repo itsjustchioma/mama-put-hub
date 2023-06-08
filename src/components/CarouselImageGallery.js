@@ -6,7 +6,7 @@ import dish5 from "/assets/pexels-karthik-reddy-397913.jpg";
 import dish6 from "/assets/pexels-nerfee-mirandilla-3186654.jpg";
 import dish7 from "/assets/pexels-rajesh-tp-1633525.jpg";
 import dish8 from "/assets/pexels-valeria-boltneva-842571.jpg";
-import plusSign from "/public/assets/plus1.png";
+import plusSign from "/assets/plus1.png";
 
 const CarouselImageGallery = [
   {

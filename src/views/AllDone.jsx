@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
-import success from "/public/assets/success.gif";
+import success from "/assets/success.gif";
 
 
 export default function AllDone() {

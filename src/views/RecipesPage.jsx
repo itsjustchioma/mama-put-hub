@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import emptyBookmarkIcon from "/public/assets/emptybookmark.png";
-import fullBookmarkIcon from "/public/assets/fullbookmark.png";
+import emptyBookmarkIcon from "/assets/emptybookmark.png";
+import fullBookmarkIcon from "/assets/fullbookmark.png";
 import { useNavigate } from "react-router-dom";
 import Tags from "../components/Tags";
 import Header from "../components/Header";

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import bell from "/assets/bell.png";
 import search from "/assets/search.png";
 import FilterModal from "./Filter/FilterModal";
-import filter from "/public/assets/filter.png";
+import filter from "/assets/filter.png";
 
 export default function Header({ showNotification }) {
   const [searchVisible, setSearchVisible] = useState(false);
