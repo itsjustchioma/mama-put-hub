@@ -15,27 +15,28 @@ export default function RecipesPage(props) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [tags, setTags] = useState([]);
   const [activeTag, setActiveTag] = useState(null);
+  const [originalRecipes, setOriginalRecipes] = useState([]);
 
   const userId = account.get();
   const navigate = useNavigate();
-
   const handleTagClick = (tag) => {
     setCurrentPage(1); // Reset current page to 1
-
+    setActiveTag(tag); // Update the active tag
+  
     let filteredRecipes = [];
     if (tag.name === "All") {
       // If "All" tag is selected, display all recipes
-      filteredRecipes = recipes;
+      filteredRecipes = originalRecipes;
     } else {
       // Filter recipes based on the selected tag
-      filteredRecipes = recipes.filter((recipe) =>
-        recipe.type.includes(tag.name)
+      filteredRecipes = originalRecipes.filter((recipe) =>
+        recipe.tags.includes(tag.name)
       );
     }
-
+  
     setRecipes(filteredRecipes);
-    setActiveTag(tag); // Update the active tag
   };
+  
 
   const handleBookMarkClick = async (index) => {
     try {
@@ -102,6 +103,7 @@ export default function RecipesPage(props) {
           tags: getTagsForRecipe(recipe),
         }));
         setRecipes(updatedRecipes);
+        setOriginalRecipes(updatedRecipes); 
         setBookmarkStatus(Array(updatedRecipes.length).fill(false));
       },
       function (error) {
@@ -124,6 +126,9 @@ export default function RecipesPage(props) {
     }
     if (recipe.type && recipe.type.includes("Dinner")) {
       tags.push("Dinner");
+    }
+    if (recipe.type && recipe.type.includes("Diary")) {
+      tags.push("Diary");
     }
     if (recipe.type && recipe.type.includes("Snacks")) {
       tags.push("Snacks");

@@ -94,7 +94,7 @@ export default function FilterTags() {
     }
   };
 
-   const handleClearAll = () => {
+  const handleClearAll = () => {
     setSelectedIngredients([]);
     setSelectedCookTimes([]);
     setSelectedLevels([]);
@@ -102,11 +102,13 @@ export default function FilterTags() {
     setSelectedDiets([]);
   };
 
+  const filteredResults = []; // Placeholder for filtered results (replace with your own logic)
+
   return (
     <div>
-          <button className="text-sm" onClick={handleClearAll}>
-            Clear All
-          </button>
+      <button className="text-sm" onClick={handleClearAll}>
+        Clear All
+      </button>
       <div className='ingredientTags mt-3'>
         <h1 className='text-[14px] font-medium'>Main Ingredients</h1>
         <div className="flex wrap flex-wrap whitespace-nowrap no-scrollbar">
@@ -124,7 +126,6 @@ export default function FilterTags() {
                 checked={selectedIngredients.includes(tag.name)}
                 onChange={handleIngredientChange}
                 className="mr-1 hidden"
-
               />
               <span className="checkmark"></span>
               <span className="label-text">{tag.name}</span>
@@ -133,108 +134,12 @@ export default function FilterTags() {
         </div>
       </div>
 
-      <div className='cookTimeTags mt-3'>
-        <h1 className='text-[14px] font-medium'>Cook Time</h1>
-        <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
-          {CookTimeTags.map((tag, index) => (
-            <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
-                selectedCookTimes.includes(tag.name) ? 'bg-blue-500 text-white' : ''
-              }`}
-              key={index}
-            >
-              <input
-                type="checkbox"
-                name="cookTime"
-                value={tag.name}
-                checked={selectedCookTimes.includes(tag.name)}
-                onChange={handleCookTimeChange}
-                className='hidden'
+      {/* Implement other tag categories (CookTimeTags, LevelTags, DishTypeTags, SuggestedDietsTags) */}
 
-              />
-              <span className="checkmark"></span>
-              <span className="label-text">{tag.name}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <p>Showing {filteredResults.length} results</p>
 
-      <div className='levelTags mt-3'>
-        <h1 className='text-[14px] font-medium'>Difficulty</h1>
-        <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
-          {LevelTags.map((tag, index) => (
-            <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
-                selectedLevels.includes(tag.name) ? 'bg-blue-500 text-white' : ''
-              }`}
-              key={index}
-            >
-              <input
-                type="checkbox"
-                name="level"
-                value={tag.name}
-                checked={selectedLevels.includes(tag.name)}
-                onChange={handleLevelChange}
-                className='hidden'
-
-              />
-              <span className="checkmark"></span>
-              <span className="label-text">{tag.name}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className='dishTypeTags mt-3'>
-        <h1 className='text-[14px] font-medium'>Dish Type</h1>
-        <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
-          {DishTypeTags.map((tag, index) => (
-            <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
-                selectedDishTypes.includes(tag.name) ? 'bg-blue-500 text-white' : ''
-              }`}
-              key={index}
-            >
-              <input
-                type="checkbox"
-                name="dishType"
-                value={tag.name}
-                checked={selectedDishTypes.includes(tag.name)}
-                onChange={handleDishTypeChange}
-                className='hidden'
-              />
-              <span className="checkmark"></span>
-              <span className="label-text">{tag.name}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className='suggestedDietsTags mt-3 mb-20'>
-        <h1 className='text-[14px] font-medium'>Suggested Diets</h1>
-        <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
-          {SuggestedDietsTags.map((tag, index) => (
-            <label
-              className={`m-2 text-center p-1 rounded-3xl border-[1px] border-black text-[12px] cursor-pointer ${
-                selectedDiets.includes(tag.name) ? 'bg-blue-500 text-white' : ''
-              }`}
-              key={index}
-            >
-              <input
-                type="checkbox"
-                name="diet"
-                value={tag.name}
-                checked={selectedDiets.includes(tag.name)}
-                onChange={handleDietChange}
-                className='hidden'
-
-              />
-              <span className="checkmark"></span>
-              <span className="label-text">{tag.name}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      {/* Render the filtered results */}
+      {/* Implement your rendering logic for the filtered results */}
     </div>
   );
 }
