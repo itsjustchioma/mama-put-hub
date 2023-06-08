@@ -1,18 +1,18 @@
 import React from "react";
 
 export const tags = [
-  { name: "Breakfast" },
-  { name: "Brunch" },
-  { name: "Lunch" },
-  { name: "Diary" },
-  { name: "Dinner" },
-  { name: "Snacks" },
-  { name: "Appetizers" },
-  { name: "Salad" },
-  { name: "Soups" },
-  { name: "Pasta and Noodles" },
-  { name: "Dessert" },
-  { name: "All" },
+  { name: "Breakfast", selected: false },
+  { name: "Brunch", selected: false },
+  { name: "Lunch", selected: false },
+  { name: "Diary", selected: false },
+  { name: "Dinner", selected: false },
+  { name: "Snacks", selected: false },
+  { name: "Appetizers", selected: false },
+  { name: "Salad", selected: false },
+  { name: "Soups", selected: false },
+  { name: "Pasta and Noodles", selected: false },
+  { name: "Dessert", selected: false },
+  { name: "All", selected: false },
 ];
 
 export default function Tags({ activeTag, onTagClick }) {

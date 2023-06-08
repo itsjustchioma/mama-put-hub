@@ -12,6 +12,29 @@ export default function RecipeDirection() {
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
 
+  const startTimer = (time) => {r
+    if (time > 0) {
+      setRemainingTime(time);
+      setTimer(
+        setInterval(() => {
+          setRemainingTime((prevTime) => {
+            const remainingSeconds = prevTime - 1;
+            if (remainingSeconds <= 0) {
+              clearInterval(timer);
+              moveToNextStep();
+              return "";
+            }
+            return remainingSeconds;
+          });
+        }, 1000)
+      );
+    }
+  };
+
+  const pauseTimer = () => {
+    clearInterval(timer);
+  };
+
   const moveToNextStep = () => {
     if (currentStep < dish.steps.length - 1) {
       setCurrentStep((prevStep) => prevStep + 1);
