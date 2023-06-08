@@ -13,6 +13,8 @@ function Settings() {
   const [email, setEmail] = useState('');
   const [Bio, setBio] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [selectedPicture, setSelectedPicture] = useState(null);
+
 
   const handlePhotoChange = (event) => {
     const selectedPhoto = event.target.files[0];
@@ -48,11 +50,26 @@ function Settings() {
    const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const fileInput = document.getElementById('imageUpload');
+    const file = fileInput.files[0];
+  
+    if (file) {
+      setSelectedPicture(URL.createObjectURL(file));
+      const fileId = uuidv4(); // Generate a random UUID
+  
+    const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
+    const imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
+
+  } else {
+    // Handle the case when no file is selected
+    console.log('Please select an image file');
+  }
+
     try {
       const profileData = {
         userId: (await userId).$id,
 
-        photo: photo,
+        photo: imageUrl,
         password: password,
         confirmPassword: confirmPassword,
         email: email,
@@ -112,7 +129,7 @@ function Settings() {
               {photo ? (
                 <img
                   className="w-full h-full object-cover"
-                  src={URL.createObjectURL(photo)}
+                  src={selectedPicture}
                   alt="Profile"
                 />
               ) : (

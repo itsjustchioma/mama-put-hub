@@ -24,7 +24,7 @@ export default function Login({ handleLogin }) {
       setIsSuccessModalOpen(true);
       setTimeout(() => {
         setIsSuccessModalOpen(false);
-        navigate("/Home");
+        navigate("/onboarding");
         console.log("Successful log in ");
       }, 1000);
     } catch (error) {
@@ -121,12 +121,12 @@ export default function Login({ handleLogin }) {
                 </button>
               </div>
 
-              <Link
+              <a
                 className="text-copper-orange text-center text-sm my-4"
-                to="/forgotpasswordpage"
+                href="#"
               >
                 Forgot password?
-              </Link>
+              </a>
               <Link to="/">
                 <p className="text-text-grey text-center text-sm my-4 underline">
                   Don't have an account? Sign Up.
