@@ -15,6 +15,7 @@ function Settings() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [documentID, setDocumentID] = useState(null);
+  const [profile, setProfile ] = useState(null);
   
   const navigate = useNavigate();
 
@@ -51,6 +52,24 @@ function Settings() {
   });
 
  let imageUrl;
+
+
+ const findProfileByUserId = async (userId) => {
+  try {
+    const response = await databases.listDocuments(
+      "64773737337f23de254d",
+      "647b7649a8bd0a7073be",
+      []
+    );
+
+    const foundDocument = response.documents.find(doc => doc.userId === userId);
+    return foundDocument;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error finding profile by user ID");
+  }
+};
+
 
  
 
@@ -106,20 +125,33 @@ const handleSubmit = async (event) => {
   const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
 
   try {
+    const currentUserID = (await userId).$id;
+
     const profileData = {
-      userId: (await userId).$id,
+      userId: currentUserID,
       photo: imageUrl,
       email: email,
       bio: Bio,
     };
 
-    console.log(documentID);
-
-    // Call the UpdateProfile component and pass the profile data
     const updatedProfile = await UpdateProfile(profileData);
-    console.log("Profile updated:", updatedProfile);
-    navigate("/myprofile");
 
+
+
+    console.log(updatedProfile);
+    const existingProfile = await findProfileByUserId(currentUserID);
+
+    if (existingProfile) {
+      // Update the existing profile
+      const updatedProfile = await UpdateProfile(existingProfile.$id, profileData);
+      console.log("Profile updated:", updatedProfile);
+      navigate("/myprofile");
+    } else {
+      // Create a new profile
+      const createdProfile = await saveProfile(profileData);
+      console.log("Profile created:", createdProfile);
+      navigate("/myprofile");
+    }
 
     // Reset form fields
     setPhoto('');
@@ -134,6 +166,8 @@ const handleSubmit = async (event) => {
 };
 
 
+console.log(profile);
+
 
 
 const UpdateProfile = async (profileData) => {
@@ -141,22 +175,30 @@ const UpdateProfile = async (profileData) => {
     console.log("Profile:", profileData);
     console.log("Document ID:", documentID); // Log the document ID
 
-    // Save the profile data to the database or update the existing profile
-    const savedProfile = await databases.updateDocument(
-      "64773737337f23de254d",
-      "647b7649a8bd0a7073be",
-      documentID,
-       profileData ,
-    );
-    console.log("Saved Profile:", savedProfile);
-        navigate("/myprofile");
+    if (documentID) {
+      // Save the profile data to the database or update the existing profile
+      const savedProfile = await databases.updateDocument(
+        "64773737337f23de254d",
+        "647b7649a8bd0a7073be",
+        documentID,
+        profileData
+      );
+      console.log("Saved Profile:", savedProfile);
+      navigate("/myprofile");
 
-    return savedProfile;
-    
+      return savedProfile;
+    } else {
+      // Create a new profile
+      const createdProfile = await saveProfile(profileData);
+      console.log("Profile created:", createdProfile);
+      navigate("/myprofile");
+      return createdProfile;
+    }
   } catch (error) {
     throw new Error(error);
   }
 };
+
 
 
 
