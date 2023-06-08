@@ -106,7 +106,7 @@ const SideBarNavigation = () => {
             </ul>
           </div>
           <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer" onClick={handleLogout}>
-            <img src="/public/assets/back-arrow.png" alt="" className="w-4" />
+            <img src="/assets/back-arrow.png" alt="" className="w-4" />
             <span className="text-[15px] ml-4">Logout</span>
           </div>
         </div>
