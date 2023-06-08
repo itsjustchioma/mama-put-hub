@@ -155,8 +155,8 @@ const handleSubmit = async (event) => {
 
     // Reset form fields
     setPhoto('');
-    setPassword('');
-    setConfirmPassword('');
+    // setPassword('');
+    // setConfirmPassword('');
     setEmail('');
     setBio('');
   } catch (error) {
@@ -298,18 +298,6 @@ const UpdateProfile = async (profileData) => {
           />
         </div>
      
-        <div className="mb-6">
-          <label htmlFor="confirmPassword" className="block font-medium mb-1">
-            Confirm Password:
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            className="w-full px-4 py-2 rounded border border-gray-300"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-          />
-        </div>
       </form>
     </div>
   );
