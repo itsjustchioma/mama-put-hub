@@ -46,6 +46,7 @@ function Settings() {
       console.log(error);
   });
 
+ let imageUrl;
 
    const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,7 +59,7 @@ function Settings() {
       const fileId = uuidv4(); // Generate a random UUID
   
     const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
-    const imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
+     imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
 
   } else {
     // Handle the case when no file is selected
@@ -157,7 +158,7 @@ function Settings() {
             </div>
             <input
               type="file"
-              id="photo"
+              id="imageUpload"
               accept="image/*"
               className="hidden"
               onChange={handlePhotoChange}
