@@ -145,11 +145,7 @@ const Homepage = (props) => {
               )}
             </div>
           </div>
-          <Link to={"/RecipesPage"}>
-            <button className="mt-2 ml-4 bg-laurel-green p-2 text-[10px] rounded-full">
-              View More
-            </button>
-          </Link>
+       
         </div>
       </div>
     </div>

@@ -72,20 +72,8 @@ function MyProfile() {
         <div className="p-4 bg-gray-200 rounded mb-4">
           <p className="font-semibold">Rank: {lastBadge.name}</p>
         </div>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="p-4 bg-gray-200 rounded">
-            <h3 className="text-lg font-semibold">Recipes Saved</h3>
-            <p className="text-3xl font-bold">34</p>
-          </div>
-          <div className="p-4 bg-gray-200 rounded">
-            <h3 className="text-lg font-semibold">Recipes Created</h3>
-            <p className="text-3xl font-bold">54</p>
-          </div>
-        </div>
-        <div className="p-4 bg-gray-200 rounded">
-          <h3 className="text-lg font-semibold">Bookmarked by</h3>
-          <p className="text-3xl font-bold">36</p>
-        </div>
+      
+        
         <div className="p-4 bg-gray-200 rounded mt-4 mb-16">
           <h3 className="text-lg font-semibold">Achievements</h3>
           <ul className="list-disc pl-6">

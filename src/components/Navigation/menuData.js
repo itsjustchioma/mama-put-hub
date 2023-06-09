@@ -15,11 +15,11 @@ export const Menus = [
     colorName: "laurel-green",
   },
   {
-    name: "Notifications",
+    name: "Explore",
     icon: "/assets/bell.png",
     dis: "translate-x-32",
     altText: "Notifications Icon",
-    path: "/scanner",
+    path: "/recipesPage",
     colorName: "lemon-meringue",
   },
   {

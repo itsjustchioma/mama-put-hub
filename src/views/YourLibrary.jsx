@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { databases } from "../services/appwriteConfig";
-import fullBookmarkIcon from "/assets/fullbookmark.png";
+import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { motion } from "framer-motion";
 import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
 import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
-import plusSign from "/assets/plus1.png";
+import plusSign from "/public/assets/plus1.png";
 
 export default function YourLibrary() {
 

@@ -136,11 +136,7 @@ export default function ImageCarouselFrame(props) {
           )}
         </div>
       </div>
-      <Link to={"/RecipesPage"}>
-        <button className="-mt-4 mb-5 ml-4 bg-laurel-green p-2 text-[10px] rounded-full">
-          View More
-        </button>
-      </Link>
+   
 
       {showModal && (
         <div className="fixed bottom-5 right-5 bg-white p-2 rounded-md shadow-md">
