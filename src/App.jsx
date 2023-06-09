@@ -26,7 +26,6 @@ import RecipesPage from "./views/RecipesPage";
 import AddShoppingCategory from "./views/AddShoppingCategory";
 import LoadingIndicator from "./components/LoadingIndicator";
 import { useNavigate } from "react-router-dom";
-import ForgotPasswordPage from "./views/ForgotPasswordPage";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 
 const closeModal = () => {
@@ -92,10 +91,7 @@ function App() {
                 element={<RecipeDirection />}
               />
               <Route path="/CommentSection" element={<CommentSection />} />
-              <Route
-                path="/ForgotPasswordPage"
-                element={<ForgotPasswordPage />}
-              />
+           
               <Route
                 path="/SavedRecipe/:category"
                 element={<SavedRecipe closeModal={closeModal} />}

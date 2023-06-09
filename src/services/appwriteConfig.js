@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Query, Storage } from "appwrite";
+import { Client, Account, Databases, Query, Storage, } from "appwrite";
 import { ID } from "appwrite";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,7 +11,7 @@ client
 export const account = new Account(client);
 // const account = new Account(client);
 
-
+// export default  users = new account. .Users(client);
 
 export const storage = new Storage(client);
 

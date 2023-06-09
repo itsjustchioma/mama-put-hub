@@ -121,12 +121,7 @@ export default function Login({ handleLogin }) {
                 </button>
               </div>
 
-              <a
-                className="text-copper-orange text-center text-sm my-4"
-                href="#"
-              >
-                Forgot password?
-              </a>
+           
               <Link to="/">
                 <p className="text-text-grey text-center text-sm my-4 underline">
                   Don't have an account? Sign Up.

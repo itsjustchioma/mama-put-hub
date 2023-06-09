@@ -136,38 +136,7 @@ export default function Header({ showNotification }) {
           </form>
         </>
       )}
-      <div className="flex items-center">
-        {/* <span className="text-lg">
-          <img
-            src={bell}
-            className="w-6 mr-4 cursor-pointer"
-            alt=""
-            onClick={handleBellClick}
-          />
-          {showNotifications && (
-            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer mr-4 z-20 text-[12px] overflow-scroll h-64 no-scrollbar">
-              {notifications.map((notification) => (
-                <p key={notification.id} className=" hover:bg-pastel-pink p-4">
-                  {notification.message} <br />
-                  {notification.time} <br />
-                  {notification.date}
-
-
-                </p>
-              ))}
-            </div>
-          )}
-        </span> */}
-        <span
-          className="text-lg FilterModalBtn"
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          <img src={filter} className="w-6 mr-4" alt="" />
-        </span>
-        {openModal && <FilterModal closeModal={setOpenModal} />}
-      </div>
+    
 
       {searchResults.length > 0 && (
         <div className="search-results">

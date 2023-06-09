@@ -70,18 +70,11 @@ function MyProfile() {
           </div>
         </div>
         <div className="p-4 bg-gray-200 rounded mb-4">
-          <p className="font-semibold">Rank: {lastBadge.name}</p>
+          <p className="font-semibold">Email Address: {profileDetails.length > 0 ? profileDetails[0].email : ""}</p>
         </div>
       
         
-        <div className="p-4 bg-gray-200 rounded mt-4 mb-16">
-          <h3 className="text-lg font-semibold">Achievements</h3>
-          <ul className="list-disc pl-6">
-            {Badges.map((badge, i) => (
-              <li key={i}>{badge.name}</li>
-            ))}
-          </ul>
-        </div>
+       
       </div>
     </div>
   );
