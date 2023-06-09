@@ -47,6 +47,7 @@ const ForgotPasswordPage = () => {
               <input
                 type="email"
                 id="email"
+                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 placeholder="Enter your email"
                 value={email}

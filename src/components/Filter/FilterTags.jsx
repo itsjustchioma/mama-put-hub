@@ -109,18 +109,21 @@ export default function FilterTags() {
       <button className="text-sm" onClick={handleClearAll}>
         Clear All
       </button>
-      <div className='ingredientTags mt-3'>
-        <h1 className='text-[14px] font-medium'>Main Ingredients</h1>
+      <div className="ingredientTags mt-3">
+        <h1 className="text-[14px] font-medium">Main Ingredients</h1>
         <div className="flex wrap flex-wrap whitespace-nowrap no-scrollbar">
           {IngredientTags.map((tag, index) => (
             <label
               className={`m-2 text-center p-1 rounded-xl border border-black text-xs cursor-pointer ${
-                selectedIngredients.includes(tag.name) ? 'bg-blue-500 text-white' : ''
+                selectedIngredients.includes(tag.name)
+                  ? "bg-blue-500 text-white"
+                  : ""
               }`}
               key={index}
             >
               <input
                 type="checkbox"
+                required
                 name="ingredient"
                 value={tag.name}
                 checked={selectedIngredients.includes(tag.name)}

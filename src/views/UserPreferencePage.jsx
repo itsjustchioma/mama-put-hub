@@ -88,7 +88,8 @@ function UserPreferencePage() {
 
         <h1 className="text-[2em] font-medium">Your Preferences</h1>
         <p className="text-sm">
-          Tell us about your preferences and we can choose the best recipes for you
+          Tell us about your preferences and we can choose the best recipes for
+          you
         </p>
 
         <div className="mt-4">
@@ -96,25 +97,25 @@ function UserPreferencePage() {
             <h1 className="font-medium">Choose your diet</h1>
             <div className="flex flex-wrap whitespace-nowrap no-scrollbar">
               {dietOptions.map((diet, index) => (
-      <label
-      key={index}
-      className={`m-2 text-center p-1 rounded-xl border border-black text-[12px] cursor-pointer ${
-        isOptionSelected(diet.value, selectedDietOptions)
-          ? 'bg-blue-500 text-white'
-          : ''
-      }`}
-      onClick={() => handleDietOptionSelect(diet.value)}
-    >
-      <input
-        type="checkbox"
-        checked={isOptionSelected(diet.value, selectedDietOptions)}
-        onChange={() => {}}
-        className="mr-1 hidden"
-      />
-      <span className="checkmark"></span>
-      <span className="label-text">{diet.name}</span>
-    </label>
-    
+                <label
+                  key={index}
+                  className={`m-2 text-center p-1 rounded-xl border border-black text-[12px] cursor-pointer ${
+                    isOptionSelected(diet.value, selectedDietOptions)
+                      ? "bg-blue-500 text-white"
+                      : ""
+                  }`}
+                  onClick={() => handleDietOptionSelect(diet.value)}
+                >
+                  <input
+                    type="checkbox"
+                    checked={isOptionSelected(diet.value, selectedDietOptions)}
+                    onChange={() => {}}
+                    required
+                    className="mr-1 hidden"
+                  />
+                  <span className="checkmark"></span>
+                  <span className="label-text">{diet.name}</span>
+                </label>
               ))}
             </div>
           </div>
@@ -136,13 +137,19 @@ function UserPreferencePage() {
                 <label
                   key={index}
                   className={`m-2 text-center p-1 rounded-xl border border-black text-[12px] cursor-pointer ${
-                    isOptionSelected(allergy.value, selectedAllergyOptions) ? 'bg-blue-500 text-white' : ''
+                    isOptionSelected(allergy.value, selectedAllergyOptions)
+                      ? "bg-blue-500 text-white"
+                      : ""
                   }`}
                   onClick={() => handleAllergyOptionSelect(allergy.value)}
                 >
                   <input
                     type="checkbox"
-                    checked={isOptionSelected(allergy.value, selectedAllergyOptions)}
+                    required
+                    checked={isOptionSelected(
+                      allergy.value,
+                      selectedAllergyOptions
+                    )}
                     onChange={() => {}}
                     className="mr-1 hidden"
                   />
@@ -169,13 +176,19 @@ function UserPreferencePage() {
               <label
                 key={index}
                 className={`m-2 text-center p-1 rounded-xl border border-black text-[12px] cursor-pointer ${
-                  isOptionSelected(dish.value, selectedFavoriteDishesOptions) ? 'bg-blue-500 text-white' : ''
+                  isOptionSelected(dish.value, selectedFavoriteDishesOptions)
+                    ? "bg-blue-500 text-white"
+                    : ""
                 }`}
                 onClick={() => handleFavoriteDishesOptionSelect(dish.value)}
               >
                 <input
                   type="checkbox"
-                  checked={isOptionSelected(dish.value, selectedFavoriteDishesOptions)}
+                  required
+                  checked={isOptionSelected(
+                    dish.value,
+                    selectedFavoriteDishesOptions
+                  )}
                   onChange={() => {}}
                   className="mr-1 hidden"
                 />
@@ -184,7 +197,8 @@ function UserPreferencePage() {
               </label>
             ))}
           </div>
-          {favoriteDishesOptionsToShow < PreferencesMenu.favoriteDishesOptions.length && (
+          {favoriteDishesOptionsToShow <
+            PreferencesMenu.favoriteDishesOptions.length && (
             <div className="text-center  md:text-left">
               <button
                 onClick={handleViewMoreFavoriteDishesOptions}

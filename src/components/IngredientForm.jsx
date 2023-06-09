@@ -37,6 +37,7 @@ function IngredientForm({ formData, setFormData, handlePrevious }) {
             Ingredient Name: <br />
             <input
               type="text"
+              required
               name="name"
               value={ingredient.name}
               onChange={(e) => handleChange(e, index)}
@@ -44,7 +45,6 @@ function IngredientForm({ formData, setFormData, handlePrevious }) {
             />
           </label>{" "}
           <br />
-
           {index > 0 && (
             <button type="button" onClick={() => handleRemoveIngredient(index)}>
               Remove

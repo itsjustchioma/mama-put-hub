@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { shuffle } from "lodash"; // Import the shuffle function from the lodash library
 
 import Navigation from "../components/Navigation/Navigation";
 import ImageCarouselFrame from "../components/ImageCarouselFrame";
@@ -42,7 +43,8 @@ const Homepage = (props) => {
 
     promise.then(
       function (response) {
-        setCarouselItems(response.documents);
+        const randomizedItems = shuffle(response.documents); // Randomize the order of documents
+        setCarouselItems(randomizedItems);
         setBookmarkStatus(Array(response.documents.length).fill(false));
       },
       function (error) {

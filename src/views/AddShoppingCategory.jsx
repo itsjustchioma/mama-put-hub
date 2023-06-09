@@ -163,6 +163,7 @@ const handleBackClick = () => {
           </label>
           <input
             type="text"
+            required
             id="categoryName"
             value={categoryName}
             onChange={handleCategoryNameChange}
@@ -175,6 +176,7 @@ const handleBackClick = () => {
           </label>
           <input
             type="file"
+            required
             id="imageUpload"
             accept="image/*"
             onChange={handleImageUpload}
@@ -205,6 +207,7 @@ const handleBackClick = () => {
             <div key={index} className="flex items-center">
               <input
                 type="text"
+                required
                 value={ingredient}
                 onChange={(e) => handleIngredientChange(e, index)}
                 className="border border-gray-300 rounded-md p-2 flex-1 mr-2"

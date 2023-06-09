@@ -3,6 +3,7 @@ import bell from "/assets/bell.png";
 import search from "/assets/search.png";
 import FilterModal from "./Filter/FilterModal";
 import filter from "/assets/filter.png";
+import { databases } from "../services/appwriteConfig";
 
 export default function Header({ showNotification }) {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -11,6 +12,7 @@ export default function Header({ showNotification }) {
   const [openModal, setOpenModal] = useState(false);
   const [searchText, setSearchText] = useState(""); // Track the input field's text
   const [showNotifications, setShowNotifications] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const inputRef = useRef(null);
 
   const handleClick = () => {
@@ -19,8 +21,37 @@ export default function Header({ showNotification }) {
     setShowSearchButton(!showSearchButton);
   };
 
-  const handleInputChange = (e) => {
-    setSearchText(e.target.value); // Update the input field's text
+  const handleInputChange = async (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+
+    if (searchText.trim() !== "") {
+      try {
+        const response = await databases.listDocuments(
+          "64676cf547e8830694b8",
+          "647b9e24d59661e7bfbe",
+          [
+            {
+              field: "name",
+              operator: "LIKE",
+              value: `%${searchText}%`,
+            },
+            {
+              field: "type",
+              operator: "LIKE",
+              value: `%${searchText}%`,
+            },
+          ]
+        );
+
+        setSearchResults(response.documents);
+        console.log("Search bar is working");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setSearchResults([]);
+    }
   };
 
   const clearInput = () => {
@@ -69,7 +100,6 @@ export default function Header({ showNotification }) {
       read: false,
     },
   ];
-  
 
   return (
     <header className="flex justify-end items-center py-2 flex-wrap">
@@ -85,6 +115,7 @@ export default function Header({ showNotification }) {
             >
               <img src={search} className="w-6 h-6 mr-4" alt="search" />
               <input
+                required
                 type="text"
                 className="bg-transparent outline-none"
                 value={searchText}
@@ -137,6 +168,15 @@ export default function Header({ showNotification }) {
         </span>
         {openModal && <FilterModal closeModal={setOpenModal} />}
       </div>
+
+      {searchResults.length > 0 && (
+        <div className="search-results">
+          {searchResults.map((result) => (
+            <p key={result.$id}>{result.name}</p>
+            // Render other relevant information from the search results
+          ))}
+        </div>
+      )}
     </header>
   );
 }

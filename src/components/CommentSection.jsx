@@ -102,45 +102,61 @@ const CommentSection = () => {
 
   return (
     <div className="container mx-auto py-8 overflow-scroll h-[90vh]">
-    <div className='w-5/6  mx-auto flex justify-between items-center'>
-    <BackArrow onClick={handleBackClick}/>
+      <div className="w-5/6  mx-auto flex justify-between items-center">
+        <BackArrow onClick={handleBackClick} />
 
-    <Header/>
-    </div>
- 
-      <div className='w-5/6 mx-auto'>
-      <h1 className="text-3xl font-bold mb-4">Comment </h1>
+        <Header />
+      </div>
+
+      <div className="w-5/6 mx-auto">
+        <h1 className="text-3xl font-bold mb-4">Comment </h1>
 
         {comments.map((comment, index) => (
-          <div key={index} className="bg-gray-100 h-[40vh] overflow-scroll p-4 mb-4 rounded">
+          <div
+            key={index}
+            className="bg-gray-100 h-[40vh] overflow-scroll p-4 mb-4 rounded"
+          >
             <h3 className="text-lg font-semibold">{comment.name}</h3>
             <p className="mb-2">Rating: {comment.rating}</p>
             <p className="mb-4">{comment.comment}</p>
             <p className="text-gray-500">Date: {comment.date}</p>
 
-            <form onSubmit={(event) => handleReplySubmit(index, event)} className="flex flex-wrap items-center mt-4">
+            <form
+              onSubmit={(event) => handleReplySubmit(index, event)}
+              className="flex flex-wrap items-center mt-4"
+            >
               <input
                 type="text"
+                required
                 placeholder="Your reply"
                 value={newComment}
                 onChange={handleCommentChange}
                 className="mr-2 p-2 border border-gray-300 rounded"
-              /> &nbsp;
+              />{" "}
+              &nbsp;
               <input
                 type="number"
                 min="1"
+                required
                 max="5"
                 value={newRating}
                 onChange={handleRatingChange}
                 className="p-2 border border-gray-300 rounded w-16"
               />
-
-              <button type="submit" className="px-4 py-2 my-4 bg-pastel-blue text-white rounded md:ml-4">Reply</button>
+              <button
+                type="submit"
+                className="px-4 py-2 my-4 bg-pastel-blue text-white rounded md:ml-4"
+              >
+                Reply
+              </button>
             </form>
 
             {comment.replies &&
               comment.replies.map((reply, replyIndex) => (
-                <div key={replyIndex} className="bg-gray-200 p-2 mt-2 ml-4 rounded">
+                <div
+                  key={replyIndex}
+                  className="bg-gray-200 p-2 mt-2 ml-4 rounded"
+                >
                   <h4 className="text-md font-semibold">{reply.name}</h4>
                   <p className="mb-2">Rating: {reply.rating}</p>
                   <p className="mb-2">{reply.comment}</p>
@@ -150,29 +166,38 @@ const CommentSection = () => {
           </div>
         ))}
       </div>
-<div className='w-5/6 mx-auto'>
-<h2 className="text-xl font-semibold mt-8 mb-4">Post a Comment</h2>
+      <div className="w-5/6 mx-auto">
+        <h2 className="text-xl font-semibold mt-8 mb-4">Post a Comment</h2>
 
-<form onSubmit={handleCommentSubmit} className="flex flex-wrap items-center">
-  <input
-    type="text"
-    placeholder="Your comment"
-    value={newComment}
-    onChange={handleCommentChange}
-    className="mr-2 p-2 border border-gray-300 rounded"
-  />
-  <input
-    type="number"
-    min="1"
-    max="5"
-    value={newRating}
-    onChange={handleRatingChange}
-    className="p-2 border border-gray-300 rounded w-16"
-  />
-  <button type="submit" className="px-4 py-2 my-4 bg-copper-orange text-white rounded md:ml-4">Post Comment</button>
-</form>
-</div>
- 
+        <form
+          onSubmit={handleCommentSubmit}
+          className="flex flex-wrap items-center"
+        >
+          <input
+            type="text"
+            required
+            placeholder="Your comment"
+            value={newComment}
+            onChange={handleCommentChange}
+            className="mr-2 p-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            min="1"
+            max="5"
+            required
+            value={newRating}
+            onChange={handleRatingChange}
+            className="p-2 border border-gray-300 rounded w-16"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 my-4 bg-copper-orange text-white rounded md:ml-4"
+          >
+            Post Comment
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

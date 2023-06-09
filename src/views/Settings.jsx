@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { saveProfile } from '../services/appwriteConfig';
-import { account,storage, databases } from '../services/appwriteConfig';
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { saveProfile } from "../services/appwriteConfig";
+import { account, storage, databases } from "../services/appwriteConfig";
 
-import BackArrow from '../components/BackClick/BackArrow';
+import BackArrow from "../components/BackClick/BackArrow";
 import { Link, useNavigate } from "react-router-dom";
 
 function Settings() {
-  const [photo, setPhoto] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [Bio, setBio] = useState('');
+  const [photo, setPhoto] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [Bio, setBio] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [documentID, setDocumentID] = useState(null);
-  const [profile, setProfile ] = useState(null);
-  
+  const [profile, setProfile] = useState(null);
+
   const navigate = useNavigate();
-
-
 
   const handlePhotoChange = (event) => {
     const selectedPhoto = event.target.files[0];
@@ -44,165 +42,163 @@ function Settings() {
 
   const userId = account.get();
 
-  userId.then(function (response) {
-    console.log(response);
+  userId.then(
+    function (response) {
+      console.log(response);
       console.log(response.$id);
-  }, function (error) {
+    },
+    function (error) {
       console.log(error);
-  });
+    }
+  );
 
- let imageUrl;
+  let imageUrl;
 
-
- const findProfileByUserId = async (userId) => {
-  try {
-    const response = await databases.listDocuments(
-      "64773737337f23de254d",
-      "647b7649a8bd0a7073be",
-      []
-    );
-
-    const foundDocument = response.documents.find(doc => doc.userId === userId);
-    return foundDocument;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error finding profile by user ID");
-  }
-};
-
-
- 
-
- useEffect(() => {
-  const fetchSavedRecipes = async () => {
+  const findProfileByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
         "64773737337f23de254d",
         "647b7649a8bd0a7073be",
         []
       );
-      console.log(response);
 
-      // Find the document with the current user ID
-      const currentUserID = (await userId).$id;
-      const foundDocument = response.documents.find(doc => doc.userId === currentUserID);
-        setDocumentID(foundDocument);
-
-
-      if (foundDocument) {
-        // Get the document ID from the found document and store it in the state variable
-        const documentId = foundDocument.$id;
-        console.log(documentId);
-        setDocumentID(documentId);
-      } else {
-        // No document found for the current user, handle accordingly
-        console.log("No document found for the current user");
-      }
+      const foundDocument = response.documents.find(
+        (doc) => doc.userId === userId
+      );
+      return foundDocument;
     } catch (error) {
       console.log(error);
+      throw new Error("Error finding profile by user ID");
     }
   };
 
-  fetchSavedRecipes();
-}, []);
+  useEffect(() => {
+    const fetchSavedRecipes = async () => {
+      try {
+        const response = await databases.listDocuments(
+          "64773737337f23de254d",
+          "647b7649a8bd0a7073be",
+          []
+        );
+        console.log(response);
 
+        // Find the document with the current user ID
+        const currentUserID = (await userId).$id;
+        const foundDocument = response.documents.find(
+          (doc) => doc.userId === currentUserID
+        );
+        setDocumentID(foundDocument);
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  const fileInput = document.getElementById('imageUpload');
-  const file = fileInput.files[0];
-
-  if (!file) {
-    console.log('Please select an image file');
-    return;
-  }
-
-  setSelectedPicture(URL.createObjectURL(file));
-  const fileId = uuidv4(); // Generate a random UUID
-
-  const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
-  const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
-
-  try {
-    const currentUserID = (await userId).$id;
-
-    const profileData = {
-      userId: currentUserID,
-      photo: imageUrl,
-      email: email,
-      bio: Bio,
+        if (foundDocument) {
+          // Get the document ID from the found document and store it in the state variable
+          const documentId = foundDocument.$id;
+          console.log(documentId);
+          setDocumentID(documentId);
+        } else {
+          // No document found for the current user, handle accordingly
+          console.log("No document found for the current user");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    const updatedProfile = await UpdateProfile(profileData);
+    fetchSavedRecipes();
+  }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    const fileInput = document.getElementById("imageUpload");
+    const file = fileInput.files[0];
 
-    console.log(updatedProfile);
-    const existingProfile = await findProfileByUserId(currentUserID);
-
-    if (existingProfile) {
-      // Update the existing profile
-      const updatedProfile = await UpdateProfile(existingProfile.$id, profileData);
-      console.log("Profile updated:", updatedProfile);
-      navigate("/myprofile");
-    } else {
-      // Create a new profile
-      const createdProfile = await saveProfile(profileData);
-      console.log("Profile created:", createdProfile);
-      navigate("/myprofile");
+    if (!file) {
+      console.log("Please select an image file");
+      return;
     }
 
-    // Reset form fields
-    setPhoto('');
-    // setPassword('');
-    // setConfirmPassword('');
-    setEmail('');
-    setBio('');
-  } catch (error) {
-    // Handle the error, such as displaying an error message
-    console.error("Error saving/updating profile:", error);
-  }
-};
+    setSelectedPicture(URL.createObjectURL(file));
+    const fileId = uuidv4(); // Generate a random UUID
 
+    const newImage = await storage.createFile(
+      "647e6735532e8f214235",
+      fileId,
+      file
+    );
+    const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
 
-console.log(profile);
+    try {
+      const currentUserID = (await userId).$id;
 
+      const profileData = {
+        userId: currentUserID,
+        photo: imageUrl,
+        email: email,
+        bio: Bio,
+      };
 
+      const updatedProfile = await UpdateProfile(profileData);
 
-const UpdateProfile = async (profileData) => {
-  try {
-    console.log("Profile:", profileData);
-    console.log("Document ID:", documentID); // Log the document ID
+      console.log(updatedProfile);
+      const existingProfile = await findProfileByUserId(currentUserID);
 
-    if (documentID) {
-      // Save the profile data to the database or update the existing profile
-      const savedProfile = await databases.updateDocument(
-        "64773737337f23de254d",
-        "647b7649a8bd0a7073be",
-        documentID,
-        profileData
-      );
-      console.log("Saved Profile:", savedProfile);
-      navigate("/myprofile");
+      if (existingProfile) {
+        // Update the existing profile
+        const updatedProfile = await UpdateProfile(
+          existingProfile.$id,
+          profileData
+        );
+        console.log("Profile updated:", updatedProfile);
+        navigate("/myprofile");
+      } else {
+        // Create a new profile
+        const createdProfile = await saveProfile(profileData);
+        console.log("Profile created:", createdProfile);
+        navigate("/myprofile");
+      }
 
-      return savedProfile;
-    } else {
-      // Create a new profile
-      const createdProfile = await saveProfile(profileData);
-      console.log("Profile created:", createdProfile);
-      navigate("/myprofile");
-      return createdProfile;
+      // Reset form fields
+      setPhoto("");
+      // setPassword('');
+      // setConfirmPassword('');
+      setEmail("");
+      setBio("");
+    } catch (error) {
+      // Handle the error, such as displaying an error message
+      console.error("Error saving/updating profile:", error);
     }
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+  };
 
+  console.log(profile);
 
+  const UpdateProfile = async (profileData) => {
+    try {
+      console.log("Profile:", profileData);
+      console.log("Document ID:", documentID); // Log the document ID
 
+      if (documentID) {
+        // Save the profile data to the database or update the existing profile
+        const savedProfile = await databases.updateDocument(
+          "64773737337f23de254d",
+          "647b7649a8bd0a7073be",
+          documentID,
+          profileData
+        );
+        console.log("Saved Profile:", savedProfile);
+        navigate("/myprofile");
 
-
+        return savedProfile;
+      } else {
+        // Create a new profile
+        const createdProfile = await saveProfile(profileData);
+        console.log("Profile created:", createdProfile);
+        navigate("/myprofile");
+        return createdProfile;
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
@@ -297,7 +293,6 @@ const UpdateProfile = async (profileData) => {
             onChange={handleEmailChange}
           />
         </div>
-     
       </form>
     </div>
   );

@@ -64,19 +64,19 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
 
   return (
     <div>
-        {steps.map((step, index) => (
+      {steps.map((step, index) => (
         <div key={index}>
           <label className="font-medium">
             Step Name: <br />
             <input
               type="text"
               value={step.name}
+              required
               onChange={(e) => handleChange(e, index)}
               className="my-2 p-2 rounded border border-gray-300"
             />
           </label>{" "}
           <br />
-
           {index > 0 && (
             <button type="button" onClick={() => handleRemoveStep(index)}>
               Remove

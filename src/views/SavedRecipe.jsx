@@ -111,6 +111,7 @@ function SavedRecipe() {
                 <input
                   type="checkbox"
                   checked={checkedIngredients.includes(index)}
+                  required
                   onChange={() => handleCheckboxChange(index)}
                 />
                 &nbsp; &nbsp;
