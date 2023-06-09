@@ -27,6 +27,7 @@ import AddShoppingCategory from "./views/AddShoppingCategory";
 import LoadingIndicator from "./components/LoadingIndicator";
 import { useNavigate } from "react-router-dom";
 import ForgotPasswordPage from "./views/ForgotPasswordPage";
+import ProtectedRoute from "./components/utils/ProtectedRoute";
 
 const closeModal = () => {
   // Implementation for closing the modal
@@ -34,9 +35,6 @@ const closeModal = () => {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true"
-  );
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -48,12 +46,11 @@ function App() {
   }, []);
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
     setIsVisible(false);
     localStorage.setItem("isLoggedIn", "true");
   };
+
   const handleLogout = () => {
-    setIsLoggedIn(false);
     setIsVisible(false);
     localStorage.setItem("isLoggedIn", "false");
   };
@@ -66,51 +63,56 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<SignUp handleLogin={handleLogin} />} />
-            <Route path="/Onboarding" element={<Onboarding />} />
-            <Route path="/Home" element={<Homepage />} />
-            <Route path="/Profile" element={<Profile />} />
             <Route
-              path="/Login"
+              path="/login"
               element={<Login handleLogin={handleLogin} />}
             />
-            <Route path="/Scanner" element={<Scanner />} />
-            <Route path="/Shopping" element={<Shopping />} />
-            <Route path="/Settings" element={<Settings />} />
-            <Route path="/Messaging" element={<Messaging />} />
-            <Route path="/YourLibrary" element={<YourLibrary />} />
-            <Route path="/MyProfile" element={<MyProfile />} />
-            <Route
-              path="/Achievement"
-              element={<Achievement closeModal={closeModal} />}
-            />
-            <Route path="/NewRecipe" element={<NewRecipe />} />
-            <Route
-              path="/UserPreferencePage"
-              element={<UserPreferencePage />}
-            />
-            <Route path="/ViewDish/:id" element={<ViewDish />} />
-            <Route path="/RecipeDirection/:id" element={<RecipeDirection />} />
-            <Route path="/CommentSection" element={<CommentSection />} />
-            <Route
-              path="/ForgotPasswordPage"
-              element={<ForgotPasswordPage />}
-            />
-            <Route
-              path="/SavedRecipe/:category"
-              element={<SavedRecipe closeModal={closeModal} />}
-            />
-            <Route path="/AllDone" element={<AllDone />} />
-            <Route
-              path="/AddShoppingCategory"
-              element={<AddShoppingCategory />}
-            />
-            <Route path="/RecipesPage" element={<RecipesPage />} />
-            <Route
-              path="/Logout"
-              element={<Logout handleLogout={handleLogout} />}
-            />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/Onboarding" element={<Onboarding />} />
+              <Route path="/Home" element={<Homepage />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/Scanner" element={<Scanner />} />
+              <Route path="/Shopping" element={<Shopping />} />
+              <Route path="/Settings" element={<Settings />} />
+              <Route path="/Messaging" element={<Messaging />} />
+              <Route path="/YourLibrary" element={<YourLibrary />} />
+              <Route path="/MyProfile" element={<MyProfile />} />
+              <Route
+                path="/Achievement"
+                element={<Achievement closeModal={closeModal} />}
+              />
+              <Route path="/NewRecipe" element={<NewRecipe />} />
+              <Route
+                path="/UserPreferencePage"
+                element={<UserPreferencePage />}
+              />
+              <Route path="/ViewDish/:id" element={<ViewDish />} />
+              <Route
+                path="/RecipeDirection/:id"
+                element={<RecipeDirection />}
+              />
+              <Route path="/CommentSection" element={<CommentSection />} />
+              <Route
+                path="/ForgotPasswordPage"
+                element={<ForgotPasswordPage />}
+              />
+              <Route
+                path="/SavedRecipe/:category"
+                element={<SavedRecipe closeModal={closeModal} />}
+              />
+              <Route path="/AllDone" element={<AllDone />} />
+              <Route
+                path="/AddShoppingCategory"
+                element={<AddShoppingCategory />}
+              />
+              <Route path="/RecipesPage" element={<RecipesPage />} />
+              <Route
+                path="/Logout"
+                element={<Logout handleLogout={handleLogout} />}
+              />
+            </Route>
           </Routes>
-          {isLoggedIn && (
+          {localStorage.getItem("isLoggedIn") === "true" && (
             <>
               <Navigation />
               <SideBarNavigation setIsVisible={setIsVisible} />
