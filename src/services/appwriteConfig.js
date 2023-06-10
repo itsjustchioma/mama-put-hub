@@ -18,30 +18,7 @@ export const storage = new Storage(client);
 // Database≠
 export const databases = new Databases(client, "64773737337f23de254d");
 
-// let promise = account.createVerification('http://localhost:5173/Home');
 
-// promise.then(function (response) {
-//     console.log(response); // Success
-// }, function (error) {
-//     console.log(error); // Failure
-// });
-
-// let promise = databases.listDocuments(
-//   "64773737337f23de254d",
-//   "647905d239ca167a89f1",
-//   [
-//     // Query.equal('food_name')
-//   ]
-// );
-
-// promise.then(
-//   function (response) {
-//     console.log(response);
-//   },
-//   function (error) {
-//     console.log(error);
-//   }
-// );
 
  export const userId = account.get();
 
@@ -124,10 +101,3 @@ export const createRecipe = async (formData) => {
 
 
 
-
-// Register User
-// createAccount: (email, password, name) => {
-//   return api.provider
-// }
-
-// export const account = sdk.account;
