@@ -13,12 +13,10 @@ import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
 import Achievement from "./views/Achievement";
-import UserPreferencePage from "./views/UserPreferencePage";
 import NewRecipe from "./views/NewRecipe";
 import ViewDish from "./views/ViewDish";
 import RecipeDirection from "./views/RecipeDirection";
 import MyProfile from "./views/MyProfile";
-import CommentSection from "./components/CommentSection";
 import SavedRecipe from "./views/SavedRecipe";
 import AllDone from "./views/AllDone";
 import Logout from "./views/Logout";
@@ -81,16 +79,12 @@ function App() {
                 element={<Achievement closeModal={closeModal} />}
               />
               <Route path="/NewRecipe" element={<NewRecipe />} />
-              <Route
-                path="/UserPreferencePage"
-                element={<UserPreferencePage />}
-              />
+           
               <Route path="/ViewDish/:id" element={<ViewDish />} />
               <Route
                 path="/RecipeDirection/:id"
                 element={<RecipeDirection />}
               />
-              <Route path="/CommentSection" element={<CommentSection />} />
            
               <Route
                 path="/SavedRecipe/:category"

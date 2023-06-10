@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { shuffle } from "lodash"; // Import the shuffle function from the lodash library
 
-import Navigation from "../components/Navigation/Navigation";
 import ImageCarouselFrame from "../components/ImageCarouselFrame";
-import SideBarNavigation from "../components/Navigation/SideBarNavigation";
 import { account, databases } from "../services/appwriteConfig";
 import emptyBookmarkIcon from "/assets/emptybookmark.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,13 +14,20 @@ import "../index.css";
 import WelcomeFrame from "../components/WelcomeFrame";
 
 const Homepage = (props) => {
-  const [carouselItems, setCarouselItems] = useState([]);
-  const [bookmarkStatus, setBookmarkStatus] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  // Define state variables using the useState hook
 
-  const navigate = useNavigate();
 
-  const userId = account.get();
+  const [carouselItems, setCarouselItems] = useState([]); // Holds the items for the image carousel
+
+
+  const [bookmarkStatus, setBookmarkStatus] = useState([]); // Holds the bookmark status for each item by saving it to users library
+
+
+  const [showModal, setShowModal] = useState(false); // Controls the visibility of a modal
+
+  const navigate = useNavigate(); // Provides navigation functionality
+
+  const userId = account.get(); // Retrieves the user ID from the account service
 
   userId.then(
     function (response) {
@@ -34,6 +39,7 @@ const Homepage = (props) => {
     }
   );
 
+  // Fetches the recipes items and initialize the bookmark status when the component mounts
   useEffect(() => {
     let promise = databases.listDocuments(
       "64773737337f23de254d",
@@ -43,9 +49,13 @@ const Homepage = (props) => {
 
     promise.then(
       function (response) {
-        const randomizedItems = shuffle(response.documents); // Randomize the order of documents
-        setCarouselItems(randomizedItems);
-        setBookmarkStatus(Array(response.documents.length).fill(false));
+        const randomizedItems = shuffle(response.documents); // Randomize the order of recipes using lodash's shuffle function
+
+
+        setCarouselItems(randomizedItems); // Update the carousel items state
+
+
+        setBookmarkStatus(Array(response.documents.length).fill(false)); // Initialize the bookmark status with an array of false values
       },
       function (error) {
         console.log(error);
@@ -53,6 +63,7 @@ const Homepage = (props) => {
     );
   }, []);
 
+  // Handle click on an image in the carousel and shows more details about the recipe in viewdish
   const handleImageClick = (index) => {
     const selectedDish = carouselItems[index];
     navigate(`/ViewDish/${index}`, {
@@ -60,11 +71,12 @@ const Homepage = (props) => {
     });
   };
 
+  // Handle click on the bookmark icon
   const handleBookMarkClick = async (index) => {
     try {
       const recipe = carouselItems[index];
 
-      const documentId = uuidv4(); // Generate a unique document ID
+      const documentId = uuidv4(); // Generate a unique document ID using uuidv4
       const savedRecipe = await saveBookmark({
         userId: (await userId).$id,
         level: recipe.level,
@@ -106,11 +118,13 @@ const Homepage = (props) => {
           <h1 className="text-xl font-semibold">Featured Recipes</h1>
           <div className="carousel overflow-x-scroll no-scrollbar m-auto h-[22rem]">
             <div className="inner-carousel flex justify-start">
+              {/* Map through the carousel items and render each item */}
               {carouselItems.map((item, index) =>
                 index < 5 ? (
                   <div className="item w-64 h-64" key={index}>
                     <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
                       <button className="absolute right-5">
+                        {/* Render a bookmark icon based on the bookmark status */}
                         <img
                           src={
                             bookmarkStatus[index]
@@ -122,6 +136,7 @@ const Homepage = (props) => {
                           onClick={() => handleBookMarkClick(index)}
                         />
                       </button>
+                      {/* Render the image and its details */}
                       <img
                         src={item.picture}
                         className="rounded-md bg-slate-200 h-full w-full"

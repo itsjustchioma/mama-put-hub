@@ -9,6 +9,7 @@ import { databases, account } from "../services/appwriteConfig";
 import { saveBookmark } from "../services/appwriteConfig";
 
 export default function RecipesPage(props) {
+  // State variables
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipes, setRecipes] = useState([]);
@@ -16,13 +17,21 @@ export default function RecipesPage(props) {
   const [tags, setTags] = useState([]);
   const [activeTag, setActiveTag] = useState(null);
   const [originalRecipes, setOriginalRecipes] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   const userId = account.get();
   const navigate = useNavigate();
+
+  const carouselItems = location.state?.array;
+  const dish = carouselItems && carouselItems[id];
+
+  console.log(dish);
+
+  // Function to handle tag click
   const handleTagClick = (tag) => {
     setCurrentPage(1); // Reset current page to 1
     setActiveTag(tag); // Update the active tag
-  
+
     let filteredRecipes = [];
     if (tag.name === "All") {
       // If "All" tag is selected, display all recipes
@@ -33,11 +42,11 @@ export default function RecipesPage(props) {
         recipe.tags.includes(tag.name)
       );
     }
-  
+
     setRecipes(filteredRecipes);
   };
-  
 
+  // Function to handle bookmark click
   const handleBookMarkClick = async (index) => {
     try {
       const recipe = recipes[index];
@@ -79,6 +88,7 @@ export default function RecipesPage(props) {
     }
   };
 
+  // Function to handle image click and navigate to recipe detail page
   const handleImageClick = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {
       state: {
@@ -88,7 +98,42 @@ export default function RecipesPage(props) {
     });
   };
 
+  const handleImageClicks = (recipe, index) => {
+    navigate(`/ViewDish/${index}`, {
+      state: {
+        selectedImage: recipe,
+        array: searchResults,
+      },
+    });
+  };
+
+  // useEffect(() => {
+  //     // Fetch recipes from the database
+  //   let promise = databases.listDocuments(
+  //     "64773737337f23de254d",
+  //     "647b9e24d59661e7bfbe",
+  //     []
+  //   );
+
+  //   promise.then(
+  //     function (response) {
+  //       console.log(response);
+  //       const updatedRecipes = response.documents.map((recipe) => ({
+  //         ...recipe,
+  //         tags: getTagsForRecipe(recipe),
+  //       }));
+  //       setRecipes(updatedRecipes);
+  //       setOriginalRecipes(updatedRecipes);
+  //       setBookmarkStatus(Array(updatedRecipes.length).fill(false));
+  //     },
+  //     function (error) {
+  //       console.log(error);
+  //     }
+  //   );
+  // }, []);
+
   useEffect(() => {
+    // Fetch recipes from the database
     let promise = databases.listDocuments(
       "64773737337f23de254d",
       "647b9e24d59661e7bfbe",
@@ -103,7 +148,7 @@ export default function RecipesPage(props) {
           tags: getTagsForRecipe(recipe),
         }));
         setRecipes(updatedRecipes);
-        setOriginalRecipes(updatedRecipes); 
+        setOriginalRecipes(updatedRecipes);
         setBookmarkStatus(Array(updatedRecipes.length).fill(false));
       },
       function (error) {
@@ -112,6 +157,7 @@ export default function RecipesPage(props) {
     );
   }, []);
 
+  // Function to get tags for a recipe
   const getTagsForRecipe = (recipe) => {
     const tags = [];
 
@@ -149,35 +195,123 @@ export default function RecipesPage(props) {
       tags.push("Dessert");
     }
 
-    // If you want to include all as a tag
     tags.push("All");
 
     return tags;
   };
 
+  // Pagination variables
   const itemsPerPage = 6;
   const totalPages = Math.ceil(recipes.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-const displayedRecipes = recipes.slice(startIndex, endIndex);
+  const displayedRecipes = recipes.slice(startIndex, endIndex);
 
+  // Function to navigate to previous page
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
+  // Function to navigate to next pagen
   const goToNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  console.log(displayedRecipes);
+  // console.log(displayedRecipes);
+
+  console.log(searchResults);
+  const handleSearchResultsChange = (results) => {
+    setSearchResults(results);
+  };
+
+  const handleSearch = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    setCurrentPage(1); // Reset current page to 1
+
+    if (searchTerm === "") {
+      // If the search term is empty, display all recipes
+      setIsSearching(false);
+      setSearchResults([]);
+      setRecipes(originalRecipes);
+    } else {
+      // Filter recipes based on the search term
+      setIsSearching(true);
+      const results = originalRecipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchTerm)
+      );
+      setSearchResults(results);
+      setRecipes(results);
+    }
+  };
 
   return (
     <div className="w-[90%] mx-auto h-[90vh] overflow-scroll no-scrollbar">
-      <Header />
+      <Header onSearchResultsChange={handleSearchResultsChange} />
+
       <Tags activeTag={activeTag} onTagClick={handleTagClick} />
+
       <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
 
+      {searchResults.length > 0 && (
+        
+      <div className="carousel overflow-x-scroll no-scrollbar m-auto">
+          <div className="text-center font-medium text-lg text-copper-orange">
+        <h1>({searchResults.length}) Recipes found</h1>
+      </div>
+     
+        <div className="inner-carousel flex flex-wrap justify-center">
+          {searchResults.map((recipe, index) => (
+            <div key={index}>
+             
+                <div className="item w-64 h-[22rem]" key={index}>
+              <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                <button
+                  className="absolute right-5"
+                  onClick={() => handleBookMarkClick(index)}
+                  >
+                  <img
+                    src={
+                      bookmarkStatus[index]
+                        ? fullBookmarkIcon
+                        : emptyBookmarkIcon
+                    }
+                    className="w-5 my-2"
+                    alt="bookmark"
+                    />
+                </button>
+                <img
+                  src={recipe.picture}
+                  className="rounded-md bg-slate-200 h-full w-full"
+                  alt=""
+                  onClick={() => handleImageClicks(recipe, index)}
+                  />
+                <Link to={`/ViewDish/${index}`}>
+                  <div className="mt-2">
+                    <h5 className="text-[14px] font-semibold">{recipe.name}</h5>
+                    <p className="flex items-center text-[14px]">
+                      {recipe.rating}
+                    </p>
+                    <p className="text-[14px]">{recipe.type}</p>
+                    <p className="text-[14px]">
+                      {recipe.time ? recipe.time.toString().slice(0, 17) : ""}
+                    </p>
+                    <p className="text-[14px]">{recipe.servings}</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+            </div>
+          
+            
+          ))}
+
+        </div>
+      <div className="text-center font-medium text-lg">
+        <h1>Explore More</h1>
+      </div>
+      </div>
+      )}
       <h1 className="text-xl font-semibold">{props.title}</h1>
 
       <div className="carousel overflow-x-scroll no-scrollbar m-auto">

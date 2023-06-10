@@ -64,7 +64,7 @@ export default function RecipeDirection() {
             <div className="h-64 md:h-2/4">
               <div className="flex justify-between flex-wrap">
                 <h1 className="text-2xl text-center font-medium">
-                  How to cook {dish.name}
+                  How to cook {dish.food_name} {dish.name}
                 </h1>
               </div>
               <div className="h-64 justify-center mx-auto text-center">

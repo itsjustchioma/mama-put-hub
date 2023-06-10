@@ -9,7 +9,6 @@ import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
 import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
-import plusSign from "/public/assets/plus1.png";
 
 export default function YourLibrary() {
 

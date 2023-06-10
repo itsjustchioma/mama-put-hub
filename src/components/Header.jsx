@@ -3,9 +3,10 @@ import bell from "/assets/bell.png";
 import search from "/assets/search.png";
 import FilterModal from "./Filter/FilterModal";
 import filter from "/assets/filter.png";
-import { databases } from "../services/appwriteConfig";
+import { databases,  } from "../services/appwriteConfig";
+import { Query } from "appwrite";
 
-export default function Header({ showNotification }) {
+export default function Header({ showNotification, onSearchResultsChange }) {
   const [searchVisible, setSearchVisible] = useState(false);
   const [hideSearch, setHideSearch] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(true);
@@ -14,45 +15,47 @@ export default function Header({ showNotification }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const inputRef = useRef(null);
+  const [carouselItems, setCarouselItems] = useState([]);
 
+  
   const handleClick = () => {
     setSearchVisible(!searchVisible);
     setHideSearch(!hideSearch);
     setShowSearchButton(!showSearchButton);
   };
 
+ 
+
   const handleInputChange = async (e) => {
     const searchText = e.target.value;
     setSearchText(searchText);
-
+  
     if (searchText.trim() !== "") {
       try {
         const response = await databases.listDocuments(
-          "64676cf547e8830694b8",
-          "647b9e24d59661e7bfbe",
+          '64773737337f23de254d',
+          '647b9e24d59661e7bfbe',
           [
-            {
-              field: "name",
-              operator: "LIKE",
-              value: `%${searchText}%`,
-            },
-            {
-              field: "type",
-              operator: "LIKE",
-              value: `%${searchText}%`,
-            },
+            Query.equal("name", searchText),
+            // Query.equal("type", searchText),
           ]
         );
-
+  
         setSearchResults(response.documents);
+        onSearchResultsChange(response.documents);
         console.log("Search bar is working");
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
     } else {
       setSearchResults([]);
+      onSearchResultsChange([]); 
     }
   };
+  
+
+
 
   const clearInput = () => {
     setSearchText(""); // Clear the input field's text
@@ -117,35 +120,46 @@ export default function Header({ showNotification }) {
               <input
                 required
                 type="text"
+                placeholder="search recipes..."
                 className="bg-transparent outline-none"
                 value={searchText}
                 onChange={handleInputChange}
               />
-              {/* {searchText && (
+              {searchText && (
                 <span className="cursor-pointer" onClick={clearInput}>
                   &#x2716;
                 </span>
-              )} */}
+              )}
             </div>
-            <button
-              type="submit"
-              className="m-2 text-sm bg-pastel-blue p-2 rounded-2xl text-white"
-            >
-              Submit
-            </button>
+           
           </form>
         </>
       )}
-    
+      <div className="flex items-center">
+        {/* <span className="text-lg">
+          <img
+            src={bell}
+            className="w-6 mr-4 cursor-pointer"
+            alt=""
+            onClick={handleBellClick}
+          />
+          {showNotifications && (
+            <div className="absolute right-0 mt-10 bg-white border rounded-lg shadow-lg p-4 cursor-pointer mr-4 z-20 text-[12px] overflow-scroll h-64 no-scrollbar">
+              {notifications.map((notification) => (
+                <p key={notification.id} className=" hover:bg-pastel-pink p-4">
+                  {notification.message} <br />
+                  {notification.time} <br />
+                  {notification.date}
 
-      {searchResults.length > 0 && (
-        <div className="search-results">
-          {searchResults.map((result) => (
-            <p key={result.$id}>{result.name}</p>
-            // Render other relevant information from the search results
-          ))}
-        </div>
-      )}
+
+                </p>
+              ))}
+            </div>
+          )}
+        </span> */}
+     
+      </div>
+
     </header>
   );
 }

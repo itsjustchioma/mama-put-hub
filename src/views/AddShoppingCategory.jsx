@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingArray } from "../components/Shopping/ShoppingCategoryArray.js";
 import BackArrow from "../components/BackClick/BackArrow.jsx";
 import { account, databases, storage } from "../services/appwriteConfig.js";
 import { v4 as uuidv4 } from "uuid";
@@ -12,7 +11,6 @@ const AddShoppingCategory = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedColor, setSelectedColor] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
-  const [selectedPicture, setSelectedPicture] = useState(null);
 
 
 const handleBackClick = () => {

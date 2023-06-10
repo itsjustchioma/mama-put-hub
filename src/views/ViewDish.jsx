@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
-import starRating from "/assets/preference.png";
 import Button from "../components/Button";
-import fullBookmarkIcon from "/assets/fullbookmark.png";
 import BackArrow from "../components/BackClick/BackArrow";
-import CommentSection from "../components/CommentSection";
 import { databases } from "../services/appwriteConfig";
 import deleteButton from "/assets/delete.png";
 
@@ -99,6 +96,7 @@ const ViewDish = () => {
               <div className="bg-copper-orange inset-0 p-4 overflow-y-auto overscroll-contain">
                 <h1 className="text-2xl text-center font-medium">
                   {dish.food_name}
+                  {dish.name}
                 </h1>
 
                 <div className="flex justify-center justify-evenly mt-4 flex-wrap items-center">
@@ -146,7 +144,7 @@ const ViewDish = () => {
                 </div>
               </div>
               <br />
-              <div onClick={handleDirection}>
+              <div onClick={handleDirection} className="cursor-pointer">
                 <Button title="Show directions" />
               </div>
             </div>
