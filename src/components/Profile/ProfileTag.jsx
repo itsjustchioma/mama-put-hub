@@ -2,13 +2,15 @@ import React, {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { UserInfo } from "./UserInfo";
 import rightArrow from "/assets/right arrow.png";
-import { account } from "../../services/appwriteConfig";
+import { account, databases } from "../../services/appwriteConfig";
 import Login from "../../views/Login";
 
 
-function ProfileTag() {
-  const [userDetails, setUserDetails] = useState();
 
+function ProfileTag() {
+  const userId = account.get();
+  const [profileDetails, setProfileDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState();
   useEffect(() => {
     const getData = account.get()
     getData.then(
@@ -20,14 +22,49 @@ function ProfileTag() {
       }
     )
   }, [])
+
+ const filterUserDetailsById = async (userId) => {
+    try {
+      const response = await databases.listDocuments(
+        "64773737337f23de254d",
+        "647b7649a8bd0a7073be",
+        []
+      );
+      console.log(response);
+
+      const filteredUsers = response.documents.filter(
+        (user) => user.userId === userId
+      );
+
+      console.log(filteredUsers);
+
+      setProfileDetails(filteredUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+    useEffect(() => {
+    // Call the filterUserDetailsById function with the user ID
+    userId.then(
+      function (response) {
+        console.log(response);
+        console.log(response.$id);
+        filterUserDetailsById(response.$id); // Call the function with the user ID
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+  }, []); // Run the effect only once on component mount
   return (
     <>
             <h1 className="text-xl  font-semibold pt-12 pl-8">Profile</h1>
-
-    {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
+            <div className="p-4  items-center">
+            {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
       <img
-        // src={userDetails.name}
-        src="/assets/user.png"
+      src={profileDetails.length > 0 ? profileDetails[0].photo : ""}
         alt="userimage"
         className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
       />
@@ -35,19 +72,21 @@ function ProfileTag() {
         <h4 className="text-md sm:text-lg font-semibold text-black">
           {userDetails.name}
         </h4>
-        <p className="text-sm sm:text-base dark:text-black">My Profile</p>
+        <p>{profileDetails.length > 0 ? profileDetails[0].bio : ""}</p> {/* Render the bio value */}
+        
       </div>
-      <Link to={"/myprofile"}>
-        <button className="absolute right-6 top-1/2 transform -translate-y-1/2">
-          <img
-            src={rightArrow}
-            alt="right arrow"
-            className="w-4"
-          />
-        </button>
-      </Link>
+      
+      
     </div>) : (
        "")} 
+        <div className="p-2 bg-gray-200 rounded mb-4">
+          <p className="font-semibold">Email Address: {profileDetails.length > 0 ? profileDetails[0].email : ""}</p>
+        </div>
+      
+      
+        
+       
+      </div>
    
     </>
   );
