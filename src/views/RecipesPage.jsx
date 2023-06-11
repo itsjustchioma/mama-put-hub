@@ -68,7 +68,7 @@ export default function RecipesPage(props) {
         time: recipe.time ? recipe.time.toString().slice(0, 17) : "",
         servings: recipe.servings,
         author: recipe.author,
-        username: username, 
+        username: username,
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,
@@ -251,7 +251,7 @@ export default function RecipesPage(props) {
 
       <Tags activeTag={activeTag} onTagClick={handleTagClick} />
       <br />
-      <h1 className="text-4xl text-center font-extrabold">Explore</h1>
+      <h1 className="text-4xl text-center font-bold">Explore</h1>
 
       {searchResults.length > 0 && (
         <div className="carousel overflow-x-scroll no-scrollbar m-auto">
