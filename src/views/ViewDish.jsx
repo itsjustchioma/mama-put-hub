@@ -76,14 +76,14 @@ const ViewDish = () => {
         <div className="flex justify-between pb-4">
           <BackArrow onClick={handleBackClick} />
 
-          <div onClick={handleConfirmDelete}>
+          {/* <div onClick={handleConfirmDelete}>
             <img
               src={deleteButton}
               className="w-6 h-6"
               alt=""
               onClick={handleConfirmDeleteCreatedRecipe}
             />
-          </div>
+          </div> */}
         </div>
         {dish ? (
           <div>

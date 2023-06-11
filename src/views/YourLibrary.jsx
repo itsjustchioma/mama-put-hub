@@ -9,6 +9,8 @@ import starRating from "/assets/preference.png";
 import CarouselISavedRecipe from "../components/CarouselImageGallery";
 import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
+import deleteButton from "/assets/delete.png";
+
 
 export default function YourLibrary() {
   // THE LIBRARY VIEW SAVES RECIPES AND CREATES RECIPES
@@ -136,6 +138,50 @@ export default function YourLibrary() {
     );
   }, []);
 
+
+  const handleDeleteSavedRecipe = (recipeId) => {
+    // Perform delete operation in Appwrite database
+    const promise = databases.deleteDocument(
+      "64773737337f23de254d",
+      "6479a9441b13f7a9ad4d",
+      recipeId
+    );
+  
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+        // Refresh the saved recipes list after deletion
+        const updatedRecipes = carouselItems.filter((item) => item.$id !== recipeId);
+        setCarouselItems(updatedRecipes);
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
+  };
+  
+  const handleDeleteCreatedRecipe = (recipeId) => {
+    // Perform delete operation in Appwrite database
+    const promise = databases.deleteDocument(
+      "64773737337f23de254d",
+      "647b9e24d59661e7bfbe",
+      recipeId
+    );
+
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+        // Refresh the created recipes list after deletion
+        const updatedRecipes = createdrecipes.filter((item) => item.$id !== recipeId);
+        setcreatedrecipes(updatedRecipes);
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
+  };
+  
+
   return (
     <div className="overflow-scroll h-[93vh] no-scrollbar">
       <div className="m-4 w-5/6 mx-auto md:h-100vh ">
@@ -148,9 +194,9 @@ export default function YourLibrary() {
               {carouselItems.map((item, index) => (
                 <motion.div className="item w-64 h-64" key={index}>
                   <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
-                    <button className="absolute right-5">
+                    <button className="absolute right-5" onClick={() => handleDeleteSavedRecipe(item.$id)}>
                       <img
-                        src={fullBookmarkIcon}
+                        src={deleteButton}
                         className="w-5 my-2"
                         alt="bookmark"
                       />
@@ -211,7 +257,7 @@ export default function YourLibrary() {
                     <div className="  w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0 ">
                       <button className="absolute right-5 ">
                         <img
-                          src={fullBookmarkIcon}
+                          src={deleteButton}
                           className="w-5 my-2"
                           alt="bookmark"
                         />
@@ -252,13 +298,13 @@ export default function YourLibrary() {
             {createdrecipes.map((item, index) => (
               <motion.div className="item w-64 h-64" key={index}>
                 <div className="w-64 h-64 object-scale-down p-4 pl-4 relative cursor-pointer top-0">
-                  <button className="absolute right-5">
+                  <button className="absolute right-5" onClick={() => handleDeleteCreatedRecipe(item.$id)}>
                     <img
-                      src={fullBookmarkIcon}
+                      src={deleteButton}
                       className="w-5 my-2"
                       alt="bookmark"
                     />
-                  </button>
+                  </button >
                   <img
                     src={item.picture}
                     className="rounded-md h-full w-full"
