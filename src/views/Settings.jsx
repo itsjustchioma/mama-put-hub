@@ -7,7 +7,7 @@ import BackArrow from "../components/BackClick/BackArrow";
 import { Link, useNavigate } from "react-router-dom";
 
 function Settings() {
-   // State variables
+  // State variables
   const [photo, setPhoto] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,6 +17,7 @@ function Settings() {
   const [selectedPicture, setSelectedPicture] = useState(null);
   const [documentID, setDocumentID] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   const navigate = useNavigate();
 
@@ -26,18 +27,15 @@ function Settings() {
     setPhoto(selectedPhoto);
   };
 
-
-  
   // Event handler for email change
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-    // Event handler for bio change
+  // Event handler for bio change
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
-
 
   // Get the current user logged in.
   const userId = account.get();
@@ -51,8 +49,7 @@ function Settings() {
     }
   );
 
-
-   // Find the profile document based on the user ID
+  // Find the profile document based on the user ID
   const findProfileByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
@@ -105,8 +102,7 @@ function Settings() {
     fetchSavedRecipes();
   }, []);
 
-
-   // Handle form submission
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -151,10 +147,13 @@ function Settings() {
         );
         console.log("Profile updated:", updatedProfile);
         navigate("/myprofile");
+        setShowPopup(true);
+        navigate("/profile");
       } else {
         // Create a new profile
         const createdProfile = await saveProfile(profileData);
         console.log("Profile created:", createdProfile);
+        setShowPopup(true);
         navigate("/myprofile");
       }
 
@@ -162,8 +161,6 @@ function Settings() {
       setPhoto("");
       setEmail("");
       setBio("");
-
-
     } catch (error) {
       // Handle the error, such as displaying an error message
       console.error("Error saving/updating profile:", error);
@@ -171,9 +168,17 @@ function Settings() {
   };
 
   console.log(profile);
+  useEffect(() => {
+    let timer;
+    if (showPopup) {
+      timer = setTimeout(() => {
+        setShowPopup(false);
+      }, 1500);
+    }
+    return () => clearTimeout(timer);
+  }, [showPopup]);
 
-
-    // Update the profile in the database
+  // Update the profile in the database
   const UpdateProfile = async (profileData) => {
     try {
       console.log("Profile:", profileData);
@@ -266,6 +271,7 @@ function Settings() {
               )}
             </div>
             <input
+            required
               type="file"
               id="imageUpload"
               accept="image/*"
@@ -279,6 +285,7 @@ function Settings() {
             Bio:
           </label>
           <textarea
+          required
             id="Bio"
             className="w-full px-4 py-2 rounded border border-gray-300"
             value={Bio}
@@ -290,6 +297,7 @@ function Settings() {
             Email:
           </label>
           <input
+          required
             type="email"
             id="email"
             className="w-full px-4 py-2 rounded border border-gray-300"
@@ -297,6 +305,13 @@ function Settings() {
             onChange={handleEmailChange}
           />
         </div>
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow">
+            <p className="text-lg">Profile updated</p>
+          </div>
+        </div>
+      )}
       </form>
     </div>
   );
