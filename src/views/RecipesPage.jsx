@@ -359,7 +359,7 @@ export default function RecipesPage(props) {
         </div>
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mb-6">
         <button
           className={`px-4 py-2 rounded-md ${
             currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
