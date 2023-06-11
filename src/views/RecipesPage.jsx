@@ -107,30 +107,20 @@ export default function RecipesPage(props) {
     });
   };
 
-  // useEffect(() => {
-  //     // Fetch recipes from the database
-  //   let promise = databases.listDocuments(
-  //     "64773737337f23de254d",
-  //     "647b9e24d59661e7bfbe",
-  //     []
-  //   );
-
-  //   promise.then(
-  //     function (response) {
-  //       console.log(response);
-  //       const updatedRecipes = response.documents.map((recipe) => ({
-  //         ...recipe,
-  //         tags: getTagsForRecipe(recipe),
-  //       }));
-  //       setRecipes(updatedRecipes);
-  //       setOriginalRecipes(updatedRecipes);
-  //       setBookmarkStatus(Array(updatedRecipes.length).fill(false));
-  //     },
-  //     function (error) {
-  //       console.log(error);
-  //     }
-  //   );
-  // }, []);
+  function SuccessModal({ showModal }) {
+    return (
+      <div
+        className={`fixed inset-0 flex items-center justify-center z-50 ${
+          showModal ? "" : "hidden"
+        }`}
+      >
+        <div className="bg-white p-4 rounded-md shadow-md">
+          <p className="text-green-500 font-bold">Recipe Saved!</p>
+        </div>
+      </div>
+    );
+  }
+  
 
   useEffect(() => {
     // Fetch recipes from the database
@@ -314,7 +304,7 @@ export default function RecipesPage(props) {
         </div>
       )}
       <h1 className="text-xl font-semibold">{props.title}</h1>
-
+      <SuccessModal showModal={showSuccessModal} />
       <div className="carousel overflow-x-scroll no-scrollbar m-auto">
         <div className="inner-carousel flex flex-wrap justify-center">
           {displayedRecipes.map((recipe, index) => (

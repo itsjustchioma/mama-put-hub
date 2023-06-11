@@ -19,6 +19,7 @@ const Homepage = (props) => {
 
   const [carouselItems, setCarouselItems] = useState([]); // Holds the items for the image carousel
 
+  const [showSavedModal, setShowSavedModal] = useState(false);
 
   const [bookmarkStatus, setBookmarkStatus] = useState([]); // Holds the bookmark status for each item by saving it to users library
 
@@ -97,16 +98,30 @@ const Homepage = (props) => {
       updatedBookmarkStatus[index] = !updatedBookmarkStatus[index];
       setBookmarkStatus(updatedBookmarkStatus);
 
-      setShowModal(true);
+      setShowSavedModal(true);
 
       setTimeout(() => {
-        setShowModal(false);
-      }, 2000);
+        setShowSavedModal(false);
+      }, 10000);
     } catch (error) {
       console.error("Error saving recipe:", error);
     }
   };
 
+
+  const SavedModal = () => {
+    return (
+      <div
+      className={`fixed inset-0 flex items-center justify-center z-50 ${
+        showModal ? "" : "hidden"
+      }`}
+    >
+      <div className="bg-white p-4 rounded-md shadow-md">
+        <p className="text-green-500 font-bold">Recipe Saved!</p>
+      </div>
+    </div>
+    );
+  };
   return (
     <div className="bg-background-color h-[94vh] overflow-scroll  m-auto md:h-[100vh] no-scrollbar">
       <div className="w-10/12 mx-auto">
@@ -160,7 +175,8 @@ const Homepage = (props) => {
               )}
             </div>
           </div>
-       
+          {showSavedModal && <SavedModal />}
+
         </div>
       </div>
     </div>
