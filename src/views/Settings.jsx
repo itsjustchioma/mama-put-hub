@@ -18,6 +18,7 @@ function Settings() {
   const [documentID, setDocumentID] = useState(null);
   const [profile, setProfile] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -134,9 +135,6 @@ function Settings() {
         bio: Bio,
       };
 
-      const updatedProfile = await UpdateProfile(profileData);
-
-      console.log(updatedProfile);
       const existingProfile = await findProfileByUserId(currentUserID);
 
       if (existingProfile) {
@@ -146,15 +144,16 @@ function Settings() {
           profileData
         );
         console.log("Profile updated:", updatedProfile);
-        navigate("/myprofile");
         setShowPopup(true);
+        setModalMessage("Profile updated");
         navigate("/profile");
       } else {
         // Create a new profile
         const createdProfile = await saveProfile(profileData);
         console.log("Profile created:", createdProfile);
         setShowPopup(true);
-        navigate("/myprofile");
+        setModalMessage("Profile created");
+        navigate("/profile");
       }
 
       // Reset form fields
@@ -179,17 +178,17 @@ function Settings() {
   }, [showPopup]);
 
   // Update the profile in the database
-  const UpdateProfile = async (profileData) => {
+  const UpdateProfile = async (profileId, profileData) => {
     try {
       console.log("Profile:", profileData);
       console.log("Document ID:", documentID); // Log the document ID
 
-      if (documentID) {
+      if (profileId) {
         // Save the profile data to the database or update the existing profile
         const savedProfile = await databases.updateDocument(
           "64773737337f23de254d",
           "647b7649a8bd0a7073be",
-          documentID,
+          profileId,
           profileData
         );
         console.log("Saved Profile:", savedProfile);
@@ -271,7 +270,7 @@ function Settings() {
               )}
             </div>
             <input
-            required
+              required
               type="file"
               id="imageUpload"
               accept="image/*"
@@ -285,7 +284,7 @@ function Settings() {
             Bio:
           </label>
           <textarea
-          required
+            required
             id="Bio"
             className="w-full px-4 py-2 rounded border border-gray-300"
             value={Bio}
@@ -297,7 +296,7 @@ function Settings() {
             Email:
           </label>
           <input
-          required
+            required
             type="email"
             id="email"
             className="w-full px-4 py-2 rounded border border-gray-300"
@@ -305,14 +304,14 @@ function Settings() {
             onChange={handleEmailChange}
           />
         </div>
+      </form>
       {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded shadow">
-            <p className="text-lg">Profile updated</p>
+        <div className="fixed inset-0 flex items-center justify-center z-10">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <p>{modalMessage}</p>
           </div>
         </div>
       )}
-      </form>
     </div>
   );
 }

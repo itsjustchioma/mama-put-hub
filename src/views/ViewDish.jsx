@@ -106,10 +106,10 @@ const ViewDish = () => {
                     {" "}
                     Recipe Author: &nbsp;
                     <span className="text-lemon-meringue">
-                      <Link to={"/MyProfile"}>
+                    
                         {dish.author}
                         {dish.username}
-                      </Link>
+                   
                     </span>
                   </p>
 
