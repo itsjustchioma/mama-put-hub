@@ -16,7 +16,7 @@ export const Menus = [
   },
   {
     name: "Explore",
-    icon: "/assets/bell.png",
+    icon: "/assets/search.png",
     dis: "translate-x-32",
     altText: "Notifications Icon",
     path: "/recipesPage",

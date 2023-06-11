@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BackArrow from "../components/BackClick/BackArrow.jsx";
 import { account, databases, storage } from "../services/appwriteConfig.js";
 import { v4 as uuidv4 } from "uuid";
-
+import { Link } from "react-router-dom";
 
 const AddShoppingCategory = () => {
   const navigate = useNavigate();
@@ -11,11 +11,11 @@ const AddShoppingCategory = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedColor, setSelectedColor] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-
-const handleBackClick = () => {
-  navigate("/Shopping");
-};
+  const handleBackClick = () => {
+    navigate("/Shopping");
+  };
 
   const handleCategoryNameChange = (e) => {
     setCategoryName(e.target.value);
@@ -67,26 +67,31 @@ const handleBackClick = () => {
     );
   }, []);
 
-
   const userId = account.get();
 
-  userId.then(function (response) {
-    console.log(response);
+  userId.then(
+    function (response) {
+      console.log(response);
       console.log(response.$id);
-  }, function (error) {
+    },
+    function (error) {
       console.log(error);
-  });
+    }
+  );
   const handleSaveCategory = async (event) => {
     // Other code...
-  
-    const fileInput = document.getElementById('imageUpload');
+
+    const fileInput = document.getElementById("imageUpload");
     const file = fileInput.files[0];
     const fileId = uuidv4(); // Generate a random UUID
-  
-    const newImage = await storage.createFile("647e6735532e8f214235", fileId, file);
-    const imageUrl =  `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
 
-  
+    const newImage = await storage.createFile(
+      "647e6735532e8f214235",
+      fileId,
+      file
+    );
+    const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
+
     const newCategory = {
       userId: (await userId).$id,
       category_name: categoryName,
@@ -94,9 +99,9 @@ const handleBackClick = () => {
       color: selectedColor,
       ingredients: ingredientList,
     };
-  
+
     console.log("New Category:", newCategory); // Log the new category object
-  
+
     // try {
     //   // Save the new category to the database or any other storage service
     //   const savedList = await saveShoppingList({ documentId, ...newCategory });
@@ -107,48 +112,38 @@ const handleBackClick = () => {
 
     try {
       const documentId = uuidv4(); // Generate a random UUID
-      console.log('Recipe:', newCategory);
-      console.log('Document ID:', documentId);
-  
+      console.log("Recipe:", newCategory);
+      console.log("Document ID:", documentId);
+
       const response = await databases.createDocument(
         "64773737337f23de254d", // Your project ID
         "647905e0a9f44dd4d1a4", // Your collection ID
         documentId, // Use the generated UUID as the document ID
-        newCategory,
+        newCategory
       );
-  
-      console.log('Recipe created:', response);
+
+      console.log("Recipe created:", response);
       navigate("/shopping");
       return response; // Optionally, return the created recipe document
     } catch (error) {
-      console.error('Error creating recipe:', error);
+      console.error("Error creating recipe:", error);
       throw error;
     }
   };
-  
-  
-  
-  
-  
-  
-  
+
   const saveShoppingList = async (formData) => {
     try {
       const collectionId = "64773737337f23de254d"; // Replace with your actual collection ID
       const document = await databases.createDocument(collectionId, formData);
-  
+
       console.log("Shopping list created:", document);
+      setShowSuccessMessage(true);
       return document;
     } catch (error) {
       console.error("Error saving shopping list:", error);
       throw new Error("Failed to save shopping list: " + error.message);
     }
   };
-  
-  
-  
-  
-  
 
   return (
     <div className="max-w-lg mx-auto my-12 p-4">
@@ -174,7 +169,7 @@ const handleBackClick = () => {
           </label>
           <input
             type="file"
-            required
+            // required
             id="imageUpload"
             accept="image/*"
             onChange={handleImageUpload}
@@ -235,6 +230,16 @@ const handleBackClick = () => {
           Save Category
         </button>
       </form>
+      <div>
+        {showSuccessMessage && (
+          <div className="success-message">Shopping list saved</div>
+        )}
+
+        {/* Use Link component to navigate to /shopping */}
+        <Link to="/shopping"></Link>
+
+        <button onClick={saveShoppingList}>Save Shopping List</button>
+      </div>
     </div>
   );
 };

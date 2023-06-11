@@ -11,22 +11,22 @@ import { account, storage } from "../services/appwriteConfig";
 import { createRecipe } from "../services/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
 
-
-
 const LevelTags = [
   { name: "Easy" },
   { name: "Medium" },
   { name: "Like a PRO" },
 ];
- const userId = account.get();
+const userId = account.get();
 
-userId.then(function (response) {
+userId.then(
+  function (response) {
     console.log(response.$id);
     console.log(response.name);
-}, function (error) {
+  },
+  function (error) {
     console.log(error);
-});
-
+  }
+);
 
 function FoodForm({ formData, setFormData, handlePrevious }) {
   const [steps, setSteps] = useState([{ name: "" }]);
@@ -41,17 +41,11 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
       steps: updatedSteps.map((step) => step.name),
     }));
   };
-  
-
-
-
 
   const handleAddStep = () => {
     setSteps([...steps, { name: "" }]);
   };
 
-
-  
   const handleRemoveStep = (index) => {
     const updatedSteps = [...steps];
     updatedSteps.splice(index, 1);
@@ -94,14 +88,10 @@ function FoodForm({ formData, setFormData, handlePrevious }) {
   );
 }
 
-
-
 function NewRecipe() {
-
   const [selectedPicture, setSelectedPicture] = useState(null);
 
   const [step, setStep] = useState(1);
-  
 
   useEffect(() => {
     account.get().then(
@@ -136,23 +126,22 @@ function NewRecipe() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-  
+
     try {
       const response = await createRecipe(formData);
-      console.log('Recipe created:', response);
+      console.log("Recipe created:", response);
       // Handle any further actions or redirection after creating the recipe
     } catch (error) {
-      console.error('Error creating recipe:', error);
+      console.error("Error creating recipe:", error);
       // Handle the error appropriately
     }
-  
+
     const totalTime = calculateTotalTime();
     const updatedSteps = formData.steps.map((step) => ({
       ...step,
       totalTime: step.time ? parseInt(step.time) : 0,
     }));
-  
+
     setFormData((prevData) => ({
       ...prevData,
       steps: updatedSteps,
@@ -161,7 +150,6 @@ function NewRecipe() {
     setStep((prevStep) => prevStep + 1);
     navigate("/AllDone");
   };
-  
 
   const handleIncrement = () => {
     setFormData((prevData) => ({
@@ -169,7 +157,7 @@ function NewRecipe() {
       servings: prevData.servings + 1,
     }));
   };
-  
+
   const handleDecrement = () => {
     if (formData.servings > 0) {
       setFormData((prevData) => ({
@@ -178,61 +166,65 @@ function NewRecipe() {
       }));
     }
   };
-  
-  let picture= " ";
 
- const handlePictureChange = async (event) => {
-  const fileIm = event.target.files[0];
-  setSelectedPicture(URL.createObjectURL(fileIm));
-  console.log(fileIm);
-  const fileId = uuidv4(); // Generate a random UUID
+  let picture = " ";
 
-  const userId = account.get();
+  const handlePictureChange = async (event) => {
+    const fileIm = event.target.files[0];
+    setSelectedPicture(URL.createObjectURL(fileIm));
+    console.log(fileIm);
+    const fileId = uuidv4(); // Generate a random UUID
 
-  userId.then(function (response) {
-    console.log(response.$id);
-    console.log(userId);
-  }, function (error) {
-    console.log(error);
-  });
+    const userId = account.get();
 
-  try {
-    // Upload the file to the storage
-    const newImage = await storage.createFile("647e6735532e8f214235", fileId, fileIm);
-    console.log(newImage);
+    userId.then(
+      function (response) {
+        console.log(response.$id);
+        console.log(userId);
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
 
-    console.log(newImage.URL);
-    const result = storage.listFiles('647e6735532e8f214235');
-console.log(result);
+    try {
+      // Upload the file to the storage
+      const newImage = await storage.createFile(
+        "647e6735532e8f214235",
+        fileId,
+        fileIm
+      );
+      console.log(newImage);
 
-const urlLink = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`
-console.log(urlLink);
+      console.log(newImage.URL);
+      const result = storage.listFiles("647e6735532e8f214235");
+      console.log(result);
 
-setFormData((prevData) => ({
-  ...prevData,
-  picture: {
-    url: urlLink,
-  },
-}));
-picture = {
-  url: urlLink,
-};
-console.log(urlLink);
+      const urlLink = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
+      console.log(urlLink);
 
-   
-    // Update the formData with the new image
-    setFormData((prevData) => ({
-      ...prevData,
-      picture: urlLink,
-    }));
-    // Handle the successful upload (e.g., update UI or trigger further actions)
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    // Handle the error (e.g., show an error message)
-  }
-};
+      setFormData((prevData) => ({
+        ...prevData,
+        picture: {
+          url: urlLink,
+        },
+      }));
+      picture = {
+        url: urlLink,
+      };
+      console.log(urlLink);
 
-  
+      // Update the formData with the new image
+      setFormData((prevData) => ({
+        ...prevData,
+        picture: urlLink,
+      }));
+      // Handle the successful upload (e.g., update UI or trigger further actions)
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      // Handle the error (e.g., show an error message)
+    }
+  };
 
   const calculateTotalTime = () => {
     let totalTime = 0;
@@ -250,30 +242,33 @@ console.log(urlLink);
 
   const navigate = useNavigate();
 
-
   const [image, setImage] = useState();
   const uploadImage = async (e) => {
     e.preventDefault();
-  
+
     // Get the file input element
-    const fileInput = document.getElementById('picture');
+    const fileInput = document.getElementById("picture");
     const file = fileInput.files[0];
-  
+
     if (file) {
       try {
         // Upload the file to the storage
-        const newImage = await storage.createFile("647e6735532e8f214235", userId, file);
+        const newImage = await storage.createFile(
+          "647e6735532e8f214235",
+          userId,
+          file
+        );
         console.log(newImage);
         // Handle the successful upload (e.g., update UI or trigger further actions)
       } catch (error) {
-        console.error('Error uploading file:', error);
+        console.error("Error uploading file:", error);
         // Handle the error (e.g., show an error message)
       }
     } else {
       console.log("No picture selected");
     }
   };
-  
+
   const [formData, setFormData] = useState({
     picture: "",
     name: "",
@@ -283,11 +278,8 @@ console.log(urlLink);
     type: "",
     ingredients: [],
     steps: [],
-    userId : "",
-
-    
+    userId: "",
   });
-  
 
   return (
     <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
@@ -325,15 +317,13 @@ console.log(urlLink);
                   {" "}
                   Add an image <br />
                   <input
-  type="file"
-  id="picture"
-  accept="image/*"
-  onChange={handlePictureChange}
-  className="border border-gray-300 rounded-md p-2 w-72 font-normal"
-  required
-/>
-
-
+                    type="file"
+                    id="picture"
+                    accept="image/*"
+                    onChange={handlePictureChange}
+                    className="border border-gray-300 rounded-md p-2 w-72 font-normal"
+                    required
+                  />
                 </label>
               </div>
               <label className="font-medium">
@@ -363,7 +353,7 @@ console.log(urlLink);
               </div>
               <br />
               <div onClick={handleNext}>
-                <Button   onClick={(e) => uploadImage(e)} title="Next Step" />
+                <Button onClick={(e) => uploadImage(e)} title="Next Step" />
               </div>
             </form>
             <div className="text-center text-sm mt-4">Step 1</div>
@@ -426,17 +416,19 @@ console.log(urlLink);
               </label>
               <br />
               <br />
-              <IngredientForm formData={formData} setFormData={setFormData} handlePrevious={handlePrevious} />
-
-
+              <IngredientForm
+                formData={formData}
+                setFormData={setFormData}
+                handlePrevious={handlePrevious}
+              />
               <div className="flex flex-col">
-              <div onClick={handleNext}>
+                <div onClick={handleNext}>
                   <Button title="Next Step" />
-                </div> <br />
+                </div>{" "}
+                <br />
                 <div onClick={handlePrevious} className="mb-4">
                   <Button title="Previous Step" />
                 </div>
-             
               </div>
             </form>
             <div className="text-center text-sm mt-4">Step 2</div>
@@ -453,7 +445,7 @@ console.log(urlLink);
                 setFormData={setFormData}
                 handlePrevious={handlePrevious}
               />
-  <div onClick={handleNext}>
+              <div onClick={handleNext}>
                 <Button title="Next Step" />
               </div>
 
@@ -461,15 +453,12 @@ console.log(urlLink);
               <div onClick={handlePrevious} className="mb-2">
                 <Button title="Previous Step" />
               </div>
-            
             </form>
             <div className="text-center text-sm mt-4">Step 3</div>
           </div>
         )}
 
         {step === 4 && (
-
-
           <div>
             <h1 className="text-lg font-bold">Recipe Publication</h1>
 
@@ -477,47 +466,39 @@ console.log(urlLink);
             <p className="mb-2 ">
               <b>Name:</b> {formData.name}
             </p>
-            <br />
 
             <p className="mb-2 ">
               <b>Servings:</b> {formData.servings}
             </p>
-            <br />
+            
 
             <p className="mb-2 ">
               <b>Description:</b> {formData.description}
             </p>
-            <br />
 
             <p className="mb-2 ">
               <b>Level:</b> {formData.level}
             </p>
 
-            <br />
 
             <p className="mb-2 ">
               <b>Steps:</b>
             </p>
-            <br />
             <ul>
               {formData.steps.map((step, index) => (
-                <li key={index}>
-                  {step}
-                </li>
+                <li key={index}>{step}</li>
               ))}
             </ul>
+            <br />
             <p className="mb-2 ">
               <b>Ingredients:</b>
             </p>
             <ul>
               {formData.ingredients.map((step, index) => (
-                <li key={index}>
-                  {step}
-                </li>
+                <li key={index}>{step}</li>
               ))}
             </ul>
 
-            <br />
 
             <div className="mb-4">
               {formData.picture && (

@@ -37,9 +37,7 @@ const Navigation = () => {
                   }`}
                 >
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      i === active ? "bg-white" : ""
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center `}
                   >
                     <img
                       src={menu.icon}

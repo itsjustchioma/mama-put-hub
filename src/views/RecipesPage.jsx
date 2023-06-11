@@ -250,67 +250,68 @@ export default function RecipesPage(props) {
       <Header onSearchResultsChange={handleSearchResultsChange} />
 
       <Tags activeTag={activeTag} onTagClick={handleTagClick} />
-
-      <h1 className="text-4xl text-center font-extrabold">Recipe Page</h1>
+      <br />
+      <h1 className="text-4xl text-center font-extrabold">Explore</h1>
 
       {searchResults.length > 0 && (
-        
-      <div className="carousel overflow-x-scroll no-scrollbar m-auto">
+        <div className="carousel overflow-x-scroll no-scrollbar m-auto">
           <div className="text-center font-medium text-lg text-copper-orange">
-        <h1>({searchResults.length}) Recipes found</h1>
-      </div>
-     
-        <div className="inner-carousel flex flex-wrap justify-center">
-          {searchResults.map((recipe, index) => (
-            <div key={index}>
-             
-                <div className="item w-64 h-[22rem]" key={index}>
-              <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
-                <button
-                  className="absolute right-5"
-                  onClick={() => handleBookMarkClick(index)}
-                  >
-                  <img
-                    src={
-                      bookmarkStatus[index]
-                        ? fullBookmarkIcon
-                        : emptyBookmarkIcon
-                    }
-                    className="w-5 my-2"
-                    alt="bookmark"
-                    />
-                </button>
-                <img
-                  src={recipe.picture}
-                  className="rounded-md bg-slate-200 h-full w-full"
-                  alt=""
-                  onClick={() => handleImageClicks(recipe, index)}
-                  />
-                <Link to={`/ViewDish/${index}`}>
-                  <div className="mt-2">
-                    <h5 className="text-[14px] font-semibold">{recipe.name}</h5>
-                    <p className="flex items-center text-[14px]">
-                      {recipe.rating}
-                    </p>
-                    <p className="text-[14px]">{recipe.type}</p>
-                    <p className="text-[14px]">
-                      {recipe.time ? recipe.time.toString().slice(0, 17) : ""}
-                    </p>
-                    <p className="text-[14px]">{recipe.servings}</p>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            </div>
-          
-            
-          ))}
+            <h1>({searchResults.length}) Recipes found</h1>
+          </div>
 
+          <div className="inner-carousel flex flex-wrap justify-center">
+            {searchResults.map((recipe, index) => (
+              <div key={index}>
+                <div className="item w-64 h-[22rem]" key={index}>
+                  <div className="w-64 h-64 object-center p-4 pl-4 relative cursor-pointer top-0">
+                    <button
+                      className="absolute right-5"
+                      onClick={() => handleBookMarkClick(index)}
+                    >
+                      <img
+                        src={
+                          bookmarkStatus[index]
+                            ? fullBookmarkIcon
+                            : emptyBookmarkIcon
+                        }
+                        className="w-5 my-2"
+                        alt="bookmark"
+                      />
+                    </button>
+                    <img
+                      src={recipe.picture}
+                      className="rounded-md bg-slate-200 h-full w-full"
+                      alt=""
+                      onClick={() => handleImageClicks(recipe, index)}
+                    />
+                    <Link to={`/ViewDish/${index}`}>
+                      <div className="mt-2">
+                        <h5 className="text-[14px] font-semibold">
+                          {recipe.name}
+                        </h5>
+                        <p className="flex items-center text-[14px]">
+                          {recipe.rating}
+                        </p>
+                        <p className="text-[14px]">{recipe.type}</p>
+                        <p className="text-[14px]">
+                          {recipe.time
+                            ? recipe.time.toString().slice(0, 17)
+                            : ""}
+                        </p>
+                        <p className="text-[14px]">
+                          {recipe.servings} servings
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <h1 className="text-xl font-bold">You Might Like These Recipes</h1>
+          </div>
         </div>
-      <div className="text-center font-medium text-lg">
-        <h1>Explore More</h1>
-      </div>
-      </div>
       )}
       <h1 className="text-xl font-semibold">{props.title}</h1>
 
@@ -349,7 +350,7 @@ export default function RecipesPage(props) {
                     <p className="text-[14px]">
                       {recipe.time ? recipe.time.toString().slice(0, 17) : ""}
                     </p>
-                    <p className="text-[14px]">{recipe.servings}</p>
+                    <p className="text-[14px]">{recipe.servings} servings</p>
                   </div>
                 </Link>
               </div>
