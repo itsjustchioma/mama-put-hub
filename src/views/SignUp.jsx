@@ -144,6 +144,7 @@ export default function SignUp({ handleLogin }) {
                   setPasswordError(e.target.value.length < 8);
                 }}
                 type="password"
+                placeholder="Enter your password"
                 required
                 className="mt-1 my-2 h-12 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
   focus:outline-none focus:border-laurel-green focus:ring-1"
