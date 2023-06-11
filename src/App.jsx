@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SignUp from "./views/SignUp";
 import Login from "./views/Login";
-import Scanner from "./views/Scanner";
 import Settings from "./views/Settings";
-import Messaging from "./views/Messaging";
 import Homepage from "./views/Homepage";
 import Onboarding from "./views/Onboarding";
 import Profile from "./views/Profile";
@@ -18,7 +16,6 @@ import RecipeDirection from "./views/RecipeDirection";
 import MyProfile from "./views/MyProfile";
 import SavedRecipe from "./views/SavedRecipe";
 import AllDone from "./views/AllDone";
-import Logout from "./views/Logout";
 import RecipesPage from "./views/RecipesPage";
 import AddShoppingCategory from "./views/AddShoppingCategory";
 import LoadingIndicator from "./components/LoadingIndicator";
@@ -67,10 +64,8 @@ function App() {
               <Route path="/Onboarding" element={<Onboarding />} />
               <Route path="/Home" element={<Homepage />} />
               <Route path="/Profile" element={<Profile />} />
-              <Route path="/Scanner" element={<Scanner />} />
               <Route path="/Shopping" element={<Shopping />} />
               <Route path="/Settings" element={<Settings />} />
-              <Route path="/Messaging" element={<Messaging />} />
               <Route path="/YourLibrary" element={<YourLibrary />} />
               <Route path="/MyProfile" element={<MyProfile />} />
             
@@ -92,10 +87,7 @@ function App() {
                 element={<AddShoppingCategory />}
               />
               <Route path="/RecipesPage" element={<RecipesPage />} />
-              <Route
-                path="/Logout"
-                element={<Logout handleLogout={handleLogout} />}
-              />
+             
             </Route>
           </Routes>
           {localStorage.getItem("isLoggedIn") === "true" && (

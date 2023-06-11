@@ -6,16 +6,16 @@ import filter from "/assets/filter.png";
 import { databases,  } from "../services/appwriteConfig";
 import { Query } from "appwrite";
 
-export default function Header({ showNotification, onSearchResultsChange }) {
+export default function Header({  onSearchResultsChange }) {
   const [searchVisible, setSearchVisible] = useState(false);
   const [hideSearch, setHideSearch] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   const [searchText, setSearchText] = useState(""); // Track the input field's text
   const [showNotifications, setShowNotifications] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const inputRef = useRef(null);
-  const [carouselItems, setCarouselItems] = useState([]);
+  // const [carouselItems, setCarouselItems] = useState([]);
 
   
   const handleClick = () => {

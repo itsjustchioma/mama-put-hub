@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";

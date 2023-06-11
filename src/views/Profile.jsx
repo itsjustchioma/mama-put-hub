@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Header from "../components/Header";
 import ProfileTag from "../components/Profile/ProfileTag";
-import AchievementTag from "../components/Achievement/AchievementTag";
 import ProfileOptions from "../components/Profile/ProfileOptions";
 import { account, databases } from "../services/appwriteConfig";
 import { Link, useNavigate } from "react-router-dom";

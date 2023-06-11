@@ -4,7 +4,6 @@ import book from "/assets/guava.png";
 import recipebook from "/assets/recipe book.png";
 import notes from "/assets/notes.png";
 import foodplanner from "/assets/food planner icon.png";
-import apron from "/assets/apron.png";
 import plate from "/assets/plate.png";
 import knife from "/assets/knife.png";
 import chefHat from "/assets/chef hat 1.png";

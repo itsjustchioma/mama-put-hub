@@ -7,6 +7,7 @@ import BackArrow from "../components/BackClick/BackArrow";
 import { Link, useNavigate } from "react-router-dom";
 
 function Settings() {
+   // State variables
   const [photo, setPhoto] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,41 +20,39 @@ function Settings() {
 
   const navigate = useNavigate();
 
+  // Event handler for photo change
   const handlePhotoChange = (event) => {
     const selectedPhoto = event.target.files[0];
     setPhoto(selectedPhoto);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
 
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
-
+  
+  // Event handler for email change
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
+    // Event handler for bio change
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
 
+
+  // Get the current user logged in.
   const userId = account.get();
 
   userId.then(
     function (response) {
       console.log(response);
-      console.log(response.$id);
     },
     function (error) {
       console.log(error);
     }
   );
 
-  let imageUrl;
 
+   // Find the profile document based on the user ID
   const findProfileByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
@@ -72,6 +71,7 @@ function Settings() {
     }
   };
 
+  // Fetch the saved recipes and find the current user's profile document
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
@@ -92,7 +92,6 @@ function Settings() {
         if (foundDocument) {
           // Get the document ID from the found document and store it in the state variable
           const documentId = foundDocument.$id;
-          console.log(documentId);
           setDocumentID(documentId);
         } else {
           // No document found for the current user, handle accordingly
@@ -106,6 +105,8 @@ function Settings() {
     fetchSavedRecipes();
   }, []);
 
+
+   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -159,10 +160,10 @@ function Settings() {
 
       // Reset form fields
       setPhoto("");
-      // setPassword('');
-      // setConfirmPassword('');
       setEmail("");
       setBio("");
+
+
     } catch (error) {
       // Handle the error, such as displaying an error message
       console.error("Error saving/updating profile:", error);
@@ -171,6 +172,8 @@ function Settings() {
 
   console.log(profile);
 
+
+    // Update the profile in the database
   const UpdateProfile = async (profileData) => {
     try {
       console.log("Profile:", profileData);
@@ -200,6 +203,7 @@ function Settings() {
     }
   };
 
+  // Handle back button click
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };

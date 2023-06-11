@@ -68,7 +68,7 @@ export default function RecipesPage(props) {
         time: recipe.time ? recipe.time.toString().slice(0, 17) : "",
         servings: recipe.servings,
         author: recipe.author,
-        username: username, // Update the username here
+        username: username, 
         steps: recipe.steps,
         rating: recipe.rating ? recipe.rating.toString().slice(0, 11) : "",
         ingredients: recipe.ingredients,

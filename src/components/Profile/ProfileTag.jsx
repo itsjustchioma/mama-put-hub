@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { UserInfo } from "./UserInfo";
-import rightArrow from "/assets/right arrow.png";
 import { account, databases } from "../../services/appwriteConfig";
-import Login from "../../views/Login";
 
 function ProfileTag() {
   const userId = account.get();
