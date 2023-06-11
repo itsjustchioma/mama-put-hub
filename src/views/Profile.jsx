@@ -26,7 +26,7 @@ function Profile() {
       <div className="w-10/12 mx-auto">
        <ProfileTag/>
         <ProfileOptions />
-        <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer" onClick={handleLogout}>
+        <div className="p-2.5 mt-3 flex md:hidden items-center rounded-md px-4 duration-300 cursor-pointer" onClick={handleLogout}>
             <img src="/assets/back-arrow.png" alt="" className="w-4" />
             <span className="text-sm ml-4">Logout</span>
          
