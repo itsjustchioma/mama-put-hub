@@ -246,7 +246,7 @@ export default function RecipesPage(props) {
   };
 
   return (
-    <div className="w-[90%] mx-auto h-[90vh] overflow-scroll no-scrollbar">
+    <div className="w-[90%] mx-auto h-[94vh] pb-10 overflow-scroll no-scrollbar">
       <Header onSearchResultsChange={handleSearchResultsChange} />
 
       <Tags activeTag={activeTag} onTagClick={handleTagClick} />
