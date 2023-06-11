@@ -38,6 +38,8 @@ const ViewDish = () => {
       dish.$id
     );
 
+    console.log(dish.$id);
+
     promise.then(
       function (response) {
         console.log(response); // Success

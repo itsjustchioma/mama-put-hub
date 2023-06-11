@@ -10,6 +10,7 @@ import AllDone from "./AllDone";
 import { account, storage } from "../services/appwriteConfig";
 import { createRecipe } from "../services/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
+import "../index.css";
 
 const LevelTags = [
   { name: "Easy" },
@@ -282,7 +283,7 @@ function NewRecipe() {
   });
 
   return (
-    <div className="m-4 h-[89vh] overflow-scroll w-5/6  mx-auto  no-scrollbar md:h[100vh]">
+    <div className="m-4 h-[90vh] overflow-scroll w-5/6  mx-auto  no-scrollbar  md:h[100vh]">
       <div className="flex justify-between mb-4">
         <BackArrow onClick={handleBackClick} />
 
