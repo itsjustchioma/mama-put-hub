@@ -3,7 +3,8 @@ import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import BackArrow from "../components/BackClick/BackArrow";
 import { databases } from "../services/appwriteConfig";
-import deleteButton from "/assets/delete.png";
+
+import "../index.css";
 
 const ViewDish = () => {
   const { id } = useParams(); // Retrieves the id (index) from the URL parameter
