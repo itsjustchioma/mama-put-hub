@@ -12,7 +12,6 @@ import Profile from "./views/Profile";
 import Shopping from "./views/Shopping";
 import YourLibrary from "./views/YourLibrary";
 import SideBarNavigation from "./components/Navigation/SideBarNavigation";
-import Achievement from "./views/Achievement";
 import NewRecipe from "./views/NewRecipe";
 import ViewDish from "./views/ViewDish";
 import RecipeDirection from "./views/RecipeDirection";
@@ -74,10 +73,7 @@ function App() {
               <Route path="/Messaging" element={<Messaging />} />
               <Route path="/YourLibrary" element={<YourLibrary />} />
               <Route path="/MyProfile" element={<MyProfile />} />
-              <Route
-                path="/Achievement"
-                element={<Achievement closeModal={closeModal} />}
-              />
+            
               <Route path="/NewRecipe" element={<NewRecipe />} />
            
               <Route path="/ViewDish/:id" element={<ViewDish />} />

@@ -38,4 +38,6 @@ export const Menus = [
     path: "/profile",
     colorName: "copper-orange",
   },
+
+  
 ];

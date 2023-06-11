@@ -1,29 +1,27 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserInfo } from "./UserInfo";
 import rightArrow from "/assets/right arrow.png";
 import { account, databases } from "../../services/appwriteConfig";
 import Login from "../../views/Login";
 
-
-
 function ProfileTag() {
   const userId = account.get();
   const [profileDetails, setProfileDetails] = useState([]);
   const [userDetails, setUserDetails] = useState();
   useEffect(() => {
-    const getData = account.get()
+    const getData = account.get();
     getData.then(
-      function(response){
-        setUserDetails(response)
+      function (response) {
+        setUserDetails(response);
       },
-      function(error){
+      function (error) {
         console.log(error);
       }
-    )
-  }, [])
+    );
+  }, []);
 
- const filterUserDetailsById = async (userId) => {
+  const filterUserDetailsById = async (userId) => {
     try {
       const response = await databases.listDocuments(
         "64773737337f23de254d",
@@ -44,8 +42,7 @@ function ProfileTag() {
     }
   };
 
-
-    useEffect(() => {
+  useEffect(() => {
     // Call the filterUserDetailsById function with the user ID
     userId.then(
       function (response) {
@@ -60,34 +57,33 @@ function ProfileTag() {
   }, []); // Run the effect only once on component mount
   return (
     <>
-            <h1 className="text-xl  font-semibold pt-12 pl-8">Profile</h1>
-            <div className="p-4  items-center">
-            {userDetails ? ( <div className="p-6 sm:p-12 rounded-md relative flex items-center">
-      <img
-      src={profileDetails.length > 0 ? profileDetails[0].photo : ""}
-        alt="userimage"
-        className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
-      />
-      <div className=" ml-2">
-        <h4 className="text-md sm:text-lg font-semibold text-black">
-          {userDetails.name}
-        </h4>
-        <p>{profileDetails.length > 0 ? profileDetails[0].bio : ""}</p> {/* Render the bio value */}
-        
-      </div>
-      
-      
-    </div>) : (
-       "")} 
-        <div className="p-2 bg-gray-200 rounded mb-4">
-          <p className="font-semibold">Email Address: {profileDetails.length > 0 ? profileDetails[0].email : ""}</p>
+      <h1 className="text-xl  font-semibold pt-12 pl-8">Profile</h1>
+      <div className="p-4  items-center">
+        {userDetails ? (
+          <div className="py-6 sm:py-12 rounded-md relative flex items-center">
+            <img
+              src={profileDetails.length > 0 ? profileDetails[0].photo : ""}
+              alt="userimage"
+              className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+            />
+            <div className=" ml-2">
+              <h4 className="text-md sm:text-lg font-semibold text-black">
+                {userDetails.name}
+              </h4>
+              <p className="text-sm">{profileDetails.length > 0 ? profileDetails[0].bio : ""}</p>{" "}
+              {/* Render the bio value */}
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="p-2rounded mb-4">
+          <p className="font-semibold text-sm">
+            Email Address:{" "}
+            {profileDetails.length > 0 ? profileDetails[0].email : ""}
+          </p>
         </div>
-      
-      
-        
-       
       </div>
-   
     </>
   );
 }
