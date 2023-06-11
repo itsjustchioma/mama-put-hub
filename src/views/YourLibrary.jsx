@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 import { databases } from "../services/appwriteConfig";
 import fullBookmarkIcon from "/public/assets/fullbookmark.png";
 import { motion } from "framer-motion";

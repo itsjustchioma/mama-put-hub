@@ -9,7 +9,7 @@ function ProfileOptions() {
     <>
       {ProfileMenu.map((pMenu, i) => (
         <div key={i}>
-          <div className="mt-6 sm:p-12 rounded-md relative flex items-center">
+          <div className="mt-6  rounded-md relative flex items-center">
             <img
               src={pMenu.icon}
               alt="userimage"
