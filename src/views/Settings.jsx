@@ -149,7 +149,7 @@ function Settings() {
           profileData
         );
         console.log("Profile updated:", updatedProfile);
-        navigate("/profile");
+        navigate("/myprofile");
       } else {
         // Create a new profile
         const createdProfile = await saveProfile(profileData);
