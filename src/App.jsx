@@ -19,7 +19,6 @@ import AllDone from "./views/AllDone";
 import RecipesPage from "./views/RecipesPage";
 import AddShoppingCategory from "./views/AddShoppingCategory";
 import LoadingIndicator from "./components/LoadingIndicator";
-import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 
 const closeModal = () => {

@@ -188,14 +188,14 @@ function Settings() {
           profileData
         );
         console.log("Saved Profile:", savedProfile);
-        navigate("/myprofile");
+        navigate("/profile");
 
         return savedProfile;
       } else {
         // Create a new profile
         const createdProfile = await saveProfile(profileData);
         console.log("Profile created:", createdProfile);
-        navigate("/myprofile");
+        navigate("/profile");
         return createdProfile;
       }
     } catch (error) {
