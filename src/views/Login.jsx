@@ -80,6 +80,7 @@ export default function Login({ handleLogin }) {
               <input
                 type="password"
                 required
+                placeholder="Enter your password"
                 onChange={(e) => {
                   setUser({
                     ...user,
@@ -120,7 +121,6 @@ export default function Login({ handleLogin }) {
                 </button>
               </div>
 
-           
               <Link to="/">
                 <p className="text-text-grey text-center text-sm my-4 underline">
                   Don't have an account? Sign Up.

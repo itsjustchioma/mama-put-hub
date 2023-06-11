@@ -20,9 +20,6 @@ export default function ImageCarouselFrame(props) {
     });
   };
 
-
-  
-
   useEffect(() => {
     let promise = databases.listDocuments(
       "64773737337f23de254d",

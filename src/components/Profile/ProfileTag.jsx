@@ -54,7 +54,9 @@ function ProfileTag() {
   }, []); // Run the effect only once on component mount
   return (
     <>
-      <h1 className="text-xl  font-semibold pt-12 pl-8">Profile</h1>
+      <h1 className="text-3xl font-bold md:text-4xl text-center pt-12 pl-8">
+        Profile
+      </h1>
       <div className="p-4  items-center">
         {userDetails ? (
           <div className="py-6 sm:py-12 rounded-md relative flex items-center">
@@ -67,7 +69,9 @@ function ProfileTag() {
               <h4 className="text-md sm:text-lg font-semibold text-black">
                 {userDetails.name}
               </h4>
-              <p className="text-sm">{profileDetails.length > 0 ? profileDetails[0].bio : ""}</p>{" "}
+              <p className="text-sm">
+                {profileDetails.length > 0 ? profileDetails[0].bio : ""}
+              </p>{" "}
               {/* Render the bio value */}
             </div>
           </div>
