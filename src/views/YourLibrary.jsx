@@ -11,7 +11,6 @@ import { saveBookmark } from "../services/appwriteConfig";
 import { account } from "../services/appwriteConfig";
 
 export default function YourLibrary() {
-
   // THE LIBRARY VIEW SAVES RECIPES AND CREATES RECIPES
 
   // State variables
@@ -21,7 +20,7 @@ export default function YourLibrary() {
   const [userId, setUserId] = useState(""); // Added userId state
   const navigate = useNavigate();
 
-   // Fetch saved recipes from the database
+  // Fetch saved recipes from the database
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
@@ -38,7 +37,6 @@ export default function YourLibrary() {
 
     fetchSavedRecipes();
   }, []);
-
 
   // Function to handle bookmarking a recipe
   const handleBookmark = async (recipe) => {
@@ -69,9 +67,7 @@ export default function YourLibrary() {
     });
   };
 
-
-
-    // Function to filter saved recipes by user ID
+  // Function to filter saved recipes by user ID
   const filterRecipesByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
@@ -89,7 +85,6 @@ export default function YourLibrary() {
       console.log(error);
     }
   };
-
 
   // Function to filter user's own recipes by user ID
   const filterRecipesByUserID = async (userId) => {
@@ -110,7 +105,7 @@ export default function YourLibrary() {
     }
   };
 
-    // Fetches the userId and filter created recipes by userId when the component mounts
+  // Fetches the userId and filter created recipes by userId when the component mounts
   useEffect(() => {
     const userIdPromise = account.get();
 
@@ -172,7 +167,6 @@ export default function YourLibrary() {
                         <h5 className="text-[14px] font-semibold">
                           {item.food_name}
                           {item.name}
-
                         </h5>
                         <p className="flex items-center text-[14px]">
                           {item.level}
@@ -274,10 +268,7 @@ export default function YourLibrary() {
                   />
                   <Link to={`/ViewDish/${index}`}>
                     <div className="mt-2">
-                      <h5 className="text-[14px] font-semibold">
-                        {item.name}
-
-                      </h5>
+                      <h5 className="text-[14px] font-semibold">{item.name}</h5>
                       <p className="flex items-center text-[14px]">
                         {/* <img
                             src={starRating}

@@ -238,7 +238,7 @@ const AddShoppingCategory = () => {
         {/* Use Link component to navigate to /shopping */}
         <Link to="/shopping"></Link>
 
-        <button onClick={saveShoppingList}>Save Shopping List</button>
+        <button onClick={saveShoppingList}></button>
       </div>
     </div>
   );
