@@ -200,7 +200,7 @@ function NewRecipe() {
       const result = storage.listFiles("647e6735532e8f214235");
       console.log(result);
 
-      const urlLink = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8&mode=admin`;
+      const urlLink = `https://cloud.appwrite.io/v1/storage/buckets/647e6735532e8f214235/files/${fileId}/view?project=64676cf547e8830694b8`;
       console.log(urlLink);
 
       setFormData((prevData) => ({
