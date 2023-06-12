@@ -39,7 +39,7 @@ function App() {
 
   const handleLogin = () => {
     setIsVisible(false);
-    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isLoggedIn", "false");
   };
 
   const handleLogout = () => {
