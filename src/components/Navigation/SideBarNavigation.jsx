@@ -41,11 +41,11 @@ const SideBarNavigation = () => {
 
     // --------Condtion Statemnt to hide the navigation when on home or sign up  -------------------
 
-  const isAboutPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/onboarding';
+    const isHiddenPage = ["/", "/login", "/onboarding"].includes(location.pathname);
 
-  if (isAboutPage) {
-    return null;
-  }
+    if (isHiddenPage) {
+      return null;
+    }
 
 
 
