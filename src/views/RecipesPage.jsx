@@ -25,7 +25,6 @@ export default function RecipesPage(props) {
   const carouselItems = location.state?.array;
   const dish = carouselItems && carouselItems[id];
 
-  console.log(dish);
 
   // Function to handle tag click
   const handleTagClick = (tag) => {
@@ -57,7 +56,6 @@ export default function RecipesPage(props) {
       );
 
       const username = recipeDocument.username;
-      console.log(username);
 
       const savedRecipe = await saveBookmark({
         userId: (await userId).$id,
@@ -208,9 +206,7 @@ export default function RecipesPage(props) {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  // console.log(displayedRecipes);
 
-  console.log(searchResults);
   const handleSearchResultsChange = (results) => {
     setSearchResults(results);
   };
