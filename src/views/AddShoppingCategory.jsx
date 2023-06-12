@@ -79,7 +79,7 @@ const AddShoppingCategory = () => {
     }
   );
   const handleSaveCategory = async (event) => {
-    // Other code...
+   
 
     const fileInput = document.getElementById("imageUpload");
     const file = fileInput.files[0];
@@ -102,13 +102,7 @@ const AddShoppingCategory = () => {
 
     console.log("New Category:", newCategory); // Log the new category object
 
-    // try {
-    //   // Save the new category to the database or any other storage service
-    //   const savedList = await saveShoppingList({ documentId, ...newCategory });
-    //   console.log("Shopping list saved:", savedList);
-    // } catch (error) {
-    //   console.error("Error saving shopping list:", error);
-    // }
+   
 
     try {
       const documentId = uuidv4(); // Generate a random UUID
