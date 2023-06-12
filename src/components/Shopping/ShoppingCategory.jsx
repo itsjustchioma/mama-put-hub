@@ -4,60 +4,34 @@ import AddShopping from "/assets/right arrow.png";
 import { databases, account } from "../../services/appwriteConfig.js";
 
 function ShoppingCategory() {
-  // Define state variables using the useState hook
   const [createdShoppings, setCreatedShoppings] = useState([]);
   const [userId, setUserId] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect hook to fetch shopping categories and filter them by user ID
   useEffect(() => {
-    // Fetch the logged-in user's ID from the account service
-
     const fetchShoppingCategories = async () => {
       try {
-        const response = await account.get(); // Get the logged-in user's ID
+        const response = await account.get();
         const userId = response.$id;
         setUserId(userId);
-        filterShoppingCategoriesByUserId(userId); // Filter categories by user ID
+        filterShoppingCategoriesByUserId(userId);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchShoppingCategories();
   }, []);
-
-  // useEffect hook to fetch all shopping categories
-  useEffect(() => {
-    const fetchShoppingCategories = async () => {
-      try {
-        // Fetch all shopping categories from the database using the listDocuments method
-
-        const response = await databases.listDocuments(
-          "64773737337f23de254d", //  database ID
-          "647905e0a9f44dd4d1a4", //  collection  ID
-          []
-        );
-        console.log(response);
-
-        setCreatedShoppings(response.documents); // Set the fetched categories
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchShoppingCategories();
-  }, []);
-
-  // Function to filter shopping categories by user ID
 
   const filterShoppingCategoriesByUserId = async (userId) => {
     try {
       const response = await databases.listDocuments(
-        "64773737337f23de254d", //  database ID
-        "647905e0a9f44dd4d1a4", //  collection  ID
+        "64773737337f23de254d", // database ID
+        "647905e0a9f44dd4d1a4", // collection ID
         []
       );
-      console.log(response);
 
       const filteredCategories = response.documents.filter(
         (category) => category.userId === userId
@@ -69,13 +43,13 @@ function ShoppingCategory() {
     }
   };
 
+  if (isLoading) {
+    return null; // Render nothing when still loading
+  }
+
   return (
     <div className="mt-2 md:mt-12 md:ml-24 ml-16">
-      {createdShoppings.length === 0 ? ( // Checks if there are no categories
-        <p className="text-copper-orange italic ">Create a shopping list.</p>
-      ) : (
-        //Checks If there are categories, map through them and render each category
-
+      {createdShoppings.length > 0 && (
         createdShoppings.map((category) => (
           <div
             key={category.$id}
@@ -104,8 +78,6 @@ function ShoppingCategory() {
               </div>
               <div className="ml-auto">
                 <Link to={`/SavedRecipe/${category.$id}`}>
-                  {" "}
-                  {/* Pass the document ID */}
                   <button>
                     <img src={AddShopping} alt="right arrow" className="w-4" />
                   </button>
@@ -114,6 +86,9 @@ function ShoppingCategory() {
             </div>
           </div>
         ))
+      )}
+      {createdShoppings.length === 0 && (
+        <p className="text-copper-orange italic">Create a shopping list.</p>
       )}
     </div>
   );

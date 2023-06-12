@@ -31,13 +31,44 @@ export default function YourLibrary() {
           "6479a9441b13f7a9ad4d",
           []
         );
-        setCarouselItems(response.documents);
+        const savedRecipes = response.documents.filter(
+          (recipe) => recipe.userId === userId
+        );
+        setCarouselItems(savedRecipes);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchSavedRecipes();
+    const fetchCreatedRecipes = async () => {
+      try {
+        const response = await databases.listDocuments(
+          "64773737337f23de254d",
+          "647b9e24d59661e7bfbe",
+          []
+        );
+        const userRecipes = response.documents.filter(
+          (recipe) => recipe.userId === userId
+        );
+        setCreatedRecipes(userRecipes);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const userIdPromise = account.get();
+
+    userIdPromise.then(
+      (response) => {
+        const userId = response.$id;
+        setUserId(userId);
+        fetchSavedRecipes();
+        fetchCreatedRecipes();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }, []);
 
   // Function to handle bookmarking a recipe

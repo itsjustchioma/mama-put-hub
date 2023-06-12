@@ -91,7 +91,7 @@ export default function RecipesPage(props) {
 const handleImageClick = (recipe, index) => {
   const recipeIndex = startIndex + index; // Calculate the index based on the current page
   const selectedRecipe = displayedRecipes[recipeIndex]; // Get the recipe using the calculated index
-  navigate(`/ViewDish/${recipeIndex}`, {
+  navigate(`/ViewDish/${index}`, {
     state: {
       selectedImage: selectedRecipe,
       array: displayedRecipes,

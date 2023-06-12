@@ -67,15 +67,15 @@ function App() {
               <Route path="/Settings" element={<Settings />} />
               <Route path="/YourLibrary" element={<YourLibrary />} />
               <Route path="/MyProfile" element={<MyProfile />} />
-            
+
               <Route path="/NewRecipe" element={<NewRecipe />} />
-           
+
               <Route path="/ViewDish/:id" element={<ViewDish />} />
               <Route
                 path="/RecipeDirection/:id"
                 element={<RecipeDirection />}
               />
-           
+
               <Route
                 path="/SavedRecipe/:category"
                 element={<SavedRecipe closeModal={closeModal} />}
@@ -86,7 +86,6 @@ function App() {
                 element={<AddShoppingCategory />}
               />
               <Route path="/RecipesPage" element={<RecipesPage />} />
-             
             </Route>
           </Routes>
           {localStorage.getItem("isLoggedIn") === "true" && (
