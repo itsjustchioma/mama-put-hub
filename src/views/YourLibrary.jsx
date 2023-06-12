@@ -238,7 +238,7 @@ export default function YourLibrary() {
                     </button>
                     <img
                       src={item.picture}
-                      className="rounded-md h-full w-full"
+                      className="rounded-md h-full w-full object-center object-cover"
                       alt=""
                       onClick={() => handleImageClick(item, index)}
                     />
@@ -298,7 +298,7 @@ export default function YourLibrary() {
                       </button>
                       <img
                         src={item.picture}
-                        className="rounded-md h-full w-full  "
+                        className="rounded-md h-full w-full  object-center object-cover"
                         alt=""
                         onClick={() => {
                           handleImageClick(item, index);
@@ -340,7 +340,7 @@ export default function YourLibrary() {
                   </button >
                   <img
                     src={item.picture}
-                    className="rounded-md h-full w-full"
+                    className="rounded-md h-full w-full object-center object-cover"
                     alt=""
                     onClick={() => handleImageClicks(item, index)}
                   />
