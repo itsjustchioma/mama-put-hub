@@ -154,7 +154,7 @@ const Homepage = (props) => {
                       {/* Render the image and its details */}
                       <img
                         src={item.picture}
-                        className="rounded-md bg-slate-200 h-full w-full"
+                        className="rounded-md bg-slate-200 h-full w-full object-center object-cover"
                         alt=""
                         onClick={() => handleImageClick(index)}
                       />

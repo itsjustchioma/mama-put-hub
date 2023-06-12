@@ -270,7 +270,7 @@ const handleImageClick = (recipe, index) => {
                     </button>
                     <img
                       src={recipe.picture}
-                      className="rounded-md bg-slate-200 h-full w-full"
+                      className="rounded-md bg-slate-200 h-full w-full object-center object-cover"
                       alt=""
                       onClick={() => handleImageClicks(recipe, index)}
                     />
@@ -326,7 +326,7 @@ const handleImageClick = (recipe, index) => {
                 </button>
                 <img
                   src={recipe.picture}
-                  className="rounded-md bg-slate-200 h-full w-full"
+                  className="rounded-md bg-slate-200 h-full w-full object-center object-cover"
                   alt=""
                   onClick={() => handleImageClick(recipe, index)}
                 />

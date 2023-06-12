@@ -113,7 +113,7 @@ export default function ImageCarouselFrame(props) {
                   </button>
                   <img
                     src={item.picture}
-                    className="rounded-md bg-slate-200 h-full w-full"
+                    className="rounded-md bg-slate-200 h-full w-full object-center object-cover"
                     alt=""
                     onClick={() => handleImageClick(index)}
                   />

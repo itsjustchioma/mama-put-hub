@@ -65,7 +65,7 @@ function ShoppingCategory() {
                 <img
                   src={category.picture}
                   alt="Category"
-                  className="w-14 h-14 rounded-lg dark:bg-gray-500 dark:border-gray-700 p-1 md:w-24 md:h-24 md:ml-6 ml-4"
+                  className="w-14 h-14 rounded-lg dark:bg-gray-500 dark:border-gray-700 p-1 md:w-24 md:h-24 md:ml-6 ml-4 object-center object-cover"
                 />
               </div>
               <div className="md:ml-8 ml-6 text-sm md:text-lg">
