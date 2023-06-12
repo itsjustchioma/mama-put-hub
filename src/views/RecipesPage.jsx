@@ -48,7 +48,7 @@ export default function RecipesPage(props) {
   // Function to handle bookmark click
   const handleBookMarkClick = async (index) => {
     try {
-      const recipe = recipes[index];
+      const recipe = displayedRecipes[index];
       const recipeDocument = await databases.getDocument(
         "64773737337f23de254d",
         "647b9e24d59661e7bfbe",
@@ -87,14 +87,18 @@ export default function RecipesPage(props) {
   };
 
   // Function to handle image click and navigate to recipe detail page
-  const handleImageClick = (recipe, index) => {
-    navigate(`/ViewDish/${index}`, {
-      state: {
-        selectedImage: recipe,
-        array: displayedRecipes,
-      },
-    });
-  };
+ // Function to handle image click and navigate to recipe detail page
+const handleImageClick = (recipe, index) => {
+  const recipeIndex = startIndex + index; // Calculate the index based on the current page
+  const selectedRecipe = displayedRecipes[recipeIndex]; // Get the recipe using the calculated index
+  navigate(`/ViewDish/${recipeIndex}`, {
+    state: {
+      selectedImage: selectedRecipe,
+      array: displayedRecipes,
+    },
+  });
+};
+
 
   const handleImageClicks = (recipe, index) => {
     navigate(`/ViewDish/${index}`, {
