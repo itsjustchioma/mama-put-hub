@@ -62,7 +62,7 @@ function ProfileTag() {
           <div className="py-6 sm:py-12 rounded-md relative flex items-center">
             <img
               src={profileDetails.length > 0 ? profileDetails[0].photo : ""}
-              alt="userimage"
+              alt="?"
               className="self-start flex-shrink-0 w-14 md:w-16 h-14 md:h-16 border rounded-full dark:bg-gray-500 dark:border-gray-700"
             />
             <div className=" ml-2">
