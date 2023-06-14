@@ -1,6 +1,9 @@
 # Mamaput Hub : README.md
 Welcome to Mamaput Hub! This web application is designed for all food lovers, bringing together a vibrant community of culinary enthusiasts. Whether you're a seasoned chef or a passionate home cook, Mamaput Hub is here to inspire, connect, and elevate your culinary journey.
 Here is the live demo! https://mama-put-hub.vercel.app/
+
+Article about Mamaput Hub: https://itsjustchioma.hashnode.dev/mamaput-hub-appwrite-hashnode-hackathon
+
 ## Features
 **Create and Share Recipes**: Unleash your creativity by sharing your unique recipes with the community. From mouthwatering main courses to delectable desserts, let your culinary creations shine.
 
